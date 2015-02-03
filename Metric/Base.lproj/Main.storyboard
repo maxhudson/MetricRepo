@@ -220,13 +220,13 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="uHt-36-wI7"/>
-                                                    <exclude reference="ae4-wO-qtb"/>
-                                                    <exclude reference="a3x-zd-ry0"/>
                                                     <exclude reference="F3q-dI-4sg"/>
+                                                    <exclude reference="a3x-zd-ry0"/>
+                                                    <exclude reference="ae4-wO-qtb"/>
+                                                    <exclude reference="uHt-36-wI7"/>
+                                                    <exclude reference="LMf-m3-d2B"/>
                                                     <exclude reference="Ucm-TG-AMj"/>
                                                     <exclude reference="heE-Oa-xGY"/>
-                                                    <exclude reference="LMf-m3-d2B"/>
                                                     <exclude reference="mBh-gb-XxS"/>
                                                 </mask>
                                             </variation>

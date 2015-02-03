@@ -27,7 +27,7 @@ class MetricSummaryViewController: UIViewController {
       navBar.topItem?.title = currentMetric.title
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
       
-      
+      //test
       
       //scrollview
       scrollView.directionalLockEnabled = true;
