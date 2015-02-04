@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MetricSummaryViewController: UIViewController {
+class MetricSummaryViewController: UIViewController{
    
    @IBOutlet weak var badButton: UIButton!
    @IBOutlet weak var badButtonWidthConstraint: NSLayoutConstraint!
@@ -29,7 +29,7 @@ class MetricSummaryViewController: UIViewController {
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
       
       //scrollview
-      scrollView.directionalLockEnabled = true;
+      //scrollView.directionalLockEnabled = true;
       
       //text
       analysisLabel.text = "It looks like " + currentMetric.title + " has been making a fairly positive impact on your life recently. We can say with a fair bit of confidence that you should keep " + currentMetric.title + " in your life, at least for now."
@@ -38,6 +38,8 @@ class MetricSummaryViewController: UIViewController {
       //graph
       graph.image = getImageForMetric(currentMetric)
       
+      //notes
+      buildNotes()
       
       //bottom bars
       var minWidth : CGFloat = 40
@@ -226,5 +228,43 @@ class MetricSummaryViewController: UIViewController {
       CGContextSetTextDrawingMode(context, kCGTextFill)
       CGContextSetTextPosition(context, position.x, position.y)
       CTLineDraw(line, context)
+   }
+   
+   func buildNotes() {
+      /*let notes = ["note1", "note2", "note3"]
+      
+      var noteBodyLabel = UILabel(frame: CGRect(x: 10, y: 200, width: 100, height: 100))
+      noteBodyLabel.text = "test asdf  asd fasdf a sdf asdf as dfa sdf  safd"
+      noteBodyLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+      
+     /* var widthCons = NSLayoutConstraint(
+         item: noteBodyLabel,
+         attribute: .Width,
+         relatedBy: .Equal,
+         toItem: nil,
+         attribute: .NotAnAttribute,
+         multiplier: 1, constant: 100)
+      
+      noteBodyLabel.addConstraint(widthCons)*/
+      
+      
+      
+     /* let topCons = NSLayoutConstraint(
+         item: noteBodyLabel,
+         attribute: .Top,
+         relatedBy: .Equal,
+         toItem: graph,
+         attribute: .Bottom,
+         multiplier: 1, constant: 0);
+      
+      noteBodyLabel.addConstraint(topCons);*/
+      
+      scrollView.addSubview(noteBodyLabel)
+      
+      var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+      label.center = CGPointMake(160, 384)
+      label.textAlignment = NSTextAlignment.Center
+      label.text = "I'am a test label"
+      scrollView.addSubview(label)*/
    }
 }
