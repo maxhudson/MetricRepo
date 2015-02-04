@@ -23,6 +23,8 @@ struct Helper {
    static var lightButtonFont = "Quicksand-Regular"
    static var buttonFont = "Quicksand-Bold"
    
+   static var graphFont = UIFont(name: "Quicksand-Bold", size: 10)
+   
    static func netMetric(met: Metric) -> Int {
       return met.good - met.bad
    }

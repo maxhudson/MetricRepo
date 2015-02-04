@@ -19,9 +19,9 @@
 		6D677B271A7CA7B500805A4D /* MainListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D677B261A7CA7B500805A4D /* MainListTableViewCell.swift */; };
 		6D782E071A7EC51C009C04E2 /* MetricSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */; };
 		6D782E0B1A7ED7E0009C04E2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D782E0A1A7ED7E0009C04E2 /* Helper.swift */; };
-		6D782E0D1A7F751F009C04E2 /* icon60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D782E0C1A7F751F009C04E2 /* icon60@2x.png */; };
-		6D782E0F1A7F7663009C04E2 /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D782E0E1A7F7663009C04E2 /* launch.png */; };
 		6D782E121A815883009C04E2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D782E111A815883009C04E2 /* StoreKit.framework */; };
+		6D782E141A816EB3009C04E2 /* icon60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D782E131A816EB3009C04E2 /* icon60@2x.png */; };
+		6D7EF77B1A81BAAA00E89662 /* metricShadow1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7EF77A1A81BAAA00E89662 /* metricShadow1@3x.png */; };
 		6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C1D1A7DD892008D130B /* Model.xcdatamodeld */; };
 		6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C271A7DDB0E008D130B /* Metrics.swift */; };
 		6D943C2A1A7DE0F0008D130B /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C291A7DE0F0008D130B /* Metric.swift */; };
@@ -54,10 +54,10 @@
 		6D677B261A7CA7B500805A4D /* MainListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainListTableViewCell.swift; sourceTree = "<group>"; };
 		6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricSummaryViewController.swift; sourceTree = "<group>"; };
 		6D782E0A1A7ED7E0009C04E2 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		6D782E0C1A7F751F009C04E2 /* icon60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon60@2x.png"; sourceTree = "<group>"; };
-		6D782E0E1A7F7663009C04E2 /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		6D782E101A815881009C04E2 /* Metric.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Metric.entitlements; sourceTree = "<group>"; };
 		6D782E111A815883009C04E2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6D782E131A816EB3009C04E2 /* icon60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon60@2x.png"; sourceTree = "<group>"; };
+		6D7EF77A1A81BAAA00E89662 /* metricShadow1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "metricShadow1@3x.png"; sourceTree = "<group>"; };
 		6D943C1E1A7DD892008D130B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		6D943C231A7DDAEB008D130B /* Metric-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Metric-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D943C271A7DDB0E008D130B /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
@@ -126,11 +126,11 @@
 		6D677B021A7CA13D00805A4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6D782E0C1A7F751F009C04E2 /* icon60@2x.png */,
+				6D782E131A816EB3009C04E2 /* icon60@2x.png */,
 				6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */,
 				6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */,
+				6D7EF77A1A81BAAA00E89662 /* metricShadow1@3x.png */,
 				6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */,
-				6D782E0E1A7F7663009C04E2 /* launch.png */,
 				6D677B031A7CA13D00805A4D /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -242,12 +242,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D782E0F1A7F7663009C04E2 /* launch.png in Resources */,
+				6D782E141A816EB3009C04E2 /* icon60@2x.png in Resources */,
 				6D677B0A1A7CA13D00805A4D /* Main.storyboard in Resources */,
-				6D782E0D1A7F751F009C04E2 /* icon60@2x.png in Resources */,
 				6D677B0F1A7CA13D00805A4D /* LaunchScreen.xib in Resources */,
 				6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */,
 				6D677B0C1A7CA13D00805A4D /* Images.xcassets in Resources */,
+				6D7EF77B1A81BAAA00E89662 /* metricShadow1@3x.png in Resources */,
 				6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */,
 				6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */,
 			);
@@ -397,7 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Metric/Metric.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -415,7 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Metric/Metric.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
