@@ -206,7 +206,7 @@ class MetricSummaryViewController: UIViewController {
          position: CGPoint(x: origin.x - 20*scale, y: graphSize.height/scale - origin.y - 5*scale),
          context: context, scale: scale)
       
-      
+      //test
       
       var image =  UIGraphicsGetImageFromCurrentImageContext();
       UIGraphicsEndImageContext();
