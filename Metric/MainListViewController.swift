@@ -133,15 +133,15 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
       
-      metrics += [
-         Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
-         Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
-         Metric(title: "Art", good: 5, bad: 0, feelings: []),
-         Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
-         Metric(title: "Girlfriend", good: 0, bad: 0, feelings: []),
-         Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
-         Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
-      ]
+//      metrics += [
+//         Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
+//         Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
+//         Metric(title: "Art", good: 5, bad: 0, feelings: []),
+//         Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
+//         Metric(title: "Girlfriend", good: 0, bad: 0, feelings: []),
+//         Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
+//         Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
+//      ]
       
    }
    
@@ -159,7 +159,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
       let baseHeight : CGFloat = 70.0
-      let netMet = CGFloat(metrics[indexPath.row].good + metrics[indexPath.row].bad)
+      let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
       let multiplier : CGFloat = 0.8
       
       return baseHeight + netMet*multiplier
@@ -201,6 +201,16 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       cell.minusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
       
       return cell
+   }
+   
+   @IBAction func unwindToList(segue: UIStoryboardSegue){
+      if segue.identifier == "DoneMetric" {
+         let metricManagerController = segue.sourceViewController as MetricManagerViewController
+         if let newMetric = metricManagerController.newMetric {
+            metricsManager.metrics += [newMetric]
+            tableView.reloadData()
+         }
+      }
    }
    
 }

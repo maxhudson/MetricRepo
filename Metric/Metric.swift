@@ -54,6 +54,10 @@ class Metric: NSObject, NSCoding {
    var feelings: [Feeling] = []
    var lastUpdated: NSDate = NSDate()
    
+   init(title: String){
+      self.title = title
+   }
+   
    init(title: String, good: UInt, bad: UInt, feelings: [Feeling]) {
       self.title = title
       self.good = good
