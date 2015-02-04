@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
-var metrics : [Metric] = []
+var metricsManager = MetricsManager()
+
+//var metrics : [Metric] = []
+var metrics: Metric!
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -41,7 +44,8 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func plusButtonTouchUp(sender: UIButton) {
-      var met = metrics[rowForButton(sender).row]
+//      var met = metrics[rowForButton(sender).row]
+      var met = metricsManager.metrics[rowForButton(sender).row]
       metricButtonReleased(sender, buttonId: 1)
    }
    
@@ -49,7 +53,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       var path = rowForButton(sender)
       
       if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
-         var met = metrics[rowForButton(sender).row]
+//         var met = metrics[rowForButton(sender).row]
+         var met = metricsManager.metrics[rowForButton(sender).row]
+
          if (Helper.netMetric(met) >= 0){
             cell.centerButton.backgroundColor = Helper.darkGoodColor
             cell.plusButton.backgroundColor = Helper.darkGoodColor
@@ -64,7 +70,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func metricButtonTouchUp(sender: UIButton) {
       //take to new screen
-      currentMetric = metrics[rowForButton(sender).row]
+      currentMetric = metricsManager.metrics[rowForButton(sender).row]
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
       let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as MetricSummaryViewController
       self.presentViewController(vc, animated: false, completion: nil)
@@ -77,7 +83,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func minusButtonTouchUp(sender: UIButton) {
-      var met = metrics[rowForButton(sender).row]
+      var met = metricsManager.metrics[rowForButton(sender).row]
       metricButtonReleased(sender, buttonId: -1)
    }
    
@@ -87,7 +93,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func metricButtonPressed(button: UIButton){
-      let met = metrics[rowForButton(button).row]
+      let met = metricsManager.metrics[rowForButton(button).row]
       
       if (Helper.netMetric(met) >= 0){
          button.backgroundColor = Helper.darkGoodColor
@@ -97,7 +103,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func metricButtonReleased(button: UIButton, buttonId : Int){
-      let met = metrics[rowForButton(button).row]
+      let met = metricsManager.metrics[rowForButton(button).row]
       
       if (Helper.netMetric(met) >= 0){
          button.backgroundColor = Helper.darkGoodColor
@@ -136,15 +142,15 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       
-      metrics += [
-         Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
-         Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
-         Metric(title: "Art", good: 5, bad: 0, feelings: []),
-         Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
-         Metric(title: "Girlfriend", good: 30, bad: 50, feelings: []),
-         Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
-         Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
-      ]
+//      metricsManager.metrics += [
+//         Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
+//         Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
+//         Metric(title: "Art", good: 5, bad: 0, feelings: []),
+//         Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
+//         Metric(title: "Girlfriend", good: 30, bad: 50, feelings: []),
+//         Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
+//         Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
+//      ]
       
    }
    
@@ -157,12 +163,12 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return metrics.count
+      return metricsManager.metrics.count
    }
    
    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
       let baseHeight : CGFloat = 80.0
-      let netMet = CGFloat(metrics[indexPath.row].good + metrics[indexPath.row].bad)
+      let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
       let multiplier : CGFloat = 0.8
       
       return baseHeight + netMet*multiplier
@@ -173,7 +179,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       let cell = tableView.dequeueReusableCellWithIdentifier("id1", forIndexPath: indexPath) as MainListTableViewCell
       
       var cellColor = Helper.badColor
-      let met = metrics[indexPath.row]
+      let met = metricsManager.metrics[indexPath.row]
       if (Helper.netMetric(met) >= 0){
          cellColor = Helper.goodColor
       }

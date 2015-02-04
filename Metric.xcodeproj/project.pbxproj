@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1546C15B1A81D10C00883F8A /* MetricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1546C15A1A81D10C00883F8A /* MetricsManager.swift */; };
 		6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */; };
 		6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */; };
 		6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1546C15A1A81D10C00883F8A /* MetricsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsManager.swift; sourceTree = "<group>"; };
 		6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
 		6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navShadow@3x.png"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				6D677B041A7CA13D00805A4D /* AppDelegate.swift */,
 				6D943C1D1A7DD892008D130B /* Model.xcdatamodeld */,
 				6D943C291A7DE0F0008D130B /* Metric.swift */,
+				1546C15A1A81D10C00883F8A /* MetricsManager.swift */,
 				6D782E0A1A7ED7E0009C04E2 /* Helper.swift */,
 				6D677B241A7CA2B600805A4D /* MainListViewController.swift */,
 				6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */,
@@ -202,7 +205,7 @@
 				TargetAttributes = {
 					6D677AFE1A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 9CQZV55V57;
+						DevelopmentTeam = 3HTQ3XN55R;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -214,6 +217,7 @@
 					};
 					6D677B131A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 3HTQ3XN55R;
 						TestTargetID = 6D677AFE1A7CA13D00805A4D;
 					};
 				};
@@ -270,6 +274,7 @@
 				6D677B251A7CA2B600805A4D /* MainListViewController.swift in Sources */,
 				6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */,
 				6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */,
+				1546C15B1A81D10C00883F8A /* MetricsManager.swift in Sources */,
 				6D677B271A7CA7B500805A4D /* MainListTableViewCell.swift in Sources */,
 				6D782E0B1A7ED7E0009C04E2 /* Helper.swift in Sources */,
 				6D943C2A1A7DE0F0008D130B /* Metric.swift in Sources */,
