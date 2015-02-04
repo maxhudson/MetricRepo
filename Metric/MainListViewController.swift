@@ -128,30 +128,21 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       }
    }
    
-   /*lazy var managedObjectContext : NSManagedObjectContext? = {
-      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-      if let managedObjectContext = appDelegate.managedObjectContext {
-         return managedObjectContext
-      }
-      else {
-         return nil
-      }
-      }()*/
-   
    override func viewDidLoad() {
       
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       
-//      metricsManager.metrics += [
-//         Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
-//         Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
-//         Metric(title: "Art", good: 5, bad: 0, feelings: []),
-//         Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
-//         Metric(title: "Girlfriend", good: 30, bad: 50, feelings: []),
-//         Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
-//         Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
-//      ]
-      
+      if (metricsManager.metrics.count == 0){
+         metricsManager.metrics += [
+            Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
+            Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
+            Metric(title: "Art", good: 5, bad: 0, feelings: []),
+            Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
+            Metric(title: "Girlfriend", good: 30, bad: 50, feelings: []),
+            Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
+            Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
+         ]
+      }
    }
    
    override func viewWillAppear(animated: Bool) {
