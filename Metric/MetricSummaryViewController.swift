@@ -17,16 +17,31 @@ class MetricSummaryViewController: UIViewController{
    
    @IBOutlet weak var backButton: UIButton!
    
+   @IBOutlet weak var editButton: UIButton!
+   
    @IBOutlet weak var analysisLabel: UILabel!
    
    @IBOutlet weak var scrollView: UIScrollView!
    @IBOutlet weak var navBar: UINavigationBar!
    @IBOutlet weak var graph: UIImageView!
    
+   
+   @IBAction func backButtonPress(sender: AnyObject) {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc = storyboard.instantiateViewControllerWithIdentifier("MainList") as MainListViewController
+      self.presentViewController(vc, animated: false, completion: nil)
+   }
+   
+   @IBAction func editButtonPress(sender: AnyObject) {
+      
+   }
+   
+   
    override func viewDidLoad() {
       //navigation bar
       navBar.topItem?.title = currentMetric.title
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
+      Helper.styleNavButton(editButton, fontName: Helper.navTitleFont, fontSize: 17)
       
       //scrollview
       //scrollView.directionalLockEnabled = true;
@@ -47,11 +62,11 @@ class MetricSummaryViewController: UIViewController{
       var totalMet = currentMetric.bad + currentMetric.good
       var unit = screenWidth/CGFloat(totalMet)
       
-      badButtonWidthConstraint.constant = minWidth + CGFloat(currentMetric.bad)*unit - 1
+      badButtonWidthConstraint.constant = minWidth + CGFloat(currentMetric.bad)*unit
       
       Helper.styleColoredButton(badButton, color: Helper.badColor, title: Helper.formatStringNumber(-1*Int(currentMetric.bad)), fontSize: 20)
       
-      goodButtonWidthConstraint.constant = minWidth + screenWidth - CGFloat(currentMetric.bad)*unit - 1
+      goodButtonWidthConstraint.constant = minWidth + screenWidth - CGFloat(currentMetric.bad)*unit
       
       Helper.styleColoredButton(goodButton, color: Helper.goodColor, title: Helper.formatStringNumber(Int(currentMetric.good)), fontSize: 20)
       
@@ -231,40 +246,46 @@ class MetricSummaryViewController: UIViewController{
    }
    
    func buildNotes() {
-      /*let notes = ["note1", "note2", "note3"]
+      let notes = [
+         "This morning I woke up and felt really good about coffee.",
+         "I'm not so sure about coffee right now.",
+         "I hate coffee.",
+         "I can't wait until I'm not addicted to coffee anymore"
+      ]
       
-      var noteBodyLabel = UILabel(frame: CGRect(x: 10, y: 200, width: 100, height: 100))
-      noteBodyLabel.text = "test asdf  asd fasdf a sdf asdf as dfa sdf  safd"
-      noteBodyLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+      var lastNote = UILabel()
       
-     /* var widthCons = NSLayoutConstraint(
-         item: noteBodyLabel,
-         attribute: .Width,
-         relatedBy: .Equal,
-         toItem: nil,
-         attribute: .NotAnAttribute,
-         multiplier: 1, constant: 100)
-      
-      noteBodyLabel.addConstraint(widthCons)*/
-      
-      
-      
-     /* let topCons = NSLayoutConstraint(
-         item: noteBodyLabel,
-         attribute: .Top,
-         relatedBy: .Equal,
-         toItem: graph,
-         attribute: .Bottom,
-         multiplier: 1, constant: 0);
-      
-      noteBodyLabel.addConstraint(topCons);*/
-      
-      scrollView.addSubview(noteBodyLabel)
-      
-      var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
-      label.center = CGPointMake(160, 384)
-      label.textAlignment = NSTextAlignment.Center
-      label.text = "I'am a test label"
-      scrollView.addSubview(label)*/
+      for (var i = 0; i < notes.count; i++) {
+         var note = UILabel()
+         note.text = notes[i]
+         note.numberOfLines = 0
+         note.font = UIFont(name: Helper.bodyTextFont, size: 15)
+         
+         note.setTranslatesAutoresizingMaskIntoConstraints(false)
+         scrollView.addSubview(note)
+         
+         var widthCons = NSLayoutConstraint(item: note, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 280)
+         
+         var leftCons = NSLayoutConstraint(item: note, attribute: .Left, relatedBy: .Equal, toItem: scrollView, attribute: .Left, multiplier: 1, constant: 20)
+         
+         var topCons : NSLayoutConstraint;
+         
+         if (i == 0) {
+            topCons = NSLayoutConstraint(item: note, attribute: .Top, relatedBy: .Equal, toItem: graph, attribute: .Bottom, multiplier: 1, constant: 0)
+         } else {
+            topCons = NSLayoutConstraint(item: note, attribute: .Top, relatedBy: .Equal, toItem: lastNote, attribute: .Bottom, multiplier: 1, constant: 10)
+         }
+         
+         self.view.addConstraints([topCons, leftCons, widthCons])
+         
+         if (i == notes.count - 2) {
+            var bottomCons = NSLayoutConstraint(item: note, attribute: .Bottom, relatedBy: .Equal, toItem: scrollView, attribute: .Bottom, multiplier: 1, constant: -100)
+            
+            self.view.addConstraint(bottomCons)
+         }
+         
+         lastNote = note;
+      }
    }
+   
 }

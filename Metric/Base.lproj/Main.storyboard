@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="metricShadow1@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="afk-Ad-5Dg">
-                                <rect key="frame" x="0.0" y="530" width="600" height="15"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botShadow@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="afk-Ad-5Dg">
+                                <rect key="frame" x="0.0" y="532" width="600" height="8"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="441-Jf-AER"/>
+                                    <constraint firstAttribute="height" constant="8" id="441-Jf-AER"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxB-OT-ReZ">
@@ -45,8 +45,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-VU-Ubr">
-                                <rect key="frame" x="0.0" y="44" width="600" height="476"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-VU-Ubr">
+                                <rect key="frame" x="0.0" y="44" width="600" height="488"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b6-1c-Ce4">
                                         <rect key="frame" x="20" y="20" width="280" height="28"/>
@@ -87,7 +87,24 @@
                                     <constraint firstAttribute="height" constant="44" id="Hdf-VX-CB3"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Title" id="QYX-Se-UPq"/>
+                                    <navigationItem title="Title" id="QYX-Se-UPq">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="YK6-GC-qLJ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GGJ-0N-vzr">
+                                                <rect key="frame" x="10" y="10" width="100" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="ijd-A9-otD"/>
+                                                </constraints>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-32" maxY="0.0"/>
+                                                <state key="normal" title="Edit">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editButtonPress:" destination="7cY-j1-iHo" eventType="touchUpInside" id="UnF-mB-pwh"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xT6-6w-gQn">
@@ -99,6 +116,9 @@
                                 <state key="normal" title="&lt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="backButtonPress:" destination="7cY-j1-iHo" eventType="touchUpInside" id="6sK-XA-dDe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,7 +131,7 @@
                             <constraint firstItem="xT6-6w-gQn" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leadingMargin" constant="-16" id="AR8-3o-6iE"/>
                             <constraint firstItem="YVC-it-MTv" firstAttribute="top" secondItem="uZe-T4-UH6" secondAttribute="top" id="Eax-Ha-wWT"/>
                             <constraint firstItem="HxB-OT-ReZ" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="EyR-6r-xNA"/>
-                            <constraint firstItem="9Zx-BP-oS4" firstAttribute="top" secondItem="afk-Ad-5Dg" secondAttribute="bottom" constant="-5" id="Fkn-Xv-QkU"/>
+                            <constraint firstItem="9Zx-BP-oS4" firstAttribute="top" secondItem="afk-Ad-5Dg" secondAttribute="bottom" id="Fkn-Xv-QkU"/>
                             <constraint firstItem="xT6-6w-gQn" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="MRX-MR-6FR"/>
                             <constraint firstItem="afk-Ad-5Dg" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="Mqy-IT-awI"/>
                             <constraint firstItem="YVC-it-MTv" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="Otr-8t-9R3"/>
@@ -119,7 +139,8 @@
                             <constraint firstItem="HxB-OT-ReZ" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leadingMargin" id="QUV-3x-KNt"/>
                             <constraint firstAttribute="trailing" secondItem="g5e-VU-Ubr" secondAttribute="trailing" id="RI1-SV-Tx9"/>
                             <constraint firstItem="BDf-xL-ZGe" firstAttribute="top" secondItem="9Zx-BP-oS4" secondAttribute="bottom" id="Rbx-xC-xzu"/>
-                            <constraint firstItem="afk-Ad-5Dg" firstAttribute="top" secondItem="g5e-VU-Ubr" secondAttribute="bottom" constant="10" id="SWq-Cd-Thv"/>
+                            <constraint firstItem="afk-Ad-5Dg" firstAttribute="top" secondItem="g5e-VU-Ubr" secondAttribute="bottom" constant="-5" id="SWq-Cd-Thv"/>
+                            <constraint firstItem="afk-Ad-5Dg" firstAttribute="top" secondItem="g5e-VU-Ubr" secondAttribute="bottom" constant="-8" id="eW5-wv-W0H"/>
                             <constraint firstItem="xT6-6w-gQn" firstAttribute="top" secondItem="uZe-T4-UH6" secondAttribute="topMargin" id="kUE-fc-jz0"/>
                             <constraint firstItem="g5e-VU-Ubr" firstAttribute="top" secondItem="xT6-6w-gQn" secondAttribute="bottom" id="kwD-nc-tIY"/>
                             <constraint firstAttribute="trailing" secondItem="9Zx-BP-oS4" secondAttribute="trailing" id="nWn-Q9-MZS"/>
@@ -131,6 +152,7 @@
                                 <exclude reference="MRX-MR-6FR"/>
                                 <exclude reference="zUv-hP-PCd"/>
                                 <exclude reference="kwD-nc-tIY"/>
+                                <exclude reference="SWq-Cd-Thv"/>
                                 <exclude reference="QUV-3x-KNt"/>
                                 <exclude reference="ndA-GR-iJ1"/>
                             </mask>
@@ -141,6 +163,7 @@
                         <outlet property="backButton" destination="xT6-6w-gQn" id="JDd-dA-n6Y"/>
                         <outlet property="badButton" destination="HxB-OT-ReZ" id="NwF-k3-Qdj"/>
                         <outlet property="badButtonWidthConstraint" destination="ky5-P9-dux" id="JDM-LH-H4k"/>
+                        <outlet property="editButton" destination="GGJ-0N-vzr" id="tSi-7x-sev"/>
                         <outlet property="goodButton" destination="9Zx-BP-oS4" id="Pc9-Sf-axj"/>
                         <outlet property="goodButtonWidthConstraint" destination="4sn-0U-jAE" id="syD-vr-GF7"/>
                         <outlet property="graph" destination="dRC-JP-CeW" id="czA-Lx-tTr"/>
@@ -155,7 +178,7 @@
         <!--Main List View Controller-->
         <scene sceneID="Yko-q9-oKW">
             <objects>
-                <viewController id="9OP-jg-jdd" customClass="MainListViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9OP-jg-jdd" customClass="MainListViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rzH-Vf-OtM"/>
                         <viewControllerLayoutGuide type="bottom" id="Gna-am-btD"/>
@@ -331,6 +354,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="metricShadow1@3x.png" width="1242" height="27"/>
+        <image name="botShadow@3x.png" width="1242" height="26"/>
     </resources>
 </document>
