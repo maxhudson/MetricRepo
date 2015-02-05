@@ -13,6 +13,7 @@ var metricsManager = MetricsManager()
 
 //var metrics : [Metric] = []
 var metrics: Metric!
+var manageMetricMode: String!
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -28,7 +29,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func addButtonExit(sender: AnyObject) {
-      
+      manageMetricMode = "edit"
    }
    
    @IBAction func helpButtonEnter(sender: AnyObject) {
@@ -202,6 +203,17 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       cell.minusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
       
       return cell
+   }
+   
+   @IBAction func unwindToList(segue: UIStoryboardSegue){
+      if segue.identifier == "DoneMetric" {
+         tableView.reloadData()
+         let metricManagerController = segue.sourceViewController as MetricManagerViewController
+         if let newMetric = metricManagerController.newMetric {
+            metricsManager.metrics += [newMetric]
+            tableView.reloadData()
+         }
+      }
    }
    
 }
