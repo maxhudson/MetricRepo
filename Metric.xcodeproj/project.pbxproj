@@ -211,7 +211,7 @@
 				TargetAttributes = {
 					6D677AFE1A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 9CQZV55V57;
+						DevelopmentTeam = 3HTQ3XN55R;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -223,7 +223,7 @@
 					};
 					6D677B131A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 9CQZV55V57;
+						DevelopmentTeam = 3HTQ3XN55R;
 						TestTargetID = 6D677AFE1A7CA13D00805A4D;
 					};
 				};
@@ -259,7 +259,6 @@
 				6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */,
 				6D677B0C1A7CA13D00805A4D /* Images.xcassets in Resources */,
 				156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */,
-				6D7EF77B1A81BAAA00E89662 /* metricShadow1@3x.png in Resources */,
 				6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */,
 				6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */,
 			);
