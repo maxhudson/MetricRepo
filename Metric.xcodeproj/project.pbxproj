@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1546C15B1A81D10C00883F8A /* MetricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1546C15A1A81D10C00883F8A /* MetricsManager.swift */; };
 		1546C15D1A81ED0E00883F8A /* MetricManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1546C15C1A81ED0E00883F8A /* MetricManagerViewController.swift */; };
+		156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 156F80911A83374C00F579A3 /* trashButtonImage@3x.png */; };
 		6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */; };
 		6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */; };
 		6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		1546C15A1A81D10C00883F8A /* MetricsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsManager.swift; sourceTree = "<group>"; };
 		1546C15C1A81ED0E00883F8A /* MetricManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricManagerViewController.swift; sourceTree = "<group>"; };
+		156F80911A83374C00F579A3 /* trashButtonImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trashButtonImage@3x.png"; sourceTree = "<group>"; };
 		6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
 		6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navShadow@3x.png"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		6D677B021A7CA13D00805A4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				156F80911A83374C00F579A3 /* trashButtonImage@3x.png */,
 				6D782E131A816EB3009C04E2 /* icon60@2x.png */,
 				6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */,
 				6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */,
@@ -254,6 +257,7 @@
 				6D677B0F1A7CA13D00805A4D /* LaunchScreen.xib in Resources */,
 				6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */,
 				6D677B0C1A7CA13D00805A4D /* Images.xcassets in Resources */,
+				156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */,
 				6D7EF77B1A81BAAA00E89662 /* metricShadow1@3x.png in Resources */,
 				6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */,
 				6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */,

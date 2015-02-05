@@ -342,24 +342,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMM-21-Vhe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <color key="backgroundColor" red="0.8901960784313725" green="0.6470588235294118" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Rl7-8u-H2s"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem id="PL1-KV-w6i">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="X6v-T3-XZm">
-                                            <connections>
-                                                <action selector="trashMetric:" destination="LjB-lQ-QcT" id="pWJ-Ox-Lua"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the name of the metric you'd like to track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abI-RM-XR8">
-                                <rect key="frame" x="219" y="144" width="163" height="146"/>
+                                <rect key="frame" x="219" y="120" width="163" height="146"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="abI-RM-XR8" secondAttribute="height" multiplier="163:146" id="7o3-vF-FOR"/>
                                     <constraint firstAttribute="width" constant="163" id="zeX-WY-fCK"/>
@@ -369,7 +353,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yhp-es-Ed3">
-                                <rect key="frame" x="30" y="310" width="540" height="44"/>
+                                <rect key="frame" x="30" y="266" width="540" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="4dQ-26-413"/>
@@ -379,33 +363,46 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blw-28-ibj">
-                                <rect key="frame" x="0.0" y="506" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="290" width="600" height="50"/>
                                 <color key="backgroundColor" red="0.15686274509803921" green="0.22352941176470587" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NnA-QU-Tf0"/>
                                 </constraints>
                                 <state key="normal" title="DONE"/>
                                 <connections>
+                                    <action selector="doneButton:" destination="LjB-lQ-QcT" eventType="touchUpInside" id="6oz-av-fYs"/>
                                     <segue destination="pBF-8n-1zg" kind="unwind" identifier="DoneMetric" unwindAction="unwindToList:" id="sVF-1J-pFe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59W-Th-IWG">
+                                <rect key="frame" x="26" y="20" width="19" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="19" id="62u-Da-D9f"/>
+                                    <constraint firstAttribute="height" constant="24" id="MT3-Qh-iOl"/>
+                                </constraints>
+                                <state key="normal" image="trashButtonImage@3x.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="trashMetric:" destination="LjB-lQ-QcT" eventType="touchUpInside" id="rVF-dy-HqE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.74901960784313726" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Yhp-es-Ed3" firstAttribute="top" secondItem="abI-RM-XR8" secondAttribute="bottom" constant="20" id="AdS-Ao-3pz"/>
+                            <constraint firstItem="59W-Th-IWG" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leadingMargin" constant="10" id="9ph-6I-2Di"/>
+                            <constraint firstItem="Yhp-es-Ed3" firstAttribute="top" secondItem="abI-RM-XR8" secondAttribute="bottom" id="AdS-Ao-3pz"/>
                             <constraint firstAttribute="centerX" secondItem="abI-RM-XR8" secondAttribute="centerX" id="FAP-eF-7FB"/>
                             <constraint firstItem="Yhp-es-Ed3" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leading" id="Gyq-ua-pcc"/>
-                            <constraint firstItem="MFt-Hq-qhS" firstAttribute="top" secondItem="blw-28-ibj" secondAttribute="bottom" id="K5J-Bv-r9S"/>
-                            <constraint firstItem="yMM-21-Vhe" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leading" id="O0r-eP-0xR"/>
+                            <constraint firstItem="MFt-Hq-qhS" firstAttribute="top" secondItem="blw-28-ibj" secondAttribute="bottom" constant="216" id="K5J-Bv-r9S"/>
                             <constraint firstItem="blw-28-ibj" firstAttribute="trailing" secondItem="yby-lK-KJ8" secondAttribute="trailing" id="S40-Wz-eXs"/>
                             <constraint firstItem="blw-28-ibj" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leading" id="TPw-ZH-Cpr"/>
                             <constraint firstAttribute="trailing" secondItem="Yhp-es-Ed3" secondAttribute="trailing" constant="30" id="WDu-gy-iVe"/>
                             <constraint firstItem="blw-28-ibj" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="centerXWithinMargins" constant="-300" id="ZBv-LI-1K2"/>
+                            <constraint firstItem="abI-RM-XR8" firstAttribute="top" secondItem="00y-Kz-WOa" secondAttribute="bottom" constant="100" id="cfc-pw-p5Z"/>
                             <constraint firstAttribute="trailing" secondItem="Yhp-es-Ed3" secondAttribute="trailing" id="fL5-KB-20g"/>
-                            <constraint firstItem="abI-RM-XR8" firstAttribute="top" secondItem="yMM-21-Vhe" secondAttribute="bottom" constant="100" id="gWt-IZ-iZq"/>
-                            <constraint firstItem="yMM-21-Vhe" firstAttribute="top" secondItem="yby-lK-KJ8" secondAttribute="top" id="hSu-cd-Url"/>
+                            <constraint firstItem="59W-Th-IWG" firstAttribute="top" secondItem="yby-lK-KJ8" secondAttribute="topMargin" constant="20" id="nGH-MC-lYT"/>
                             <constraint firstItem="Yhp-es-Ed3" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leading" constant="30" id="rhT-0o-Mn3"/>
-                            <constraint firstAttribute="trailing" secondItem="yMM-21-Vhe" secondAttribute="trailing" id="vZ1-FN-Ojd"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -418,7 +415,10 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="doneButton" destination="blw-28-ibj" id="oRw-lN-p3R"/>
+                        <outlet property="metricManagerView" destination="yby-lK-KJ8" id="Xib-Td-pre"/>
                         <outlet property="metricTextField" destination="Yhp-es-Ed3" id="N0c-pZ-7nK"/>
+                        <outlet property="trashButton" destination="59W-Th-IWG" id="T8m-Ji-HMS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxe-mm-YwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -429,5 +429,6 @@
     </scenes>
     <resources>
         <image name="metricShadow1@3x.png" width="1242" height="27"/>
+        <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
 </document>
