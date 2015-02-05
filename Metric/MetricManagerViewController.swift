@@ -8,8 +8,6 @@
 
 import UIKit
 
-var addMode: Bool!
-var editMode: Bool!
 var row: Int!
 
 class MetricManagerViewController: UIViewController {
@@ -17,8 +15,6 @@ class MetricManagerViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       metricTextField.becomeFirstResponder()
-      addMode = false
-      editMode = true
       row = 0
       setupView()
 
@@ -39,11 +35,12 @@ class MetricManagerViewController: UIViewController {
    func setupView(){
       doneButton.backgroundColor = Helper.darkNayColor
       
-      if addMode == true {
+      if manageMetricMode == "add" {
          metricManagerView.backgroundColor = Helper.goldColor
          promptLabel.text = "Enter the name of the metric you'd like to track"
       }
-      if editMode == true {
+      
+      if manageMetricMode == "edit" {
          metricManagerView.backgroundColor = Helper.purpleColor
          promptLabel.text = "Modify the name of the metric you're tracking"
          metricTextField.text = metricsManager.metrics[row].title
@@ -61,14 +58,15 @@ class MetricManagerViewController: UIViewController {
       self.view.endEditing(true)
    
       if segue.identifier == "DoneMetric" {
-         if addMode == true {
+         if manageMetricMode == "add" {
             if let title = metricTextField.text {
                if !title.isEmpty{
                   newMetric = Metric(title: title)
                }
             }
          }
-         if editMode == true {
+         
+         if manageMetricMode == "edit" {
             if let title = metricTextField.text {
                if !title.isEmpty{
                   metricsManager.metrics[row].title = title

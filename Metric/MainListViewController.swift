@@ -13,6 +13,7 @@ var metricsManager = MetricsManager()
 
 //var metrics : [Metric] = []
 var metrics: Metric!
+var manageMetricMode: String!
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -28,7 +29,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func addButtonExit(sender: AnyObject) {
-      
+      manageMetricMode = "edit"
    }
    
    @IBAction func helpButtonEnter(sender: AnyObject) {
