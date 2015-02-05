@@ -370,7 +370,6 @@
                                 </constraints>
                                 <state key="normal" title="DONE"/>
                                 <connections>
-                                    <action selector="doneButton:" destination="LjB-lQ-QcT" eventType="touchUpInside" id="6oz-av-fYs"/>
                                     <segue destination="pBF-8n-1zg" kind="unwind" identifier="DoneMetric" unwindAction="unwindToList:" id="sVF-1J-pFe"/>
                                 </connections>
                             </button>
@@ -418,6 +417,7 @@
                         <outlet property="doneButton" destination="blw-28-ibj" id="oRw-lN-p3R"/>
                         <outlet property="metricManagerView" destination="yby-lK-KJ8" id="Xib-Td-pre"/>
                         <outlet property="metricTextField" destination="Yhp-es-Ed3" id="N0c-pZ-7nK"/>
+                        <outlet property="promptLabel" destination="abI-RM-XR8" id="san-aX-eAp"/>
                         <outlet property="trashButton" destination="59W-Th-IWG" id="T8m-Ji-HMS"/>
                     </connections>
                 </viewController>

@@ -205,6 +205,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func unwindToList(segue: UIStoryboardSegue){
       if segue.identifier == "DoneMetric" {
+         tableView.reloadData()
          let metricManagerController = segue.sourceViewController as MetricManagerViewController
          if let newMetric = metricManagerController.newMetric {
             metricsManager.metrics += [newMetric]
