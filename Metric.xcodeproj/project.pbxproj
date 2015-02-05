@@ -135,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				6DD535AF1A83515000F584FA /* botShadow@3x.png */,
+				156F80911A83374C00F579A3 /* trashButtonImage@3x.png */,
 				6D782E131A816EB3009C04E2 /* icon60@2x.png */,
 				6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */,
 				6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */,
@@ -257,6 +258,8 @@
 				6D677B0F1A7CA13D00805A4D /* LaunchScreen.xib in Resources */,
 				6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */,
 				6D677B0C1A7CA13D00805A4D /* Images.xcassets in Resources */,
+				156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */,
+				6D7EF77B1A81BAAA00E89662 /* metricShadow1@3x.png in Resources */,
 				6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */,
 				6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */,
 			);

@@ -14,6 +14,7 @@ var metricsManager = MetricsManager()
 //var metrics : [Metric] = []
 var metrics: Metric!
 var manageMetricMode: String!
+var currentMetricRow: Int!
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -29,7 +30,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func addButtonExit(sender: AnyObject) {
-      manageMetricMode = "edit"
+      manageMetricMode = "add"
    }
    
    @IBAction func helpButtonEnter(sender: AnyObject) {
@@ -71,7 +72,10 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func metricButtonTouchUp(sender: UIButton) {
       //take to new screen
+      
       currentMetric = metricsManager.metrics[rowForButton(sender).row]
+      currentMetricRow = rowForButton(sender).row
+      
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
       let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as MetricSummaryViewController
       self.presentViewController(vc, animated: false, completion: nil)
@@ -160,7 +164,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-      let baseHeight : CGFloat = 80.0
+      let baseHeight : CGFloat = 70.0
       let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
       let multiplier : CGFloat = 0.8
       

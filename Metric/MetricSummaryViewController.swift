@@ -33,7 +33,7 @@ class MetricSummaryViewController: UIViewController{
    }
    
    @IBAction func editButtonPress(sender: AnyObject) {
-      
+      manageMetricMode = "edit"
    }
    
    

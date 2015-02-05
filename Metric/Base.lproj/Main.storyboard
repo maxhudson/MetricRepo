@@ -454,5 +454,6 @@
     </scenes>
     <resources>
         <image name="botShadow@3x.png" width="1242" height="26"/>
+        <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
 </document>
