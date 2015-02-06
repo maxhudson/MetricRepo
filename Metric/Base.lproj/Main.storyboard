@@ -352,11 +352,93 @@
                         <outlet property="navigationBar" destination="AaQ-mn-WKs" id="ha8-fa-INE"/>
                         <outlet property="tableView" destination="hiV-iD-Glt" id="4Cq-ni-Bta"/>
                         <segue destination="7cY-j1-iHo" kind="showDetail" identifier="showSummarySegue" id="Snl-b2-yDp"/>
+                        <segue destination="LEB-Rd-SeB" kind="presentation" identifier="showNoteSegue" id="f3F-Ix-JQa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCI-JM-jFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2527" y="387"/>
+        </scene>
+        <!--Add Note View Controller-->
+        <scene sceneID="GDD-7X-17w">
+            <objects>
+                <viewController storyboardIdentifier="NoteViewController" id="LEB-Rd-SeB" customClass="AddNoteViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JjB-1k-3Q2"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wfr-r4-ohP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NE6-hF-XZC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifr-Jh-gkT">
+                                <rect key="frame" x="10" y="40" width="19" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="19" id="7c1-l9-TP7"/>
+                                    <constraint firstAttribute="height" constant="24" id="pAF-ox-CEK"/>
+                                </constraints>
+                                <state key="normal" image="trashButtonImage@3x.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="trashMetric:" destination="LjB-lQ-QcT" eventType="touchUpInside" id="T7O-C1-bdj"/>
+                                    <action selector="trashNote:" destination="LEB-Rd-SeB" eventType="touchUpInside" id="Ahc-KS-25k"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Keep it short if you can!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDe-OZ-FVf">
+                                <rect key="frame" x="167" y="40" width="204" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6On-Om-YMc">
+                                <rect key="frame" x="167" y="150" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAS-zU-n67">
+                                <rect key="frame" x="0.0" y="542" width="600" height="50"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.22352941179999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="tw5-le-eTZ"/>
+                                </constraints>
+                                <state key="normal" title="DONE"/>
+                                <connections>
+                                    <segue destination="zhn-yS-jYf" kind="unwind" unwindAction="unwindToList:" id="Ojq-Ur-ZSa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.6470588235294118" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ifr-Jh-gkT" firstAttribute="leading" secondItem="NE6-hF-XZC" secondAttribute="leading" constant="10" id="7Nh-5g-1eY"/>
+                            <constraint firstItem="6On-Om-YMc" firstAttribute="top" secondItem="gDe-OZ-FVf" secondAttribute="bottom" constant="20" id="8xM-XD-w8c"/>
+                            <constraint firstItem="gDe-OZ-FVf" firstAttribute="top" secondItem="JjB-1k-3Q2" secondAttribute="bottom" constant="20" id="GAl-P5-jql"/>
+                            <constraint firstAttribute="centerX" secondItem="gDe-OZ-FVf" secondAttribute="centerX" id="TEa-4E-xfi"/>
+                            <constraint firstItem="Wfr-r4-ohP" firstAttribute="top" secondItem="iAS-zU-n67" secondAttribute="bottom" id="UuP-qy-VhL"/>
+                            <constraint firstItem="iAS-zU-n67" firstAttribute="leading" secondItem="NE6-hF-XZC" secondAttribute="leading" id="Vkr-Bk-Mkf"/>
+                            <constraint firstAttribute="centerX" secondItem="6On-Om-YMc" secondAttribute="centerX" id="aKC-WM-MqF"/>
+                            <constraint firstAttribute="trailing" secondItem="6On-Om-YMc" secondAttribute="trailing" constant="10" id="aa5-6I-vRV"/>
+                            <constraint firstItem="ifr-Jh-gkT" firstAttribute="top" secondItem="JjB-1k-3Q2" secondAttribute="bottom" constant="20" id="c9c-7G-wpI"/>
+                            <constraint firstItem="6On-Om-YMc" firstAttribute="leading" secondItem="NE6-hF-XZC" secondAttribute="leading" constant="10" id="mxT-kV-FEM"/>
+                            <constraint firstAttribute="trailing" secondItem="iAS-zU-n67" secondAttribute="trailing" id="qod-e2-HB8"/>
+                            <constraint firstItem="iAS-zU-n67" firstAttribute="top" secondItem="6On-Om-YMc" secondAttribute="bottom" constant="50" id="sXb-B5-IaL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addNoteView" destination="NE6-hF-XZC" id="boL-AN-7Pr"/>
+                        <outlet property="doneButton" destination="iAS-zU-n67" id="yWb-SK-ZMi"/>
+                        <outlet property="doneButtonConstraint" destination="UuP-qy-VhL" id="kFE-7S-R0m"/>
+                        <outlet property="noteTextView" destination="6On-Om-YMc" id="oTS-m5-d4t"/>
+                        <outlet property="promptLabel" destination="gDe-OZ-FVf" id="6Vq-2k-NBe"/>
+                        <outlet property="trashButton" destination="ifr-Jh-gkT" id="DTT-53-YGq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xnZ-WX-lvs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="zhn-yS-jYf" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1806" y="363"/>
         </scene>
         <!--Metric Manager View Controller-->
         <scene sceneID="cu5-F1-CEe">
@@ -391,7 +473,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blw-28-ibj">
-                                <rect key="frame" x="0.0" y="290" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="506" width="600" height="50"/>
                                 <color key="backgroundColor" red="0.15686274509803921" green="0.22352941176470587" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NnA-QU-Tf0"/>
@@ -421,7 +503,7 @@
                             <constraint firstItem="Yhp-es-Ed3" firstAttribute="top" secondItem="abI-RM-XR8" secondAttribute="bottom" id="AdS-Ao-3pz"/>
                             <constraint firstAttribute="centerX" secondItem="abI-RM-XR8" secondAttribute="centerX" id="FAP-eF-7FB"/>
                             <constraint firstItem="Yhp-es-Ed3" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leading" id="Gyq-ua-pcc"/>
-                            <constraint firstItem="MFt-Hq-qhS" firstAttribute="top" secondItem="blw-28-ibj" secondAttribute="bottom" constant="216" id="K5J-Bv-r9S"/>
+                            <constraint firstItem="MFt-Hq-qhS" firstAttribute="top" secondItem="blw-28-ibj" secondAttribute="bottom" id="K5J-Bv-r9S"/>
                             <constraint firstItem="blw-28-ibj" firstAttribute="trailing" secondItem="yby-lK-KJ8" secondAttribute="trailing" id="S40-Wz-eXs"/>
                             <constraint firstItem="blw-28-ibj" firstAttribute="leading" secondItem="yby-lK-KJ8" secondAttribute="leading" id="TPw-ZH-Cpr"/>
                             <constraint firstAttribute="trailing" secondItem="Yhp-es-Ed3" secondAttribute="trailing" constant="30" id="WDu-gy-iVe"/>
@@ -443,6 +525,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="doneButton" destination="blw-28-ibj" id="oRw-lN-p3R"/>
+                        <outlet property="doneButtonConstraint" destination="K5J-Bv-r9S" id="lRp-k7-jj9"/>
                         <outlet property="metricManagerView" destination="yby-lK-KJ8" id="Xib-Td-pre"/>
                         <outlet property="metricTextField" destination="Yhp-es-Ed3" id="N0c-pZ-7nK"/>
                         <outlet property="promptLabel" destination="abI-RM-XR8" id="san-aX-eAp"/>
@@ -452,7 +535,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxe-mm-YwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="pBF-8n-1zg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3308" y="-170"/>
+            <point key="canvasLocation" x="3314" y="-16"/>
         </scene>
     </scenes>
     <resources>
@@ -461,6 +544,6 @@
         <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ilt-Nv-gc8"/>
+        <segue reference="6tY-VM-hXw"/>
     </inferredMetricsTieBreakers>
 </document>

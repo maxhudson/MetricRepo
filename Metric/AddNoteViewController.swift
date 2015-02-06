@@ -1,33 +1,27 @@
 //
-//  MetricManagerViewController.swift
+//  AddNoteViewController.swift
 //  Metric
 //
-//  Created by Chance Daniel on 2/3/15.
+//  Created by Chance Daniel on 2/5/15.
 //  Copyright (c) 2015 Max Hudson. All rights reserved.
 //
 
 import UIKit
 
-class MetricManagerViewController: UIViewController {
-
-   override func viewDidLoad() {
-      super.viewDidLoad()
-      metricTextField.becomeFirstResponder()
-      setupView()
-
-   }
-
-   var newMetric: Metric!
+class AddNoteViewController: UIViewController {
    
-   @IBOutlet weak var trashButton: UIButton!
-   @IBOutlet weak var doneButton: UIButton!
-   @IBOutlet var metricManagerView: UIView!
-   @IBOutlet weak var metricTextField: UITextField!
+   @IBOutlet var addNoteView: UIView!
+   @IBOutlet weak var noteTextView: UITextView!
    @IBOutlet weak var promptLabel: UILabel!
+   @IBOutlet weak var doneButton: UIButton!
+   @IBOutlet weak var trashButton: UIButton!
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
-   @IBAction func trashMetric(sender: AnyObject) {
-      dismissViewControllerAnimated(true, completion: nil)
+   override func viewDidLoad() {
+      super.viewDidLoad()
+      noteTextView.becomeFirstResponder()
+      setupView()
+      
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -41,7 +35,7 @@ class MetricManagerViewController: UIViewController {
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
    }
-   
+
    func keyboardWillShowNotification(notification: NSNotification) {
       updateDoneButtonLayoutConstraintsWithNotificaiton(notification)
    }
@@ -62,55 +56,48 @@ class MetricManagerViewController: UIViewController {
       doneButtonConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame)
       UIView.animateWithDuration(animationDuraiton, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
          self.view.layoutIfNeeded()
-      }, completion: nil)
+         }, completion: nil)
       
       
+   }
+
+   
+   @IBAction func trashNote(sender: AnyObject) {
+      dismissViewControllerAnimated(true, completion: nil)
    }
    
    func setupView(){
-      doneButton.backgroundColor = Helper.darkNayColor
-      
-      if manageMetricMode == "add" {
-         metricManagerView.backgroundColor = Helper.goldColor
-         promptLabel.text = "Enter the name of the metric you'd like to track"
-      }
-      
-      if manageMetricMode == "edit" {
-         metricManagerView.backgroundColor = Helper.purpleColor
-         promptLabel.text = "Modify the name of the metric you're tracking"
-         metricTextField.text = metricsManager.metrics[currentMetricRow].title
-      }
-      
-      
+      addNoteView.backgroundColor = Helper.goldColor
    }
-
+   
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
       self.view.endEditing(true)
    }
-
+   
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-   
+      
       if segue.identifier == "DoneMetric" {
-         if manageMetricMode == "add" {
-            if let title = metricTextField.text {
-               if !title.isEmpty{
-                  newMetric = Metric(title: title)
-               }
-            }
-         }
-         
-         if manageMetricMode == "edit" {
-            if let title = metricTextField.text {
-               if !title.isEmpty{
-                  metricsManager.metrics[currentMetricRow].title = title
-               }
-            }
-         }
+//         if manageMetricMode == "add" {
+//            if let title = metricTextField.text {
+//               if !title.isEmpty{
+//                  newMetric = Metric(title: title)
+//               }
+//            }
+//         }
+//         
+//         if manageMetricMode == "edit" {
+//            if let title = metricTextField.text {
+//               if !title.isEmpty{
+//                  metricsManager.metrics[currentMetricRow].title = title
+//               }
+//            }
+//         }
       }
    }
+
    
-
-
+   
+   
 }

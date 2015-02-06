@@ -78,6 +78,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as MetricSummaryViewController
          self.presentViewController(vc, animated: false, completion: nil)
       }
+      if segue.identifier == "showNoteSegue"{
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let vc = storyboard.instantiateViewControllerWithIdentifier("NoteViewController") as AddNoteViewController
+         self.presentViewController(vc, animated: true, completion: nil)
+      }
    }
    
    @IBAction func metricButtonTouchUp(sender: UIButton) {
@@ -146,6 +151,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          } else if (buttonId == 1) {
             //leave note
             //show note view controller
+         
+            performSegueWithIdentifier("showNoteSegue", sender: nil)
+
             currentFeeling = met.lastFeeling
             updateMetricViewMode(cell, mode: 1)
          }
