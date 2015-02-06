@@ -15,6 +15,7 @@ var metricsManager = MetricsManager()
 var metrics: Metric!
 var manageMetricMode: String!
 var currentMetricRow: Int!
+var currentFeeling: Feeling!
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -46,7 +47,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func plusButtonTouchUp(sender: UIButton) {
-//      var met = metrics[rowForButton(sender).row]
       var met = metricsManager.metrics[rowForButton(sender).row]
       metricButtonReleased(sender, buttonId: 1)
    }
@@ -55,7 +55,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       var path = rowForButton(sender)
       
       if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
-//         var met = metrics[rowForButton(sender).row]
          var met = metricsManager.metrics[rowForButton(sender).row]
 
          if (Helper.netMetric(met) >= 0){
@@ -89,6 +88,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func minusButtonTouchUp(sender: UIButton) {
       var met = metricsManager.metrics[rowForButton(sender).row]
+      
       metricButtonReleased(sender, buttonId: -1)
    }
    
@@ -116,20 +116,55 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          button.backgroundColor = Helper.darkBadColor
       }
       
-      if (buttonId == -1){
-         met.feelBad("")
-      } else if (buttonId == 1){
-         met.feelGood("")
-      }
+      
       
       var path = rowForButton(button)
       
       if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
          
-         Helper.delay(0.05) {
-            self.tableView.reloadData()
+         if (button.titleForState(.Normal) == "-" || button.titleForState(.Normal) == "+") {
+            //indicated feeling
+            
+            if (buttonId == -1){
+               met.lastFeeling = met.feelBad("feeling bad")
+            } else if (buttonId == 1){
+               met.lastFeeling = met.feelGood("feeling good")
+            }
+            
+            met.feelings.append(met.lastFeeling!)
+            
+            updateMetricViewMode(cell, mode: 0)
+         } else if (buttonId == -1) {
+            //undo
+            met.feelings.removeAtIndex(met.feelings.count - 1)
+            updateMetricViewMode(cell, mode: 1)
+         } else if (buttonId == 1) {
+            //leave note
+            //show note view controller
+            currentFeeling = met.lastFeeling
+            updateMetricViewMode(cell, mode: 1)
          }
          
+      }
+      
+      Helper.delay(0.05) {
+         self.tableView.reloadData()
+      }
+   }
+   
+   func updateMetricViewMode(cell: MainListTableViewCell, mode : Int){
+      if (mode == 0){
+         cell.minusButton.setImage(UIImage(named: "undo"), forState: .Normal)
+         cell.minusButton.setTitle("", forState: .Normal)
+         
+         cell.plusButton.setImage(UIImage(named: "note"), forState: .Normal)
+         cell.plusButton.setTitle("", forState: .Normal)
+      } else if (mode == 1){
+         cell.minusButton.setImage(nil, forState: .Normal)
+         cell.minusButton.setTitle("-", forState: .Normal)
+         
+         cell.plusButton.setImage(nil, forState: .Normal)
+         cell.plusButton.setTitle("+", forState: .Normal)
       }
    }
    
@@ -138,17 +173,76 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
       
-      if (metricsManager.metrics.count == 0){
-         metricsManager.metrics += [
-            Metric(title: "Coffee", good: 30, bad: 80, feelings: []),
-            Metric(title: "Drugs", good: 0, bad: 5, feelings: []),
-            Metric(title: "Art", good: 5, bad: 0, feelings: []),
-            Metric(title: "Best Friend", good: 30, bad: 10, feelings: []),
-            Metric(title: "Girlfriend", good: 30, bad: 50, feelings: []),
-            Metric(title: "Healthy Food", good: 10, bad: 0, feelings: []),
-            Metric(title: "Unhealthy Food", good: 0, bad: 20, feelings: [])
+      //if (metricsManager.metrics.count == 0){
+         
+         metricsManager.metrics = [
+            Metric(title: "Graph 1", good: 0, bad: 0, feelings: []),
+            Metric(title: "Graph 2", good: 0, bad: 0, feelings: []),
+            Metric(title: "Graph 3", good: 0, bad: 0, feelings: [])
          ]
+      
+         for (var i = 0; i < 20; i++) {
+            var rand : Int = random() % 5
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            let startDate:NSDate = dateFormatter.dateFromString("2015-02-0" + String(rand + 1))!
+            
+            metricsManager.metrics[0].feelings.append(Feeling(value: (random() % 3) - 1, note: "This is the note content for note id number " + String(i), date: startDate))
+         }
+      
+      for (var i = 0; i < 20; i++) {
+         var rand : Int = random() % 5
+         
+         let dateFormatter = NSDateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         
+         let startDate:NSDate = dateFormatter.dateFromString("2015-02-0" + String(rand + 1))!
+         
+         metricsManager.metrics[1].feelings.append(Feeling(value: (random() % 3) - 1, note: "This is the note content for note id number " + String(i), date: startDate))
       }
+      for (var i = 0; i < 120; i++) {
+         var rand : Int = random() % 30
+         
+         let dateFormatter = NSDateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         
+         let startDate:NSDate = dateFormatter.dateFromString("2015-01-0" + String(rand + 1))!
+         
+         metricsManager.metrics[1].feelings.append(Feeling(value: (random() % 4) - 1, note: "", date: startDate))
+      }
+      for (var i = 0; i < 20; i++) {
+         var rand : Int = random() % 5
+         
+         let dateFormatter = NSDateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         
+         let startDate:NSDate = dateFormatter.dateFromString("2015-02-0" + String(rand + 1))!
+         
+         metricsManager.metrics[2].feelings.append(Feeling(value: (random() % 3) - 1, note: "This is the note content for note id number " + String(i), date: startDate))
+      }
+      for (var i = 0; i < 120; i++) {
+         var rand : Int = random() % 30
+         
+         let dateFormatter = NSDateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         
+         let startDate:NSDate = dateFormatter.dateFromString("2015-01-0" + String(rand + 1))!
+         
+         metricsManager.metrics[2].feelings.append(Feeling(value: (random() % 3) - 1, note: "", date: startDate))
+      }
+      for (var i = 0; i < 120; i++) {
+         var rand : Int = random() % 30
+         
+         let dateFormatter = NSDateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         
+         let startDate:NSDate = dateFormatter.dateFromString("2014-11-0" + String(rand + 1))!
+         
+         metricsManager.metrics[2].feelings.append(Feeling(value: (random() % 3) - 1, note: "", date: startDate))
+      }
+      //}
    }
    
    override func viewWillAppear(animated: Bool) {

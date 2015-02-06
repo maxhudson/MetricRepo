@@ -24,6 +24,9 @@
 		6D782E0B1A7ED7E0009C04E2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D782E0A1A7ED7E0009C04E2 /* Helper.swift */; };
 		6D782E121A815883009C04E2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D782E111A815883009C04E2 /* StoreKit.framework */; };
 		6D782E141A816EB3009C04E2 /* icon60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D782E131A816EB3009C04E2 /* icon60@2x.png */; };
+		6D896E161A8423F20031A3B8 /* edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D896E141A8423F20031A3B8 /* edit@3x.png */; };
+		6D896E171A8423F20031A3B8 /* undo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D896E151A8423F20031A3B8 /* undo@3x.png */; };
+		6D896E191A8425690031A3B8 /* note@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D896E181A8425690031A3B8 /* note@3x.png */; };
 		6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C1D1A7DD892008D130B /* Model.xcdatamodeld */; };
 		6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C271A7DDB0E008D130B /* Metrics.swift */; };
 		6D943C2A1A7DE0F0008D130B /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C291A7DE0F0008D130B /* Metric.swift */; };
@@ -63,6 +66,9 @@
 		6D782E101A815881009C04E2 /* Metric.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Metric.entitlements; sourceTree = "<group>"; };
 		6D782E111A815883009C04E2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6D782E131A816EB3009C04E2 /* icon60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon60@2x.png"; sourceTree = "<group>"; };
+		6D896E141A8423F20031A3B8 /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
+		6D896E151A8423F20031A3B8 /* undo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@3x.png"; sourceTree = "<group>"; };
+		6D896E181A8425690031A3B8 /* note@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note@3x.png"; sourceTree = "<group>"; };
 		6D943C1E1A7DD892008D130B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		6D943C231A7DDAEB008D130B /* Metric-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Metric-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D943C271A7DDB0E008D130B /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
@@ -135,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				6DD535AF1A83515000F584FA /* botShadow@3x.png */,
-				156F80911A83374C00F579A3 /* trashButtonImage@3x.png */,
+				6D896E1A1A84256E0031A3B8 /* Icons */,
 				6D782E131A816EB3009C04E2 /* icon60@2x.png */,
 				6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */,
 				6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */,
@@ -160,6 +166,17 @@
 				6D677B191A7CA13D00805A4D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D896E1A1A84256E0031A3B8 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				156F80911A83374C00F579A3 /* trashButtonImage@3x.png */,
+				6D896E141A8423F20031A3B8 /* edit@3x.png */,
+				6D896E151A8423F20031A3B8 /* undo@3x.png */,
+				6D896E181A8425690031A3B8 /* note@3x.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,13 +270,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D782E141A816EB3009C04E2 /* icon60@2x.png in Resources */,
+				6D896E161A8423F20031A3B8 /* edit@3x.png in Resources */,
+				6D896E171A8423F20031A3B8 /* undo@3x.png in Resources */,
 				6DD535B01A83515000F584FA /* botShadow@3x.png in Resources */,
 				6D677B0A1A7CA13D00805A4D /* Main.storyboard in Resources */,
 				6D677B0F1A7CA13D00805A4D /* LaunchScreen.xib in Resources */,
 				6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */,
+				6D896E191A8425690031A3B8 /* note@3x.png in Resources */,
 				6D677B0C1A7CA13D00805A4D /* Images.xcassets in Resources */,
 				156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */,
-				6D7EF77B1A81BAAA00E89662 /* metricShadow1@3x.png in Resources */,
 				6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */,
 				6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */,
 			);

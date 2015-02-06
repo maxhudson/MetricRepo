@@ -32,6 +32,16 @@ struct Helper {
       return met.good - met.bad
    }
    
+   static func netFeelings(feelings: [Feeling]) -> Int {
+      var net = 0
+      
+      for feeling in feelings {
+         net += feeling.value
+      }
+      
+      return net
+   }
+   
    static func delay(delay:Double, closure:()->()) {
       dispatch_after(
          dispatch_time(
@@ -46,7 +56,6 @@ struct Helper {
       if (number > 0){
          output = "+" + output
       }
-      
       return output
    }
    
@@ -60,5 +69,15 @@ struct Helper {
       button.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
       button.setTitle(title, forState: .Normal)
       button.titleLabel!.font = UIFont(name: Helper.buttonFont, size: fontSize)
+   }
+   
+   static func colorForFeeling(feeling : Int) -> UIColor {
+      if (feeling == 1) {
+         return goodColor
+      } else if (feeling == 0) {
+         return UIColor(white: 0.9, alpha: 1)
+      }
+      
+      return badColor
    }
 }

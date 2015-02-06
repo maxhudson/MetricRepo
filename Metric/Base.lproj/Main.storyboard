@@ -47,8 +47,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-VU-Ubr">
-                                <rect key="frame" x="0.0" y="44" width="600" height="488"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-VU-Ubr">
+                                <rect key="frame" x="0.0" y="44" width="600" height="496"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b6-1c-Ce4">
                                         <rect key="frame" x="20" y="20" width="280" height="28"/>
@@ -91,14 +91,14 @@
                                 <items>
                                     <navigationItem title="Title" id="QYX-Se-UPq">
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="YK6-GC-qLJ">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GGJ-0N-vzr">
-                                                <rect key="frame" x="10" y="10" width="100" height="44"/>
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GGJ-0N-vzr">
+                                                <rect key="frame" x="484" y="0.0" width="48" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="ijd-A9-otD"/>
                                                 </constraints>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-32" maxY="0.0"/>
-                                                <state key="normal" title="Edit">
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" image="edit@3x.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -189,6 +189,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaQ-mn-WKs">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="backgroundColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="riM-gQ-Nl3"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
+                                <items>
+                                    <navigationItem title="Metrics" id="JZO-Em-QaK">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="P2o-Qs-yHZ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eM4-mN-Dv2">
+                                                <rect key="frame" x="10" y="10" width="100" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <inset key="contentEdgeInsets" minX="-32" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="?">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="helpButtonEnter:" destination="9OP-jg-jdd" eventType="touchDown" id="mzy-bF-K2A"/>
+                                                    <action selector="helpButtonExit:" destination="9OP-jg-jdd" eventType="touchUpInside" id="avt-aa-OsO"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="VDH-xe-tBf">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L4K-Fq-AQJ">
+                                                <rect key="frame" x="10" y="10" width="100" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-32" maxY="0.0"/>
+                                                <state key="normal" title="+">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addButtonEnter:" destination="9OP-jg-jdd" eventType="touchDown" id="h8C-ue-vMy"/>
+                                                    <action selector="addButtonExit:" destination="9OP-jg-jdd" eventType="touchUpInside" id="GYL-JJ-MuQ"/>
+                                                    <segue destination="LjB-lQ-QcT" kind="presentation" id="6tY-VM-hXw"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hiV-iD-Glt">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -199,7 +240,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v95-HL-fO3" id="6qP-lX-UXN">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
                                                     <rect key="frame" x="500" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="j1N-7P-I6a"/>
@@ -213,8 +254,8 @@
                                                         <action selector="plusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchCancel" id="uii-25-hlb"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="132"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="131.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="pF9-t2-gzU"/>
                                                     </constraints>
@@ -237,7 +278,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MlP-nt-AWJ">
-                                                    <rect key="frame" x="279" y="69" width="42" height="21"/>
+                                                    <rect key="frame" x="279" y="69" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -291,47 +332,6 @@
                                     <outlet property="delegate" destination="9OP-jg-jdd" id="Muq-Hn-owp"/>
                                 </connections>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaQ-mn-WKs">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <color key="backgroundColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="riM-gQ-Nl3"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
-                                <items>
-                                    <navigationItem title="Metrics" id="JZO-Em-QaK">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="P2o-Qs-yHZ">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eM4-mN-Dv2">
-                                                <rect key="frame" x="10" y="10" width="100" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <inset key="contentEdgeInsets" minX="-32" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="?">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="helpButtonEnter:" destination="9OP-jg-jdd" eventType="touchDown" id="mzy-bF-K2A"/>
-                                                    <action selector="helpButtonExit:" destination="9OP-jg-jdd" eventType="touchUpInside" id="avt-aa-OsO"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="VDH-xe-tBf">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L4K-Fq-AQJ">
-                                                <rect key="frame" x="10" y="10" width="100" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-32" maxY="0.0"/>
-                                                <state key="normal" title="+">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="addButtonEnter:" destination="9OP-jg-jdd" eventType="touchDown" id="h8C-ue-vMy"/>
-                                                    <action selector="addButtonExit:" destination="9OP-jg-jdd" eventType="touchUpInside" id="GYL-JJ-MuQ"/>
-                                                    <segue destination="LjB-lQ-QcT" kind="presentation" id="6tY-VM-hXw"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -454,6 +454,7 @@
     </scenes>
     <resources>
         <image name="botShadow@3x.png" width="1242" height="26"/>
+        <image name="edit@3x.png" width="48" height="55"/>
         <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
 </document>
