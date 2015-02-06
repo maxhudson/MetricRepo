@@ -231,7 +231,7 @@
 				TargetAttributes = {
 					6D677AFE1A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3HTQ3XN55R;
+						DevelopmentTeam = 9CQZV55V57;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -243,7 +243,7 @@
 					};
 					6D677B131A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3HTQ3XN55R;
+						DevelopmentTeam = 9CQZV55V57;
 						TestTargetID = 6D677AFE1A7CA13D00805A4D;
 					};
 				};

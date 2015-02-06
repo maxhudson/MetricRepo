@@ -126,8 +126,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          button.backgroundColor = Helper.darkBadColor
       }
       
-      
-      
       var path = rowForButton(button)
       
       if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
@@ -143,18 +141,30 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             
             met.feelings.append(met.lastFeeling!)
             
+            met.delayReference = Helper.cancellableDelay(5.0) {
+               self.updateMetricViewMode(cell, mode: 1)
+            }
+            
             updateMetricViewMode(cell, mode: 0)
          } else if (buttonId == -1) {
             //undo
+            
+            if(met.lastFeeling?.value == 1) {
+               met.good--
+            } else if (met.lastFeeling?.value == -1){
+               met.bad--
+            }
+            
             met.feelings.removeAtIndex(met.feelings.count - 1)
+            
+            Helper.cancelDelay(met.delayReference)
             updateMetricViewMode(cell, mode: 1)
          } else if (buttonId == 1) {
             //leave note
-            //show note view controller
-         
             performSegueWithIdentifier("showNoteSegue", sender: nil)
 
             currentFeeling = met.lastFeeling
+            Helper.cancelDelay(met.delayReference)
             updateMetricViewMode(cell, mode: 1)
          }
          

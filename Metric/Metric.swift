@@ -56,6 +56,7 @@ class Metric: NSObject, NSCoding {
    var feelings: [Feeling] = []
    var lastUpdated: NSDate = NSDate()
    var lastFeeling: Feeling?
+   var delayReference: dispatch_cancelable_closure?
    
    init(title: String){
       self.title = title
