@@ -69,15 +69,20 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       }
    }
    
+   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+      if segue.identifier == "showSummarySegue" {
+         currentMetric = metricsManager.metrics[rowForButton(sender as UIButton).row]
+         currentMetricRow = rowForButton(sender as UIButton).row
+         
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as MetricSummaryViewController
+         self.presentViewController(vc, animated: false, completion: nil)
+      }
+   }
+   
    @IBAction func metricButtonTouchUp(sender: UIButton) {
       //take to new screen
-      
-      currentMetric = metricsManager.metrics[rowForButton(sender).row]
-      currentMetricRow = rowForButton(sender).row
-      
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as MetricSummaryViewController
-      self.presentViewController(vc, animated: false, completion: nil)
+      performSegueWithIdentifier("showSummarySegue", sender: sender)
       
       metricButtonReleased(sender, buttonId: 0)
    }
@@ -303,6 +308,10 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       return cell
    }
    
+//   @IBAction func unwindFromSum(segue: UIStoryboardSegue){
+//      tableView.reloadData()
+//   }
+//   
    @IBAction func unwindToList(segue: UIStoryboardSegue){
       if segue.identifier == "DoneMetric" {
          tableView.reloadData()

@@ -26,11 +26,11 @@ class MetricSummaryViewController: UIViewController{
    @IBOutlet weak var graph: UIImageView!
    
    
-   @IBAction func backButtonPress(sender: AnyObject) {
-      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc = storyboard.instantiateViewControllerWithIdentifier("MainList") as MainListViewController
-      self.presentViewController(vc, animated: false, completion: nil)
-   }
+//   @IBAction func backButtonPress(sender: AnyObject) {
+//      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//      let vc = storyboard.instantiateViewControllerWithIdentifier("MainList") as MainListViewController
+//      self.presentViewController(vc, animated: false, completion: nil)
+//   }
    
    @IBAction func editButtonPress(sender: AnyObject) {
       manageMetricMode = "edit"
@@ -519,5 +519,10 @@ class MetricSummaryViewController: UIViewController{
          lastNote = note;
       }
    }
+   
+   
+   
+   
+   
    
 }
