@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias dispatch_cancelable_closure = (cancel : Bool) -> ()
+
 struct Helper {
    
    static var goodColor = UIColor(red: 65/255.0, green: 195/255.0, blue: 222/255.0, alpha: 1)
@@ -49,6 +51,47 @@ struct Helper {
             Int64(delay * Double(NSEC_PER_SEC))
          ),
          dispatch_get_main_queue(), closure)
+   }
+   
+   static func cancellableDelay(time:NSTimeInterval, closure:()->()) ->  dispatch_cancelable_closure? {
+      
+      func dispatch_later(clsr:()->()) {
+         dispatch_after(
+            dispatch_time(
+               DISPATCH_TIME_NOW,
+               Int64(time * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), clsr)
+      }
+      
+      var closure:dispatch_block_t? = closure
+      var cancelableClosure:dispatch_cancelable_closure?
+      
+      let delayedClosure:dispatch_cancelable_closure = { cancel in
+         if let clsr = closure {
+            if (cancel == false) {
+               dispatch_async(dispatch_get_main_queue(), clsr);
+            }
+         }
+         closure = nil
+         cancelableClosure = nil
+      }
+      
+      cancelableClosure = delayedClosure
+      
+      dispatch_later {
+         if let delayedClosure = cancelableClosure {
+            delayedClosure(cancel: false)
+         }
+      }
+      
+      return cancelableClosure;
+   }
+   
+   static func cancelDelay(closure:dispatch_cancelable_closure?) {
+      if closure != nil {
+         closure!(cancel: true)
+      }
    }
    
    static func formatStringNumber(number : Int) -> String{

@@ -113,7 +113,6 @@ class MetricSummaryViewController: UIViewController{
          
          for (var i = 2; i >= 0; i--) {
             recentBenefit += slopes[i] + 2*nets[i]
-            println(String(slopes[i]) + ", " + String(nets[i]))
          }
          
          var overallBenefit = 3*nets[slopes.count - 1] //gives more weight to net than slope
@@ -217,7 +216,6 @@ class MetricSummaryViewController: UIViewController{
       }
       
       var multipler = CGFloat(days)
-      println(CGFloat(net) / CGFloat(dailyFeelings.count))
       net = Int(round(20 * CGFloat(net) / CGFloat(dailyFeelings.count))) //values per day * 2
       return net
    }
@@ -425,6 +423,20 @@ class MetricSummaryViewController: UIViewController{
       CTLineDraw(line, context)
    }
    
+   func modifyNote(sender: UIButton) {
+      
+      var feelings : [Feeling] = []
+      for (var i = 0; i < currentMetric.feelings.count; i++){
+         if (currentMetric.feelings[i].note != "") {
+            feelings.append(currentMetric.feelings[i])
+         }
+      }
+      
+      currentFeeling = feelings[sender.tag]
+      
+      //segue to edit note
+   }
+   
    func buildNotes() {
       var lastNote : UIView!
       
@@ -438,12 +450,15 @@ class MetricSummaryViewController: UIViewController{
       for (var i = feelings.count - 1; i >= 0; i--) {
          var feeling = feelings[i]
          
-         var note = UIView()
+         var note = UIButton()
+         note.addTarget(self, action: "modifyNote:", forControlEvents: .TouchUpInside)
+         note.tag = i
          note.setTranslatesAutoresizingMaskIntoConstraints(false)
          scrollView.addSubview(note)
          
          //add uiview constraints
-         var leftViewCons = NSLayoutConstraint(item: note, attribute: .Left, relatedBy: .Equal, toItem: scrollView, attribute: .Left, multiplier: 1, constant: 20)
+         var leftViewCons = NSLayoutConstraint(item: note, attribute: .Left, relatedBy: .Equal, toItem: scrollView, attribute: .Left, multiplier: 1, constant: 0)
+         var widthViewCons = NSLayoutConstraint(item: note, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 320)
          
          var topViewCons : NSLayoutConstraint;
          
@@ -453,7 +468,7 @@ class MetricSummaryViewController: UIViewController{
             topViewCons = NSLayoutConstraint(item: note, attribute: .Top, relatedBy: .Equal, toItem: lastNote, attribute: .Bottom, multiplier: 1, constant: 10)
          }
          
-         self.view.addConstraints([topViewCons, leftViewCons])
+         self.view.addConstraints([topViewCons, leftViewCons, widthViewCons])
          
          if (i == 0) {
             var bottomViewCons = NSLayoutConstraint(item: note, attribute: .Bottom, relatedBy: .Equal, toItem: scrollView, attribute: .Bottom, multiplier: 1, constant: -100)
@@ -472,7 +487,7 @@ class MetricSummaryViewController: UIViewController{
          //button constraints
          var widthButtonCons = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 5)
          var topButtonCons = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: note, attribute: .Top, multiplier: 1, constant: 0)
-         var leftButtonCons = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: note, attribute: .Left, multiplier: 1, constant: 0)
+         var leftButtonCons = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: note, attribute: .Left, multiplier: 1, constant: 20)
          var bottomButtonCons = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: note, attribute: .Bottom, multiplier: 1, constant: 0)
          
          self.view.addConstraints([widthButtonCons, topButtonCons, leftButtonCons, bottomButtonCons])
@@ -498,7 +513,6 @@ class MetricSummaryViewController: UIViewController{
          self.view.addConstraints([widthDateCons, topDateCons, leftDateCons])
          
          //text
-         
          var text = UILabel()
          text.text = feeling.note
          text.numberOfLines = 0
@@ -514,7 +528,6 @@ class MetricSummaryViewController: UIViewController{
          var bottomTextCons = NSLayoutConstraint(item: text, attribute: .Bottom, relatedBy: .Equal, toItem: note, attribute: .Bottom, multiplier: 1, constant: 0)
          
          self.view.addConstraints([widthTextCons, topTextCons, leftTextCons, bottomTextCons])
-         
          
          lastNote = note;
       }

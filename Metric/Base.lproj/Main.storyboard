@@ -94,9 +94,6 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GGJ-0N-vzr">
                                                 <rect key="frame" x="484" y="0.0" width="48" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="ijd-A9-otD"/>
-                                                </constraints>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" image="edit@3x.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -135,31 +132,15 @@
                             <constraint firstItem="YVC-it-MTv" firstAttribute="top" secondItem="uZe-T4-UH6" secondAttribute="top" id="Eax-Ha-wWT"/>
                             <constraint firstItem="HxB-OT-ReZ" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="EyR-6r-xNA"/>
                             <constraint firstItem="9Zx-BP-oS4" firstAttribute="top" secondItem="afk-Ad-5Dg" secondAttribute="bottom" id="Fkn-Xv-QkU"/>
-                            <constraint firstItem="xT6-6w-gQn" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="MRX-MR-6FR"/>
                             <constraint firstItem="afk-Ad-5Dg" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="Mqy-IT-awI"/>
                             <constraint firstItem="YVC-it-MTv" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leading" id="Otr-8t-9R3"/>
                             <constraint firstItem="g5e-VU-Ubr" firstAttribute="top" secondItem="YVC-it-MTv" secondAttribute="bottom" id="PZc-OO-qDa"/>
-                            <constraint firstItem="HxB-OT-ReZ" firstAttribute="leading" secondItem="uZe-T4-UH6" secondAttribute="leadingMargin" id="QUV-3x-KNt"/>
                             <constraint firstAttribute="trailing" secondItem="g5e-VU-Ubr" secondAttribute="trailing" id="RI1-SV-Tx9"/>
                             <constraint firstItem="BDf-xL-ZGe" firstAttribute="top" secondItem="9Zx-BP-oS4" secondAttribute="bottom" id="Rbx-xC-xzu"/>
-                            <constraint firstItem="afk-Ad-5Dg" firstAttribute="top" secondItem="g5e-VU-Ubr" secondAttribute="bottom" constant="-5" id="SWq-Cd-Thv"/>
                             <constraint firstItem="afk-Ad-5Dg" firstAttribute="top" secondItem="g5e-VU-Ubr" secondAttribute="bottom" constant="-8" id="eW5-wv-W0H"/>
                             <constraint firstItem="xT6-6w-gQn" firstAttribute="top" secondItem="uZe-T4-UH6" secondAttribute="topMargin" id="kUE-fc-jz0"/>
-                            <constraint firstItem="g5e-VU-Ubr" firstAttribute="top" secondItem="xT6-6w-gQn" secondAttribute="bottom" id="kwD-nc-tIY"/>
                             <constraint firstAttribute="trailing" secondItem="9Zx-BP-oS4" secondAttribute="trailing" id="nWn-Q9-MZS"/>
-                            <constraint firstItem="9Zx-BP-oS4" firstAttribute="top" secondItem="g5e-VU-Ubr" secondAttribute="bottom" constant="2" id="ndA-GR-iJ1"/>
-                            <constraint firstItem="xT6-6w-gQn" firstAttribute="top" secondItem="uZe-T4-UH6" secondAttribute="top" id="zUv-hP-PCd"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="MRX-MR-6FR"/>
-                                <exclude reference="zUv-hP-PCd"/>
-                                <exclude reference="kwD-nc-tIY"/>
-                                <exclude reference="SWq-Cd-Thv"/>
-                                <exclude reference="QUV-3x-KNt"/>
-                                <exclude reference="ndA-GR-iJ1"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="analysisLabel" destination="6b6-1c-Ce4" id="EDU-bJ-K3v"/>
@@ -242,7 +223,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v95-HL-fO3" id="6qP-lX-UXN">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
                                                     <rect key="frame" x="500" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="j1N-7P-I6a"/>
@@ -256,7 +237,7 @@
                                                         <action selector="plusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchCancel" id="uii-25-hlb"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="pF9-t2-gzU"/>
@@ -269,7 +250,7 @@
                                                         <action selector="minusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchUpInside" id="SHa-Uj-ZmM"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ush-oD-Qi8">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ush-oD-Qi8">
                                                     <rect key="frame" x="100" y="0.0" width="400" height="132"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
