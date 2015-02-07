@@ -36,7 +36,6 @@ class MetricSummaryViewController: UIViewController{
       manageMetricMode = "edit"
    }
    
-   
    override func viewDidLoad() {
       //navigation bar
       navBar.topItem?.title = currentMetric.title
