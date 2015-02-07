@@ -434,6 +434,8 @@ class MetricSummaryViewController: UIViewController{
       currentFeeling = feelings[sender.tag]
       
       //segue to edit note
+      manageNoteMode = "edit"
+      performSegueWithIdentifier("showNoteFromSumSegue", sender: nil)
    }
    
    func buildNotes() {

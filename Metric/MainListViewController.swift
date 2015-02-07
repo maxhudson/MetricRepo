@@ -141,7 +141,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             met.feelings.append(met.lastFeeling!)
-            
+            println("NOTE PRINT")
             met.delayReference = Helper.cancellableDelay(5.0) {
                self.updateMetricViewMode(cell, mode: 1)
             }
@@ -168,9 +168,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             updateMetricViewMode(cell, mode: 1)
             performSegueWithIdentifier("showNoteSegue", sender: nil)
 
-            currentFeeling = met.lastFeeling
-            Helper.cancelDelay(met.delayReference)
-            updateMetricViewMode(cell, mode: 1)
+//            currentFeeling = met.lastFeeling
+//            Helper.cancelDelay(met.delayReference)
+//            updateMetricViewMode(cell, mode: 1)
          }
          
       }

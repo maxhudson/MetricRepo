@@ -71,13 +71,13 @@ class AddNoteViewController: UIViewController {
       
       if manageNoteMode == "add" {
          addNoteView.backgroundColor = Helper.goldColor
-//         promptLabel.text = "Enter the name of the metric you'd like to track"
+         promptLabel.text = "Keep it short if you can?"
       }
       
       if manageNoteMode == "edit" {
          addNoteView.backgroundColor = Helper.purpleColor
-//         promptLabel.text = "Modify the name of the metric you're tracking"
-//         noteTextView.text = metricsManager.metrics[currentMetricRow].title
+         noteTextView.text = currentFeeling.note
+         promptLabel.text = "Made a mistake?"
       }
 
       
