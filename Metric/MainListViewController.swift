@@ -14,6 +14,7 @@ var metricsManager = MetricsManager()
 //var metrics : [Metric] = []
 var metrics: Metric!
 var manageMetricMode: String!
+var manageNoteMode: String!
 var currentMetricRow: Int!
 var currentFeeling: Feeling!
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
@@ -151,11 +152,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          } else if (buttonId == 1) {
             //leave note
             //show note view controller
-         
-            performSegueWithIdentifier("showNoteSegue", sender: nil)
-
+            manageNoteMode = "add"
             currentFeeling = met.lastFeeling
             updateMetricViewMode(cell, mode: 1)
+            performSegueWithIdentifier("showNoteSegue", sender: nil)
+
          }
          
       }

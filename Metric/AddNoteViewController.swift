@@ -68,6 +68,19 @@ class AddNoteViewController: UIViewController {
    
    func setupView(){
       addNoteView.backgroundColor = Helper.goldColor
+      
+      if manageNoteMode == "add" {
+         addNoteView.backgroundColor = Helper.goldColor
+//         promptLabel.text = "Enter the name of the metric you'd like to track"
+      }
+      
+      if manageNoteMode == "edit" {
+         addNoteView.backgroundColor = Helper.purpleColor
+//         promptLabel.text = "Modify the name of the metric you're tracking"
+//         noteTextView.text = metricsManager.metrics[currentMetricRow].title
+      }
+
+      
    }
    
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -78,22 +91,13 @@ class AddNoteViewController: UIViewController {
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
       
-      if segue.identifier == "DoneMetric" {
-//         if manageMetricMode == "add" {
-//            if let title = metricTextField.text {
-//               if !title.isEmpty{
-//                  newMetric = Metric(title: title)
-//               }
-//            }
-//         }
-//         
-//         if manageMetricMode == "edit" {
-//            if let title = metricTextField.text {
-//               if !title.isEmpty{
-//                  metricsManager.metrics[currentMetricRow].title = title
-//               }
-//            }
-//         }
+      if segue.identifier == "DoneNote" {
+         if let note = noteTextView.text {
+            if !note.isEmpty{
+               currentFeeling.note = note
+            
+            }
+         }
       }
    }
 
