@@ -11,12 +11,11 @@ import CoreData
 
 var metricsManager = MetricsManager()
 
-//var metrics : [Metric] = []
-var metrics: Metric!
-var manageMetricMode: String!
-var currentMetricRow: Int!
-var currentFeeling: Feeling!
-var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: [])
+var metrics: Metric! //???
+var manageMetricMode: String! //indicate the mode in which metric note managing is happening
+var currentMetricRow: Int! //reference to current metric row
+var currentFeeling: Feeling! //current feeling for editing notes
+var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
@@ -134,12 +133,10 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             //indicated feeling
             
             if (buttonId == -1){
-               met.lastFeeling = met.feelBad("feeling bad")
+               met.lastFeeling = met.feelBad("")
             } else if (buttonId == 1){
-               met.lastFeeling = met.feelGood("feeling good")
+               met.lastFeeling = met.feelGood("")
             }
-            
-            met.feelings.append(met.lastFeeling!)
             
             met.delayReference = Helper.cancellableDelay(5.0) {
                self.updateMetricViewMode(cell, mode: 1)
@@ -196,76 +193,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
       
-      //if (metricsManager.metrics.count == 0){
-         
-         metricsManager.metrics = [
-            Metric(title: "Graph 1", good: 0, bad: 0, feelings: []),
-            Metric(title: "Graph 2", good: 0, bad: 0, feelings: []),
-            Metric(title: "Graph 3", good: 0, bad: 0, feelings: [])
-         ]
       
-         for (var i = 0; i < 20; i++) {
-            var rand : Int = random() % 5
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
-            let startDate:NSDate = dateFormatter.dateFromString("2015-02-0" + String(rand + 1))!
-            
-            metricsManager.metrics[0].feelings.append(Feeling(value: (random() % 3) - 1, note: "This is the note content for note id number " + String(i), date: startDate))
-         }
-      
-      for (var i = 0; i < 20; i++) {
-         var rand : Int = random() % 5
-         
-         let dateFormatter = NSDateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd"
-         
-         let startDate:NSDate = dateFormatter.dateFromString("2015-02-0" + String(rand + 1))!
-         
-         metricsManager.metrics[1].feelings.append(Feeling(value: (random() % 3) - 1, note: "This is the note content for note id number " + String(i), date: startDate))
-      }
-      for (var i = 0; i < 120; i++) {
-         var rand : Int = random() % 30
-         
-         let dateFormatter = NSDateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd"
-         
-         let startDate:NSDate = dateFormatter.dateFromString("2015-01-0" + String(rand + 1))!
-         
-         metricsManager.metrics[1].feelings.append(Feeling(value: (random() % 4) - 1, note: "", date: startDate))
-      }
-      for (var i = 0; i < 20; i++) {
-         var rand : Int = random() % 5
-         
-         let dateFormatter = NSDateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd"
-         
-         let startDate:NSDate = dateFormatter.dateFromString("2015-02-0" + String(rand + 1))!
-         
-         metricsManager.metrics[2].feelings.append(Feeling(value: (random() % 3) - 1, note: "This is the note content for note id number " + String(i), date: startDate))
-      }
-      for (var i = 0; i < 120; i++) {
-         var rand : Int = random() % 30
-         
-         let dateFormatter = NSDateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd"
-         
-         let startDate:NSDate = dateFormatter.dateFromString("2015-01-0" + String(rand + 1))!
-         
-         metricsManager.metrics[2].feelings.append(Feeling(value: (random() % 3) - 1, note: "", date: startDate))
-      }
-      for (var i = 0; i < 120; i++) {
-         var rand : Int = random() % 30
-         
-         let dateFormatter = NSDateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd"
-         
-         let startDate:NSDate = dateFormatter.dateFromString("2014-11-0" + String(rand + 1))!
-         
-         metricsManager.metrics[2].feelings.append(Feeling(value: (random() % 3) - 1, note: "", date: startDate))
-      }
-      //}
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -274,6 +202,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       
       Helper.styleNavButton(helpButton, fontName: Helper.buttonFont, fontSize: 22)
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
+      
+      
+      //Helper.generateRandomData(50, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
    }
    
    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -95,7 +95,6 @@ class MetricSummaryViewController: UIViewController{
             slope(met, days: 3),
             slope(met, days: 7),
             slope(met, days: 14),
-            slope(met, days: 28),
             slope(met, days: 1000000)
          ]
          
@@ -103,37 +102,64 @@ class MetricSummaryViewController: UIViewController{
             net(met, days: 3),
             net(met, days: 7),
             net(met, days: 14),
-            net(met, days: 28),
             net(met, days: 1000000)
          ]
          
+         //RECENT CALC
          
-         var recentBenefit = 0 //gives more weight to 14 day than 3
+         var recentBenefit : CGFloat = 0 //gives more weight to 14 day than 3
+         var recentNet : CGFloat = 0
+         var recentSlope : CGFloat = 0
          
          for (var i = 2; i >= 0; i--) {
-            recentBenefit += slopes[i] + 2*nets[i]
+            recentNet += slopes[i]/3.0
+            recentNet += nets[i]/3.0
          }
          
-         var overallBenefit = 3*nets[slopes.count - 1] //gives more weight to net than slope
+         recentBenefit = 0.35*recentSlope + 0.65*recentNet
          
+         if (recentNet > 0.9 && recentSlope > -0.2) {
+            recentBenefit = recentNet
+         } else if (recentSlope > 0.8 && recentNet > 0.5) {
+            recentBenefit = 0.8*recentSlope + 0.2*recentNet
+         }
+         
+         //OVERALL CALC
+         
+         var overallBenefit = 0.85*nets[nets.count - 1] + 0.15*slopes[slopes.count - 1] //gives more weight to net than slope
+         
+         if (nets[nets.count - 1] > 0.9 && slopes[slopes.count - 1] > -0.2) {
+            overallBenefit = nets[nets.count - 1]
+         }
          
          var dir = 0 //how good or bad it is - based on slope and magnitude
-         if (((recentBenefit < 3 && overallBenefit < 0) || recentBenefit < 0 || overallBenefit < -10) && !(recentBenefit >= -3 && overallBenefit > 0)){
+         if (
+            (overallBenefit < -0.1 && recentBenefit < 0.2) ||
+            (overallBenefit < 0.05 && recentBenefit < -0.1) ||
+            overallBenefit < -0.2 ||
+            (recentBenefit < -0.9 && overallBenefit < 0.4)
+         ){
             dir = 1
          }
          
          var inaccuracy = 0 //how sure we are - based on number of entries and days of data and magnitude
-         var recentAbs = fabs(CGFloat(recentBenefit))
-         var overallAbs = fabs(CGFloat(overallBenefit))/2.0
-         if (recentAbs + overallAbs < 5){
+         var recentAbs = fabs(recentBenefit)
+         var overallAbs = fabs(overallBenefit)
+         
+         if (recentAbs + overallAbs < 0.1){
             inaccuracy++
          }
-         if (daysOfData < 7 || recentAbs + overallAbs < 10){
+         if (daysOfData < 7){
+            inaccuracy++
+         }
+         if (recentAbs + overallAbs < 0.2){
             inaccuracy++
          }
          if (daysOfData < 14){
             inaccuracy++
          }
+         
+         inaccuracy = max(3, inaccuracy)
          
          var dirStrings = [
             "keep " + met.title + " in",
@@ -143,7 +169,7 @@ class MetricSummaryViewController: UIViewController{
          var accuracyStrings = [
             "almost certainly, that",
             "with a lot of confidence, that",
-            "with a fair amount of confidence, that",
+            "with a some of confidence, that",
             "but not with much certainty, that"
          ]
          
@@ -153,70 +179,65 @@ class MetricSummaryViewController: UIViewController{
             analysis += "You haven't been tracking how this makes you feel for very long. In another " + String(14 - daysOfData) + " days we'll have a better idea of the situation.\n\n"
          }
          
-         analysis += "Recent Benefit:  " + String(recentBenefit) + " goodness\n"
+         analysis += "Recent Benefit:  " + String(Int(recentBenefit*100)) + "%\n"
          
-         analysis += "Overall Benefit: " + String(overallBenefit) + " goodness"
+         analysis += "Overall Benefit: " + String(Int(overallBenefit*100)) + "%"
          
       } else {
-         "We need at least 3 days worth of data to make a somewhat accurate recommendation about " + met.title + ". You have " + String(3 - daysOfData) + " to go"
+         analysis += "We need at least 3 days worth of data in order to get a somewhat accurate recommendation about " + met.title + ". You have " + String(3 - daysOfData) + " to go"
       }
       
       return analysis;
    }
    
-   func slope(met : Metric, days: Int) -> Int {
+   func percentage(value: CGFloat, max: CGFloat) -> CGFloat {
+      var trueValue = value;
+      var sign = trueValue/fabs(trueValue)
+      if (fabs(value) > fabs(max)) {
+         trueValue = max*sign;
+      }
+      
+      return trueValue/max;
+   }
+   
+   func slope(met : Metric, days: Int) -> CGFloat {
       var dailyFeelings = feelingsByDay(met)
       var Sx = 0;
       var Sy = 0;
       var Sxx = 0;
       var Sxy = 0;
-      var n = dailyFeelings.count;
-      
+      var n = min(dailyFeelings.count, days);
       
       for (var i = 0; i < dailyFeelings.count && i < days; i++) {
-         Sx -= i;
-         Sy += Helper.netFeelings(dailyFeelings[i])
-         Sxx += i*i;
-         Sxy -= i*Helper.netFeelings(dailyFeelings[i]);
+         var x = -i
+         var y = Helper.netFeelings(dailyFeelings[i])
+         Sx += x
+         Sy += y
+         Sxx += x*x
+         Sxy += x*y
       }
       
       var slope = CGFloat(n*Sxy - Sx*Sy)/CGFloat(n*Sxx - Sx*Sx)
       
-      var sign = 1
-      if (slope < 0){
-         sign = -1
-      }
-      
-      if (fabs(slope) < 0.1){
-         slope = 0
-      }else if (fabs(slope) < 0.6){
-         slope = 1
-      }else if (fabs(slope) < 1){
-         slope = 2
-      }else{
-         slope = 3
-      }
-      
-      return Int(slope*CGFloat(sign))
+      return percentage(slope, max: 1)
    }
    
-   func net(met : Metric, days: Int) -> Int {
+   func net(met : Metric, days: Int) -> CGFloat {
       var dailyFeelings = feelingsByDay(met)
       var net = 0;
+      var totalDays = 0;
+      var maxDays = days
       
-      
-      for (var i = 0; i < dailyFeelings.count && i < days; i++) {
-         net += Helper.netFeelings(dailyFeelings[i])
+      for (var i = 0; i < dailyFeelings.count && i < maxDays; i++) {
+         if(dailyFeelings[i].count > 0) {
+            net += Helper.netFeelings(dailyFeelings[i])
+            totalDays++
+         }
+         println( Helper.netFeelings(dailyFeelings[i]))
       }
       
-      var sign = 1
-      if (net < 0){
-         sign = -1
-      }
-      
-      var multipler = CGFloat(days)
-      net = Int(round(20 * CGFloat(net) / CGFloat(dailyFeelings.count))) //values per day * 2
-      return net
+      var average = CGFloat(net) / CGFloat(totalDays)
+      return percentage(average, max: 3)
    }
    
    func daysBetween(date1 : NSDate, date2 : NSDate) -> Int {
@@ -351,24 +372,34 @@ class MetricSummaryViewController: UIViewController{
                pathColor = Helper.badColor.CGColor
             }
             
-            CGPathMoveToPoint(path, nil, drawX, origin.y - CGFloat(sign)*scale)
-            drawX += xUnit/2.0
-            
-            for (var x = 0; x < valueSet.count; x++){
-               CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(valueSet[x])*yUnit*scale - CGFloat(sign)*scale)
+            if (sign == 0) {
+               drawX += xUnit
                
-               if (x < valueSet.count - 1) {
-                  drawX += xUnit
+               for (var x = 0; x < valueSet.count; x++){
+                  if (x < valueSet.count - 1) {
+                     drawX += xUnit
+                  }
                }
+            } else {
+               CGPathMoveToPoint(path, nil, drawX, origin.y - CGFloat(sign)*scale)
+               drawX += xUnit/2.0
+               
+               for (var x = 0; x < valueSet.count; x++){
+                  CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(valueSet[x])*yUnit*scale - CGFloat(sign)*scale)
+                  
+                  if (x < valueSet.count - 1) {
+                     drawX += xUnit
+                  }
+               }
+               
+               drawX += xUnit/2.0
+               CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(sign)*scale)
+               
+               CGPathCloseSubpath(path)
+               CGContextAddPath(context, path)
+               CGContextSetFillColorWithColor(context, pathColor)
+               CGContextFillPath(context)
             }
-            
-            drawX += xUnit/2.0
-            CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(sign)*scale)
-            
-            CGPathCloseSubpath(path)
-            CGContextAddPath(context, path)
-            CGContextSetFillColorWithColor(context, pathColor)
-            CGContextFillPath(context)
          }
       }
       

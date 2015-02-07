@@ -123,4 +123,19 @@ struct Helper {
       
       return badColor
    }
+   
+   static func generateRandomData(days: Int, values: Int, lowRange: Int, hiRange: Int, met: Metric) {
+      var date = NSDate()
+      date = date.dateByAddingTimeInterval(Double(-1*60*60*24*days))
+      var val :CGFloat = 0
+      for (var i = 0; i < days; i++) {
+         
+         val = CGFloat(i % 2)
+         
+         met.feelings.append(Feeling(value: Int(val), note: "", date: date))
+         
+            date = date.dateByAddingTimeInterval(Double(60*60*24))
+         
+      }
+   }
 }
