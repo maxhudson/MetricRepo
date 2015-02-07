@@ -165,10 +165,12 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             //show note view controller
             manageNoteMode = "add"
             currentFeeling = met.lastFeeling
-            Helper.cancelDelay(met.delayReference)
             updateMetricViewMode(cell, mode: 1)
             performSegueWithIdentifier("showNoteSegue", sender: nil)
 
+            currentFeeling = met.lastFeeling
+            Helper.cancelDelay(met.delayReference)
+            updateMetricViewMode(cell, mode: 1)
          }
          
       }
