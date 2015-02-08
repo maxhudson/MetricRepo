@@ -189,7 +189,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewDidLoad() {
-      
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
       
