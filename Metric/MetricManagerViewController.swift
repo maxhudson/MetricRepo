@@ -17,6 +17,13 @@ class MetricManagerViewController: UIViewController {
 
    }
 
+//   override func viewDidDisappear(animated: Bool) {
+//      if manageMetricMode == "edit" {
+//         if let parentVC = self.parentViewController as? SummaryViewController {
+//            parentVC.navBar.topItem?.title = currentMetric.title
+//         }
+//      }
+//   }
    var newMetric: Metric!
    
    @IBOutlet weak var trashButton: UIButton!
@@ -29,6 +36,16 @@ class MetricManagerViewController: UIViewController {
    
    @IBAction func trashMetric(sender: AnyObject) {
       metricsManager.metrics.removeAtIndex(currentMetricRow)
+      performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+   }
+   
+   @IBAction func doneMetric(sender: AnyObject) {
+      if manageMetricMode == "edit" {
+         performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
+      }
+      if manageMetricMode == "add" {
+         performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+      }
    }
    
    @IBAction func cancelMetric(sender: AnyObject) {
@@ -98,8 +115,8 @@ class MetricManagerViewController: UIViewController {
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-   
-      if segue.identifier == "DoneMetric" {
+      
+      if segue.identifier == "DoneMetricFromList" {
          if manageMetricMode == "add" {
             if let title = metricTextField.text {
                if !title.isEmpty{
@@ -107,7 +124,10 @@ class MetricManagerViewController: UIViewController {
                }
             }
          }
-         
+      }
+      
+      
+      else if segue.identifier == "DoneMetricFromSum" {
          if manageMetricMode == "edit" {
             if let title = metricTextField.text {
                if !title.isEmpty{
@@ -116,6 +136,7 @@ class MetricManagerViewController: UIViewController {
             }
          }
       }
+
    }
    
 

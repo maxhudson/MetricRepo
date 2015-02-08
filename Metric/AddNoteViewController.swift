@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNoteViewController: UIViewController {
+class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
    
    @IBOutlet var addNoteView: UIView!
    @IBOutlet weak var noteTextView: UITextView!
@@ -35,8 +35,9 @@ class AddNoteViewController: UIViewController {
       super.viewWillDisappear(animated)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-//      Reload data
-//      self.parentViewController.tableView.reloaddatat
+//      if let parentVC = self.parentViewController as? SummaryViewController {
+//         parentVC.tableView.reloadData()
+//      }
    }
 
    func keyboardWillShowNotification(notification: NSNotification) {
@@ -74,6 +75,14 @@ class AddNoteViewController: UIViewController {
       dismissViewControllerAnimated(true, completion: nil)
    }
    
+   @IBAction func doneNote(sender: AnyObject) {
+      if manageNoteMode == "add" {
+         performSegueWithIdentifier("DoneNoteFromList", sender: nil)
+      }
+      if manageNoteMode == "edit" {
+         performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
+      }
+   }
    func setupView(){
       doneButton.backgroundColor = Helper.darkNavyColor
       addNoteView.backgroundColor = Helper.goldColor
@@ -101,10 +110,17 @@ class AddNoteViewController: UIViewController {
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-      
-      if segue.identifier == "DoneNote" {
+      if segue.identifier == "DoneNoteFromSum" {
          if let note = noteTextView.text {
-            if !note.isEmpty{
+            if !note.isEmpty {
+               currentFeeling.note = note
+            }
+         }
+      }
+      
+      if segue.identifier == "DoneNoteFromList" {
+         if let note = noteTextView.text {
+            if !note.isEmpty {
                currentFeeling.note = note
             
             }

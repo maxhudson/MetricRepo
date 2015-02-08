@@ -57,6 +57,10 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       Helper.styleColoredButton(goodButton, color: Helper.goodColor, title: Helper.formatStringNumber(Int(currentMetric.good)), fontSize: 20)
    }
    
+   override func viewWillAppear(animated: Bool) {
+      navBar.topItem?.title = currentMetric.title
+   }
+   
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       return 3
    }
@@ -534,7 +538,16 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       currentFeeling = feelings[sender.tag]
       
       //segue to edit note
+      manageNoteMode = "edit"
+      performSegueWithIdentifier("showNoteFromSumSegue", sender: nil)
    }
+   
+   @IBAction func unwindToSummary(segue: UIStoryboardSegue){
+      if segue.identifier == "DoneNoteFromSum" {
+         tableView.reloadData()
+      }
+   }
+
 
 }
 

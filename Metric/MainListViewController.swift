@@ -140,8 +140,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                met.lastFeeling = met.feelGood("")
             }
             
-            met.feelings.append(met.lastFeeling!)
-            println("NOTE PRINT")
+           
             met.delayReference = Helper.cancellableDelay(5.0) {
                self.updateMetricViewMode(cell, mode: 1)
             }
@@ -269,7 +268,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
 //   }
 //   
    @IBAction func unwindToList(segue: UIStoryboardSegue){
-      if segue.identifier == "DoneMetric" {
+      if segue.identifier == "DoneMetricFromList" {
          tableView.reloadData()
          let metricManagerController = segue.sourceViewController as MetricManagerViewController
          if let newMetric = metricManagerController.newMetric {

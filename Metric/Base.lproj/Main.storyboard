@@ -83,7 +83,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aLr-tN-A6Q" id="4rl-EA-fLG">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-1k-PZp">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-1k-PZp">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -240,12 +240,13 @@
                         <outlet property="goodButtonWidthConstraint" destination="KQq-of-8gA" id="cwf-pi-eKh"/>
                         <outlet property="navBar" destination="e5b-I8-ZEE" id="b7X-Qe-eEh"/>
                         <outlet property="tableView" destination="sDp-K1-Ohp" id="TP7-Ib-rV3"/>
+                        <segue destination="LEB-Rd-SeB" kind="presentation" identifier="showNoteFromSumSegue" id="g9k-QH-wco"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJ5-Cv-xRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="3et-TS-v2y" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2527" y="-345"/>
+            <point key="canvasLocation" x="2191" y="-633"/>
         </scene>
         <!--Metric Summary View Controller-->
         <scene sceneID="08g-W9-efc">
@@ -392,13 +393,12 @@
                         <outlet property="graph" destination="dRC-JP-CeW" id="czA-Lx-tTr"/>
                         <outlet property="navBar" destination="YVC-it-MTv" id="g3R-yC-CFx"/>
                         <outlet property="scrollView" destination="g5e-VU-Ubr" id="ayt-Ia-XAN"/>
-                        <segue destination="LEB-Rd-SeB" kind="presentation" identifier="showNoteFromSumSegue" id="HvM-Kp-hIl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUj-41-tCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="x86-3h-YAQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1735" y="-149"/>
+            <point key="canvasLocation" x="2191" y="-1361"/>
         </scene>
         <!--Main List View Controller-->
         <scene sceneID="Yko-q9-oKW">
@@ -578,7 +578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCI-JM-jFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2527" y="387"/>
+            <point key="canvasLocation" x="1395" y="31"/>
         </scene>
         <!--Add Note View Controller-->
         <scene sceneID="GDD-7X-17w">
@@ -612,7 +612,7 @@
                                 </constraints>
                                 <state key="normal" title="DONE"/>
                                 <connections>
-                                    <segue destination="zhn-yS-jYf" kind="unwind" identifier="DoneNote" unwindAction="unwindToList:" id="Ojq-Ur-ZSa"/>
+                                    <action selector="doneNote:" destination="LEB-Rd-SeB" eventType="touchUpInside" id="Rzm-Tw-21O"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLd-kq-GkR">
@@ -684,12 +684,14 @@
                         <outlet property="noteTextView" destination="6On-Om-YMc" id="oTS-m5-d4t"/>
                         <outlet property="promptLabel" destination="gDe-OZ-FVf" id="6Vq-2k-NBe"/>
                         <outlet property="trashButton" destination="ifr-Jh-gkT" id="DTT-53-YGq"/>
+                        <segue destination="zhn-yS-jYf" kind="unwind" identifier="DoneNoteFromList" unwindAction="unwindToList:" id="i4E-FH-vfG"/>
+                        <segue destination="zhn-yS-jYf" kind="unwind" identifier="DoneNoteFromSum" unwindAction="unwindToSummary:" id="oyF-zR-1mb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnZ-WX-lvs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zhn-yS-jYf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2527" y="1201"/>
+            <point key="canvasLocation" x="2197" y="583"/>
         </scene>
         <!--Metric Manager View Controller-->
         <scene sceneID="cu5-F1-CEe">
@@ -731,7 +733,7 @@
                                 </constraints>
                                 <state key="normal" title="DONE"/>
                                 <connections>
-                                    <segue destination="pBF-8n-1zg" kind="unwind" identifier="DoneMetric" unwindAction="unwindToList:" id="sVF-1J-pFe"/>
+                                    <action selector="doneMetric:" destination="LjB-lQ-QcT" eventType="touchUpInside" id="ulP-rm-qNL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59W-Th-IWG">
@@ -799,12 +801,14 @@
                         <outlet property="metricTextField" destination="Yhp-es-Ed3" id="N0c-pZ-7nK"/>
                         <outlet property="promptLabel" destination="abI-RM-XR8" id="san-aX-eAp"/>
                         <outlet property="trashButton" destination="59W-Th-IWG" id="T8m-Ji-HMS"/>
+                        <segue destination="pBF-8n-1zg" kind="unwind" identifier="DoneMetricFromList" unwindAction="unwindToList:" id="9or-l1-U3B"/>
+                        <segue destination="pBF-8n-1zg" kind="unwind" identifier="DoneMetricFromSum" unwindAction="unwindToSummary:" id="HMG-qS-sDf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxe-mm-YwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="pBF-8n-1zg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3344" y="-4"/>
+            <point key="canvasLocation" x="2992" y="31"/>
         </scene>
     </scenes>
     <resources>
@@ -813,6 +817,7 @@
         <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="g9k-QH-wco"/>
         <segue reference="zca-OV-H2M"/>
     </inferredMetricsTieBreakers>
 </document>
