@@ -10,7 +10,7 @@
         <!--Summary View Controller-->
         <scene sceneID="jEg-tB-e8Q">
             <objects>
-                <viewController id="Kis-9N-ppW" customClass="SummaryViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MetricSummary" id="Kis-9N-ppW" customClass="SummaryViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IaG-wh-tNJ"/>
                         <viewControllerLayoutGuide type="bottom" id="96U-J8-ple"/>
@@ -251,7 +251,7 @@
         <!--Metric Summary View Controller-->
         <scene sceneID="08g-W9-efc">
             <objects>
-                <viewController storyboardIdentifier="MetricSummary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7cY-j1-iHo" customClass="MetricSummaryViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MetricSummaryDEPRICATED" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7cY-j1-iHo" customClass="MetricSummaryViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RIE-eh-N4a"/>
                         <viewControllerLayoutGuide type="bottom" id="BDf-xL-ZGe"/>

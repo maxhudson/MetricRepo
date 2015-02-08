@@ -74,7 +74,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          currentMetricRow = rowForButton(sender as UIButton).row
          
          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-         let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as MetricSummaryViewController
+         let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as SummaryViewController
          self.presentViewController(vc, animated: false, completion: nil)
       }
       if segue.identifier == "showNoteSegue"{
