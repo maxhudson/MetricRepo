@@ -23,6 +23,8 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    @IBOutlet weak var tableView: UITableView!
    
+   
+   
    override func viewDidLoad() {
       
       tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
