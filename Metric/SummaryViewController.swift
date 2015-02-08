@@ -1,14 +1,14 @@
 //
-//  MetricSummaryViewController.swift
+//  SummaryViewController.swift
 //  Metric
 //
-//  Created by Max Hudson on 2/1/15.
+//  Created by Max Hudson on 2/7/15.
 //  Copyright (c) 2015 Max Hudson. All rights reserved.
 //
 
 import UIKit
 
-class MetricSummaryViewController: UIViewController{
+class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
    
    @IBOutlet weak var badButton: UIButton!
    @IBOutlet weak var badButtonWidthConstraint: NSLayoutConstraint!
@@ -19,42 +19,25 @@ class MetricSummaryViewController: UIViewController{
    
    @IBOutlet weak var editButton: UIButton!
    
-   @IBOutlet weak var analysisLabel: UILabel!
-   
-   @IBOutlet weak var scrollView: UIScrollView!
    @IBOutlet weak var navBar: UINavigationBar!
-   @IBOutlet weak var graph: UIImageView!
    
-   
-//   @IBAction func backButtonPress(sender: AnyObject) {
-//      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//      let vc = storyboard.instantiateViewControllerWithIdentifier("MainList") as MainListViewController
-//      self.presentViewController(vc, animated: false, completion: nil)
-//   }
+   @IBOutlet weak var tableView: UITableView!
    
    @IBAction func editButtonPress(sender: AnyObject) {
       manageMetricMode = "edit"
    }
    
    override func viewDidLoad() {
-      //navigation bar
+      
+      tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+      tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+      
+      tableView.rowHeight = UITableViewAutomaticDimension;
+      tableView.estimatedRowHeight = 44.0;
+      
       navBar.topItem?.title = currentMetric.title
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
       Helper.styleNavButton(editButton, fontName: Helper.navTitleFont, fontSize: 17)
-      
-      //scrollview
-      //scrollView.directionalLockEnabled = true;
-      
-      //text
-      
-      analysisLabel.text = analyze(currentMetric)
-      analysisLabel.font = UIFont(name: Helper.bodyTextFont, size: 15)
-      
-      //graph
-      graph.image = getImageForMetric(currentMetric)
-      
-      //notes
-      buildNotes()
       
       //bottom bars
       var minWidth : CGFloat = 40
@@ -72,6 +55,75 @@ class MetricSummaryViewController: UIViewController{
       
       Helper.styleColoredButton(badButton, color: Helper.badColor, title: Helper.formatStringNumber(-1*Int(currentMetric.bad)), fontSize: 20)
       Helper.styleColoredButton(goodButton, color: Helper.goodColor, title: Helper.formatStringNumber(Int(currentMetric.good)), fontSize: 20)
+   }
+   
+   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+      return 3
+   }
+   
+   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      var rows = [
+         1,
+         1,
+         feelingsWithNotes().count
+      ]
+      
+      return rows[section]
+   }
+   
+   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      
+      
+      if(indexPath.section == 0) {
+         var cell = tableView.dequeueReusableCellWithIdentifier("summaryAnalysis", forIndexPath: indexPath) as SummaryAnalysisTableViewCell
+         
+         cell.analysisLabel.text = analyze(currentMetric)
+         cell.analysisLabel.font = UIFont(name: Helper.bodyTextFont, size: 15)
+         
+         return cell
+      } else if(indexPath.section == 1) {
+         var cell = tableView.dequeueReusableCellWithIdentifier("summaryGraph", forIndexPath: indexPath) as SummaryGraphTableViewCell
+         
+         cell.graph.image = getImageForMetric(currentMetric, graph: cell.graph)
+         
+         return cell
+      } else {
+         var feelings = feelingsWithNotes()
+         
+         var formatter = NSDateFormatter()
+         formatter.setLocalizedDateFormatFromTemplate("MMM d, yyyy - h:mm")
+         
+         var cell = tableView.dequeueReusableCellWithIdentifier("summaryNote", forIndexPath: indexPath) as SummaryNoteTableViewCell
+         
+         var i = feelings.count - 1 - indexPath.row
+         var feeling = feelings[i]
+         
+         cell.noteButton.addTarget(self, action: "modifyNote:", forControlEvents: .TouchUpInside)
+         cell.noteButton.tag = i
+         
+         cell.noteColor.backgroundColor = Helper.colorForFeeling(feeling.value)
+         
+         cell.noteDate.text = formatter.stringFromDate(feeling.date)
+         cell.noteDate.font = UIFont(name: Helper.bodyTextFont, size: 10)
+         cell.noteDate.textColor = UIColor(white: 0.3, alpha: 0.5)
+         
+         cell.noteText.text = feeling.note
+         cell.noteText.font = UIFont(name: Helper.bodyTextFont, size: 15)
+         
+         return cell
+      }
+   }
+   
+   func feelingsWithNotes() -> [Feeling] {
+      
+      var feelings : [Feeling] = []
+      for (var i = 0; i < currentMetric.feelings.count; i++){
+         if (currentMetric.feelings[i].note != "") {
+            feelings.append(currentMetric.feelings[i])
+         }
+      }
+      
+      return feelings
    }
    
    func analyze(met: Metric) -> String{
@@ -135,11 +187,11 @@ class MetricSummaryViewController: UIViewController{
          var dir = 0 //how good or bad it is - based on slope and magnitude
          if (
             (overallBenefit < -0.1 && recentBenefit < 0.2) ||
-            (overallBenefit < 0.05 && recentBenefit < -0.1) ||
-            overallBenefit < -0.2 ||
-            (recentBenefit < -0.9 && overallBenefit < 0.4)
-         ){
-            dir = 1
+               (overallBenefit < 0.05 && recentBenefit < -0.1) ||
+               overallBenefit < -0.2 ||
+               (recentBenefit < -0.9 && overallBenefit < 0.4)
+            ){
+               dir = 1
          }
          
          var inaccuracy = 0 //how sure we are - based on number of entries and days of data and magnitude
@@ -189,6 +241,7 @@ class MetricSummaryViewController: UIViewController{
       
       return analysis;
    }
+
    
    func percentage(value: CGFloat, max: CGFloat) -> CGFloat {
       var trueValue = value;
@@ -267,9 +320,7 @@ class MetricSummaryViewController: UIViewController{
       return feelingsByDay
    }
    
-
-   
-   func getImageForMetric(met : Metric) -> UIImage{
+   func getImageForMetric(met : Metric, graph: UIImageView) -> UIImage{
       
       let scale = UIScreen.mainScreen().scale
       
@@ -282,7 +333,6 @@ class MetricSummaryViewController: UIViewController{
       UIGraphicsBeginImageContext(graphSize)
       var context = UIGraphicsGetCurrentContext();
       
-      
       var backwardYValues : [Int] = []
       
       //pulled data
@@ -291,6 +341,8 @@ class MetricSummaryViewController: UIViewController{
       for (var i = 0; i < dailyFeelings.count; i++) {
          backwardYValues.append(Helper.netFeelings(dailyFeelings[i]))
       }
+      
+      var dateX : CGFloat = 0
       
       if (backwardYValues.count > 0) {
          var yValues : [Int] = []
@@ -389,6 +441,10 @@ class MetricSummaryViewController: UIViewController{
                for (var x = 0; x < valueSet.count; x++){
                   CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(valueSet[x])*yUnit*scale - CGFloat(sign)*scale)
                   
+                  if(i == 0 && x == 0){
+                     dateX = drawX
+                  }
+                  
                   if (x < valueSet.count - 1) {
                      drawX += xUnit
                   }
@@ -433,6 +489,17 @@ class MetricSummaryViewController: UIViewController{
          position: CGPoint(x: origin.x - 20*scale, y: graphSize.height/scale - origin.y - 5*scale),
          context: context, scale: scale)
       
+      
+      if (dateX != 0) {
+         var formatter = NSDateFormatter()
+         formatter.setLocalizedDateFormatFromTemplate("M/d")
+         
+         drawText(
+            formatter.stringFromDate(NSDate()),
+            position: CGPoint(x: dateX, y: graphSize.height/scale - origin.y - 50*scale),
+            context: context, scale: scale)
+      }
+      
       //test
       
       var image =  UIGraphicsGetImageFromCurrentImageContext();
@@ -445,13 +512,13 @@ class MetricSummaryViewController: UIViewController{
       let path = CGPathCreateMutable()
       
       let aFont = UIFont(name: "Quicksand-Bold", size: 12*scale)
-      let attr:CFDictionaryRef = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:UIColor(white: 0.5, alpha: 1)]
+      let attr = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:UIColor(white: 0.5, alpha: 1)]
       let text = CFAttributedStringCreate(nil, text, attr)
       let line = CTLineCreateWithAttributedString(text)
       let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
       CGContextSetLineWidth(context, 1.5)
       CGContextSetTextDrawingMode(context, kCGTextFill)
-      CGContextSetTextPosition(context, position.x, position.y)
+      CGContextSetTextPosition(context, position.x - bounds.size.width/2, position.y)
       CTLineDraw(line, context)
    }
    
@@ -467,109 +534,7 @@ class MetricSummaryViewController: UIViewController{
       currentFeeling = feelings[sender.tag]
       
       //segue to edit note
-      manageNoteMode = "edit"
-      performSegueWithIdentifier("showNoteFromSumSegue", sender: nil)
    }
-   
-   func buildNotes() {
-      var lastNote : UIView!
-      
-      var feelings : [Feeling] = []
-      for (var i = 0; i < currentMetric.feelings.count; i++){
-         if (currentMetric.feelings[i].note != "") {
-            feelings.append(currentMetric.feelings[i])
-         }
-      }
-      
-      for (var i = feelings.count - 1; i >= 0; i--) {
-         var feeling = feelings[i]
-         
-         var note = UIButton()
-         note.addTarget(self, action: "modifyNote:", forControlEvents: .TouchUpInside)
-         note.tag = i
-         note.setTranslatesAutoresizingMaskIntoConstraints(false)
-         scrollView.addSubview(note)
-         
-         //add uiview constraints
-         var leftViewCons = NSLayoutConstraint(item: note, attribute: .Left, relatedBy: .Equal, toItem: scrollView, attribute: .Left, multiplier: 1, constant: 0)
-         var widthViewCons = NSLayoutConstraint(item: note, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 320)
-         
-         var topViewCons : NSLayoutConstraint;
-         
-         if (i == feelings.count - 1) {
-            topViewCons = NSLayoutConstraint(item: note, attribute: .Top, relatedBy: .Equal, toItem: graph, attribute: .Bottom, multiplier: 1, constant: 0)
-         } else {
-            topViewCons = NSLayoutConstraint(item: note, attribute: .Top, relatedBy: .Equal, toItem: lastNote, attribute: .Bottom, multiplier: 1, constant: 10)
-         }
-         
-         self.view.addConstraints([topViewCons, leftViewCons, widthViewCons])
-         
-         if (i == 0) {
-            var bottomViewCons = NSLayoutConstraint(item: note, attribute: .Bottom, relatedBy: .Equal, toItem: scrollView, attribute: .Bottom, multiplier: 1, constant: -100)
-            
-            self.view.addConstraint(bottomViewCons)
-         }
-         
-         //button
-         var button = UIButton()
-         button.setTitle("", forState: .Normal)
-         button.backgroundColor = Helper.colorForFeeling(feeling.value)
-         
-         button.setTranslatesAutoresizingMaskIntoConstraints(false)
-         note.addSubview(button)
-         
-         //button constraints
-         var widthButtonCons = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 5)
-         var topButtonCons = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: note, attribute: .Top, multiplier: 1, constant: 0)
-         var leftButtonCons = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: note, attribute: .Left, multiplier: 1, constant: 20)
-         var bottomButtonCons = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: note, attribute: .Bottom, multiplier: 1, constant: 0)
-         
-         self.view.addConstraints([widthButtonCons, topButtonCons, leftButtonCons, bottomButtonCons])
-         
-         //date
-         var formatter = NSDateFormatter()
-         formatter.setLocalizedDateFormatFromTemplate("MMM d, yyyy - h:mm")
-         
-         var date = UILabel()
-         date.text = formatter.stringFromDate(feeling.date)
-         date.numberOfLines = 0
-         date.font = UIFont(name: Helper.bodyTextFont, size: 10)
-         date.textColor = UIColor(white: 0.3, alpha: 0.5)
-         
-         date.setTranslatesAutoresizingMaskIntoConstraints(false)
-         note.addSubview(date)
-         
-         //date constraints
-         var widthDateCons = NSLayoutConstraint(item: date, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
-         var topDateCons = NSLayoutConstraint(item: date, attribute: .Top, relatedBy: .Equal, toItem: note, attribute: .Top, multiplier: 1, constant: 0)
-         var leftDateCons = NSLayoutConstraint(item: date, attribute: .Left, relatedBy: .Equal, toItem: button, attribute: .Right, multiplier: 1, constant: 20)
-         
-         self.view.addConstraints([widthDateCons, topDateCons, leftDateCons])
-         
-         //text
-         var text = UILabel()
-         text.text = feeling.note
-         text.numberOfLines = 0
-         text.font = UIFont(name: Helper.bodyTextFont, size: 15)
-         
-         text.setTranslatesAutoresizingMaskIntoConstraints(false)
-         note.addSubview(text)
-         
-         //text constraints
-         var widthTextCons = NSLayoutConstraint(item: text, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
-         var topTextCons = NSLayoutConstraint(item: text, attribute: .Top, relatedBy: .Equal, toItem: date, attribute: .Bottom, multiplier: 1, constant: 0)
-         var leftTextCons = NSLayoutConstraint(item: text, attribute: .Left, relatedBy: .Equal, toItem: button, attribute: .Right, multiplier: 1, constant: 20)
-         var bottomTextCons = NSLayoutConstraint(item: text, attribute: .Bottom, relatedBy: .Equal, toItem: note, attribute: .Bottom, multiplier: 1, constant: 0)
-         
-         self.view.addConstraints([widthTextCons, topTextCons, leftTextCons, bottomTextCons])
-         
-         lastNote = note;
-      }
-   }
-   
-   
-   
-   
-   
-   
+
 }
+

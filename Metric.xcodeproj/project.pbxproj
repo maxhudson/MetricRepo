@@ -31,6 +31,10 @@
 		6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C1D1A7DD892008D130B /* Model.xcdatamodeld */; };
 		6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C271A7DDB0E008D130B /* Metrics.swift */; };
 		6D943C2A1A7DE0F0008D130B /* Metric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D943C291A7DE0F0008D130B /* Metric.swift */; };
+		6D9B14751A86D5DC008404F9 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */; };
+		6D9B14771A86D720008404F9 /* SummaryAnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */; };
+		6D9B14791A86D74D008404F9 /* SummaryGraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */; };
+		6D9B147B1A86D758008404F9 /* SummaryNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */; };
 		6DD535B01A83515000F584FA /* botShadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD535AF1A83515000F584FA /* botShadow@3x.png */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +79,10 @@
 		6D943C231A7DDAEB008D130B /* Metric-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Metric-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D943C271A7DDB0E008D130B /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		6D943C291A7DE0F0008D130B /* Metric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metric.swift; sourceTree = "<group>"; };
+		6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryAnalysisTableViewCell.swift; sourceTree = "<group>"; };
+		6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryGraphTableViewCell.swift; sourceTree = "<group>"; };
+		6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryNoteTableViewCell.swift; sourceTree = "<group>"; };
 		6DD535AF1A83515000F584FA /* botShadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botShadow@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,10 +138,14 @@
 				6D782E0A1A7ED7E0009C04E2 /* Helper.swift */,
 				6D677B241A7CA2B600805A4D /* MainListViewController.swift */,
 				6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */,
+				6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */,
 				1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */,
 				6D677B081A7CA13D00805A4D /* Main.storyboard */,
 				6D677B0B1A7CA13D00805A4D /* Images.xcassets */,
 				6D677B261A7CA7B500805A4D /* MainListTableViewCell.swift */,
+				6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */,
+				6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */,
+				6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */,
 				6D677B0D1A7CA13D00805A4D /* LaunchScreen.xib */,
 				6D677B021A7CA13D00805A4D /* Supporting Files */,
 			);
@@ -231,7 +243,7 @@
 				TargetAttributes = {
 					6D677AFE1A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3HTQ3XN55R;
+						DevelopmentTeam = 9CQZV55V57;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -243,7 +255,7 @@
 					};
 					6D677B131A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3HTQ3XN55R;
+						DevelopmentTeam = 9CQZV55V57;
 						TestTargetID = 6D677AFE1A7CA13D00805A4D;
 					};
 				};
@@ -306,12 +318,16 @@
 				6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */,
 				6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */,
 				1546C15B1A81D10C00883F8A /* MetricsManager.swift in Sources */,
+				6D9B14771A86D720008404F9 /* SummaryAnalysisTableViewCell.swift in Sources */,
 				6D677B271A7CA7B500805A4D /* MainListTableViewCell.swift in Sources */,
+				6D9B14791A86D74D008404F9 /* SummaryGraphTableViewCell.swift in Sources */,
 				6D782E0B1A7ED7E0009C04E2 /* Helper.swift in Sources */,
 				1546C15D1A81ED0E00883F8A /* MetricManagerViewController.swift in Sources */,
 				6D943C2A1A7DE0F0008D130B /* Metric.swift in Sources */,
+				6D9B147B1A86D758008404F9 /* SummaryNoteTableViewCell.swift in Sources */,
 				6D677B051A7CA13D00805A4D /* AppDelegate.swift in Sources */,
 				6D782E071A7EC51C009C04E2 /* MetricSummaryViewController.swift in Sources */,
+				6D9B14751A86D5DC008404F9 /* SummaryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +456,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Metric/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -458,6 +475,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Metric/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
