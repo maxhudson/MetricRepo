@@ -23,7 +23,9 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    @IBOutlet weak var tableView: UITableView!
    
-   
+   @IBAction func editButtonPress(sender: AnyObject) {
+      manageMetricMode = "edit"
+   }
    
    override func viewDidLoad() {
       
@@ -33,12 +35,9 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       tableView.rowHeight = UITableViewAutomaticDimension;
       tableView.estimatedRowHeight = 44.0;
       
-      currentMetric = metricsManager.metrics[0]
-      
       navBar.topItem?.title = currentMetric.title
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
       Helper.styleNavButton(editButton, fontName: Helper.navTitleFont, fontSize: 17)
-      
       
       //bottom bars
       var minWidth : CGFloat = 40
@@ -69,7 +68,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          feelingsWithNotes().count
       ]
       
-      return 1//rows[section]
+      return rows[section]
    }
    
    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -343,6 +342,8 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          backwardYValues.append(Helper.netFeelings(dailyFeelings[i]))
       }
       
+      var dateX : CGFloat = 0
+      
       if (backwardYValues.count > 0) {
          var yValues : [Int] = []
          
@@ -440,6 +441,10 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
                for (var x = 0; x < valueSet.count; x++){
                   CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(valueSet[x])*yUnit*scale - CGFloat(sign)*scale)
                   
+                  if(i == 0 && x == 0){
+                     dateX = drawX
+                  }
+                  
                   if (x < valueSet.count - 1) {
                      drawX += xUnit
                   }
@@ -484,13 +489,16 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          position: CGPoint(x: origin.x - 20*scale, y: graphSize.height/scale - origin.y - 5*scale),
          context: context, scale: scale)
       
-      var formatter = NSDateFormatter()
-      formatter.setLocalizedDateFormatFromTemplate("m/d")
       
-      drawText(
-         formatter.stringFromDate(NSDate()),
-         position: CGPoint(x: origin.x - 20*scale, y: graphSize.height/scale - origin.y - 5*scale),
-         context: context, scale: scale)
+      if (dateX != 0) {
+         var formatter = NSDateFormatter()
+         formatter.setLocalizedDateFormatFromTemplate("M/d")
+         
+         drawText(
+            formatter.stringFromDate(NSDate()),
+            position: CGPoint(x: dateX, y: graphSize.height/scale - origin.y - 50*scale),
+            context: context, scale: scale)
+      }
       
       //test
       
@@ -504,13 +512,13 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       let path = CGPathCreateMutable()
       
       let aFont = UIFont(name: "Quicksand-Bold", size: 12*scale)
-      let attr:CFDictionaryRef = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:UIColor(white: 0.5, alpha: 1)]
+      let attr = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:UIColor(white: 0.5, alpha: 1)]
       let text = CFAttributedStringCreate(nil, text, attr)
       let line = CTLineCreateWithAttributedString(text)
       let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
       CGContextSetLineWidth(context, 1.5)
       CGContextSetTextDrawingMode(context, kCGTextFill)
-      CGContextSetTextPosition(context, position.x, position.y)
+      CGContextSetTextPosition(context, position.x - bounds.size.width/2, position.y)
       CTLineDraw(line, context)
    }
    

@@ -71,6 +71,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       if segue.identifier == "showSummarySegue" {
          currentMetric = metricsManager.metrics[rowForButton(sender as UIButton).row]
+         
          currentMetricRow = rowForButton(sender as UIButton).row
          
          let storyboard = UIStoryboard(name: "Main", bundle: nil)

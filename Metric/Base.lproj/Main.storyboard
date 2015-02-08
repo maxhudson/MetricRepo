@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9OP-jg-jdd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C99d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9OP-jg-jdd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -10,7 +10,7 @@
         <!--Summary View Controller-->
         <scene sceneID="jEg-tB-e8Q">
             <objects>
-                <viewController storyboardIdentifier="MetricSummary" id="Kis-9N-ppW" customClass="SummaryViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MetricSummary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kis-9N-ppW" customClass="SummaryViewController" customModule="Metric" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IaG-wh-tNJ"/>
                         <viewControllerLayoutGuide type="bottom" id="96U-J8-ple"/>
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="44" width="600" height="496"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="summaryAnalysis" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryAnalysis" rowHeight="84" id="zHp-qi-hd8" customClass="SummaryAnalysisTableViewCell" customModule="Metric" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="summaryAnalysis" selectionStyle="none" indentationWidth="10" reuseIdentifier="summaryAnalysis" rowHeight="84" id="zHp-qi-hd8" customClass="SummaryAnalysisTableViewCell" customModule="Metric" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zHp-qi-hd8" id="xyq-6T-nll">
@@ -47,7 +47,7 @@
                                             <outlet property="analysisLabel" destination="p5Q-I9-Khe" id="uTz-ZQ-bTc"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="summaryGraph" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryGraph" rowHeight="220" id="IsA-E7-04G" customClass="SummaryGraphTableViewCell" customModule="Metric" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="summaryGraph" selectionStyle="none" indentationWidth="10" reuseIdentifier="summaryGraph" rowHeight="220" id="IsA-E7-04G" customClass="SummaryGraphTableViewCell" customModule="Metric" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IsA-E7-04G" id="lOT-6P-QkI">
@@ -77,13 +77,13 @@
                                             <outlet property="graph" destination="H58-6i-U4N" id="h0f-O6-m7i"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="summaryNote" selectionStyle="default" indentationWidth="10" reuseIdentifier="summaryNote" id="aLr-tN-A6Q" customClass="SummaryNoteTableViewCell" customModule="Metric" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="summaryNote" selectionStyle="none" indentationWidth="10" reuseIdentifier="summaryNote" id="aLr-tN-A6Q" customClass="SummaryNoteTableViewCell" customModule="Metric" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aLr-tN-A6Q" id="4rl-EA-fLG">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-1k-PZp">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-1k-PZp">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -154,6 +154,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="editButtonPress:" destination="Kis-9N-ppW" eventType="touchUpInside" id="kOt-NA-QCj"/>
                                                     <segue destination="LjB-lQ-QcT" kind="presentation" id="zca-OV-H2M"/>
                                                 </connections>
                                             </button>
@@ -179,7 +180,6 @@
                                 <rect key="frame" x="0.0" y="540" width="100" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="1o6-3o-lvd"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="3bP-gR-Y9h"/>
                                     <constraint firstAttribute="height" constant="60" id="cRR-SD-r0q"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
@@ -192,7 +192,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="KQq-of-8gA"/>
                                     <constraint firstAttribute="height" constant="60" id="ZnJ-2D-ybu"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="yQP-VB-CS9"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="120">
@@ -463,7 +462,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v95-HL-fO3" id="6qP-lX-UXN">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
                                                     <rect key="frame" x="500" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="j1N-7P-I6a"/>
@@ -477,7 +476,7 @@
                                                         <action selector="plusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchCancel" id="uii-25-hlb"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="pF9-t2-gzU"/>
@@ -490,7 +489,7 @@
                                                         <action selector="minusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchUpInside" id="SHa-Uj-ZmM"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ush-oD-Qi8">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ush-oD-Qi8">
                                                     <rect key="frame" x="100" y="0.0" width="400" height="132"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
