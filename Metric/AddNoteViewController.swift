@@ -14,6 +14,7 @@ class AddNoteViewController: UIViewController {
    @IBOutlet weak var noteTextView: UITextView!
    @IBOutlet weak var promptLabel: UILabel!
    @IBOutlet weak var doneButton: UIButton!
+   @IBOutlet weak var cancleButton: UIButton!
    @IBOutlet weak var trashButton: UIButton!
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
@@ -34,6 +35,8 @@ class AddNoteViewController: UIViewController {
       super.viewWillDisappear(animated)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+//      Reload data
+//      self.parentViewController.tableView.reloaddatat
    }
 
    func keyboardWillShowNotification(notification: NSNotification) {
@@ -63,15 +66,23 @@ class AddNoteViewController: UIViewController {
 
    
    @IBAction func trashNote(sender: AnyObject) {
+      dismissViewControllerAnimated(true, completion: { () -> Void in
+         currentFeeling.note = ""
+      })
+   }
+   @IBAction func cancleNote(sender: AnyObject) {
       dismissViewControllerAnimated(true, completion: nil)
    }
    
    func setupView(){
+      doneButton.backgroundColor = Helper.darkNavyColor
       addNoteView.backgroundColor = Helper.goldColor
+      cancleButton.backgroundColor = Helper.darkNavyColor
       
       if manageNoteMode == "add" {
          addNoteView.backgroundColor = Helper.goldColor
          promptLabel.text = "Keep it short if you can?"
+         trashButton.removeFromSuperview()
       }
       
       if manageNoteMode == "edit" {

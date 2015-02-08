@@ -246,6 +246,8 @@ class MetricSummaryViewController: UIViewController{
       return feelingsByDay
    }
    
+
+   
    func getImageForMetric(met : Metric) -> UIImage{
       
       let scale = UIScreen.mainScreen().scale

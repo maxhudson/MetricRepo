@@ -20,6 +20,7 @@ class MetricManagerViewController: UIViewController {
    var newMetric: Metric!
    
    @IBOutlet weak var trashButton: UIButton!
+   @IBOutlet weak var cancleButton: UIButton!
    @IBOutlet weak var doneButton: UIButton!
    @IBOutlet var metricManagerView: UIView!
    @IBOutlet weak var metricTextField: UITextField!
@@ -27,9 +28,12 @@ class MetricManagerViewController: UIViewController {
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
    @IBAction func trashMetric(sender: AnyObject) {
-      dismissViewControllerAnimated(true, completion: nil)
+      metricsManager.metrics.removeAtIndex(currentMetricRow)
    }
    
+   @IBAction func cancelMetric(sender: AnyObject) {
+      dismissViewControllerAnimated(true, completion: nil)
+   }
    override func viewWillAppear(animated: Bool) {
       super.viewWillAppear(animated)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
@@ -68,11 +72,14 @@ class MetricManagerViewController: UIViewController {
    }
    
    func setupView(){
-      doneButton.backgroundColor = Helper.darkNayColor
-      
+      doneButton.backgroundColor = Helper.darkNavyColor
+      cancleButton.titleLabel?.textColor = Helper.darkNavyColor
+      cancleButton.backgroundColor = Helper.darkNavyColor
       if manageMetricMode == "add" {
          metricManagerView.backgroundColor = Helper.goldColor
          promptLabel.text = "Enter the name of the metric you'd like to track"
+         trashButton.removeFromSuperview()
+
       }
       
       if manageMetricMode == "edit" {
