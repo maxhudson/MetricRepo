@@ -159,11 +159,15 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             updateMetricViewMode(cell, mode: 1)
          } else if (buttonId == 1) {
             //leave note
+            //show note view controller
+            manageNoteMode = "add"
+            currentFeeling = met.lastFeeling
+            updateMetricViewMode(cell, mode: 1)
             performSegueWithIdentifier("showNoteSegue", sender: nil)
 
-            currentFeeling = met.lastFeeling
-            Helper.cancelDelay(met.delayReference)
-            updateMetricViewMode(cell, mode: 1)
+//            currentFeeling = met.lastFeeling
+//            Helper.cancelDelay(met.delayReference)
+//            updateMetricViewMode(cell, mode: 1)
          }
          
       }
