@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C99d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9OP-jg-jdd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9OP-jg-jdd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -30,7 +30,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5Q-I9-Khe">
-                                                    <rect key="frame" x="20" y="20" width="560" height="20.5"/>
+                                                    <rect key="frame" x="20" y="20" width="560" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H58-6i-U4N">
-                                                    <rect key="frame" x="20" y="10" width="280" height="199.5"/>
+                                                    <rect key="frame" x="20" y="10" width="280" height="200"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="200" id="779-3A-ZCL"/>
                                                         <constraint firstAttribute="width" constant="280" id="9gd-Sg-dBb"/>
@@ -83,14 +83,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aLr-tN-A6Q" id="4rl-EA-fLG">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-1k-PZp">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="83.5"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-1k-PZp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCX-sA-EXP">
-                                                    <rect key="frame" x="20" y="10" width="7" height="63.5"/>
+                                                    <rect key="frame" x="20" y="10" width="7" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="5" id="wwW-7i-hne"/>
                                                     </constraints>
@@ -99,7 +99,7 @@
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpv-To-QNb">
-                                                    <rect key="frame" x="35" y="10" width="565" height="20.5"/>
+                                                    <rect key="frame" x="35" y="10" width="565" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -153,6 +153,9 @@
                                                 <state key="normal" image="edit@3x.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="LjB-lQ-QcT" kind="presentation" id="zca-OV-H2M"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -168,6 +171,9 @@
                                 <state key="normal" title="&lt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="3et-TS-v2y" kind="unwind" unwindAction="unwindToList:" id="hGo-Wn-zBi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9h-Wz-mmd">
                                 <rect key="frame" x="0.0" y="540" width="100" height="60"/>
@@ -238,6 +244,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJ5-Cv-xRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="3et-TS-v2y" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2527" y="-345"/>
         </scene>
@@ -334,7 +341,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="editButtonPress:" destination="7cY-j1-iHo" eventType="touchUpInside" id="UnF-mB-pwh"/>
-                                                    <segue destination="LjB-lQ-QcT" kind="presentation" id="ilt-Nv-gc8"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -392,7 +398,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUj-41-tCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="x86-3h-YAQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="-311"/>
+            <point key="canvasLocation" x="1735" y="-149"/>
         </scene>
         <!--Main List View Controller-->
         <scene sceneID="Yko-q9-oKW">
@@ -457,7 +463,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v95-HL-fO3" id="6qP-lX-UXN">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANV-GD-MUU">
                                                     <rect key="frame" x="500" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="j1N-7P-I6a"/>
@@ -471,7 +477,7 @@
                                                         <action selector="plusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchCancel" id="uii-25-hlb"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlQ-hw-Luw">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="132"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="pF9-t2-gzU"/>
@@ -484,7 +490,7 @@
                                                         <action selector="minusButtonTouchUp:" destination="9OP-jg-jdd" eventType="touchUpInside" id="SHa-Uj-ZmM"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ush-oD-Qi8">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ush-oD-Qi8">
                                                     <rect key="frame" x="100" y="0.0" width="400" height="132"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -566,8 +572,8 @@
                         <outlet property="helpButton" destination="eM4-mN-Dv2" id="YTm-cj-MPb"/>
                         <outlet property="navigationBar" destination="AaQ-mn-WKs" id="ha8-fa-INE"/>
                         <outlet property="tableView" destination="hiV-iD-Glt" id="4Cq-ni-Bta"/>
-                        <segue destination="7cY-j1-iHo" kind="showDetail" identifier="showSummarySegue" id="Snl-b2-yDp"/>
                         <segue destination="LEB-Rd-SeB" kind="presentation" identifier="showNoteSegue" id="f3F-Ix-JQa"/>
+                        <segue destination="Kis-9N-ppW" kind="showDetail" identifier="showSummarySegue" id="f6a-ro-89t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCI-JM-jFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -759,6 +765,6 @@
         <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ilt-Nv-gc8"/>
+        <segue reference="zca-OV-H2M"/>
     </inferredMetricsTieBreakers>
 </document>
