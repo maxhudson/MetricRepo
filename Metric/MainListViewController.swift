@@ -13,6 +13,7 @@ var metricsManager = MetricsManager()
 
 var metrics: Metric! //???
 var manageMetricMode: String! //indicate the mode in which metric note managing is happening
+var manageNoteMode: String!
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
@@ -139,6 +140,8 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                met.lastFeeling = met.feelGood("")
             }
             
+            met.feelings.append(met.lastFeeling!)
+            println("NOTE PRINT")
             met.delayReference = Helper.cancellableDelay(5.0) {
                self.updateMetricViewMode(cell, mode: 1)
             }

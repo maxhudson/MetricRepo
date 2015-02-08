@@ -139,7 +139,6 @@
 				6D677B241A7CA2B600805A4D /* MainListViewController.swift */,
 				6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */,
 				6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */,
-				6D677B081A7CA13D00805A4D /* Main.storyboard */,
 				1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */,
 				6D677B081A7CA13D00805A4D /* Main.storyboard */,
 				6D677B0B1A7CA13D00805A4D /* Images.xcassets */,
@@ -244,7 +243,7 @@
 				TargetAttributes = {
 					6D677AFE1A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3HTQ3XN55R;
+						DevelopmentTeam = 9CQZV55V57;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -256,7 +255,7 @@
 					};
 					6D677B131A7CA13D00805A4D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3HTQ3XN55R;
+						DevelopmentTeam = 9CQZV55V57;
 						TestTargetID = 6D677AFE1A7CA13D00805A4D;
 					};
 				};
