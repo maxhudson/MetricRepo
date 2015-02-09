@@ -221,7 +221,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
       
       
-      Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
+      //Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
    }
    
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {

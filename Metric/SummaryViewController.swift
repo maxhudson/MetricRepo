@@ -23,6 +23,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    @IBOutlet weak var tableView: UITableView!
    
+   var showGraph : Int!
    var graphImage : UIImage?
    var analysis : String?
    
@@ -70,18 +71,34 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       
       Helper.styleColoredButton(badButton, color: Helper.badColor, title: Helper.formatStringNumber(-1*Int(currentMetric.bad)), fontSize: 20)
       Helper.styleColoredButton(goodButton, color: Helper.goodColor, title: Helper.formatStringNumber(Int(currentMetric.good)), fontSize: 20)
+      
+      showGraph = 0;
+      
+      if (currentMetric.feelings.count > 0) {
+         var nonZero = true
+         for feeling in currentMetric.feelings {
+            if (feeling.value != 0) {
+               nonZero = true
+            }
+         }
+         
+         if (nonZero) {
+            showGraph = 1
+         }
+      }
    }
    
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-      return 4
+      return 5
    }
    
    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       var rows = [
          1,
+         showGraph,
          1,
-         1,
-         feelingsWithNotes().count
+         feelingsWithNotes().count,
+         1
       ]
       
       return rows[section]
@@ -117,7 +134,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          cell.button.backgroundColor = UIColor(white: 0.95, alpha: 1)
          
          return cell
-      } else {
+      } else if(indexPath.section == 3) {
          var feelings = feelingsWithNotes()
          
          var formatter = NSDateFormatter()
@@ -139,6 +156,13 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          
          cell.noteText.text = feeling.note
          cell.noteText.font = UIFont(name: Helper.bodyTextFont, size: 15)
+         
+         return cell
+      } else {
+         var cell = tableView.dequeueReusableCellWithIdentifier("feedback", forIndexPath: indexPath) as FeedbackTableViewCell
+         
+         Helper.styleNavButton(cell.button, fontName: "Give Feedback", fontSize: 20)
+         cell.button.titleLabel!.font = UIFont(name: Helper.navTitleFont, size: 15)
          
          return cell
       }
