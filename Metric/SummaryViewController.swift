@@ -23,8 +23,23 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    @IBOutlet weak var tableView: UITableView!
    
+   var graphImage : UIImage?
+   var analysis : String?
+   
    @IBAction func editButtonPress(sender: AnyObject) {
       manageMetricMode = "edit"
+   }
+   
+   @IBAction func addNoteButtonExit(sender: AnyObject) {
+      var feeling = Feeling(value: 0, note: "", date: NSDate())
+      
+      currentMetric.feelings.append(feeling)
+      currentMetric.lastFeeling = feeling
+      currentFeeling = feeling
+      
+      manageNoteMode = "add"
+      
+      //segue to add note here
    }
    
    override func viewDidLoad() {
@@ -58,11 +73,12 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    }
    
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-      return 3
+      return 4
    }
    
    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       var rows = [
+         1,
          1,
          1,
          feelingsWithNotes().count
@@ -77,14 +93,28 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       if(indexPath.section == 0) {
          var cell = tableView.dequeueReusableCellWithIdentifier("summaryAnalysis", forIndexPath: indexPath) as SummaryAnalysisTableViewCell
          
-         cell.analysisLabel.text = analyze(currentMetric)
+         if analysis == nil {
+            analysis = analyze(currentMetric)
+         }
+         
+         cell.analysisLabel.text = analysis
          cell.analysisLabel.font = UIFont(name: Helper.bodyTextFont, size: 15)
          
          return cell
       } else if(indexPath.section == 1) {
          var cell = tableView.dequeueReusableCellWithIdentifier("summaryGraph", forIndexPath: indexPath) as SummaryGraphTableViewCell
          
-         cell.graph.image = getImageForMetric(currentMetric, graph: cell.graph)
+         if graphImage == nil {
+            graphImage = getImageForMetric(currentMetric, graph: cell.graph)
+         }
+         
+         cell.graph.image = graphImage
+         
+         return cell
+      } else if(indexPath.section == 2) {
+         var cell = tableView.dequeueReusableCellWithIdentifier("summaryAddNote", forIndexPath: indexPath) as SummaryAddNoteTableViewCell
+         
+         cell.button.backgroundColor = UIColor(white: 0.95, alpha: 1)
          
          return cell
       } else {
@@ -164,7 +194,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          var recentSlope : CGFloat = 0
          
          for (var i = 2; i >= 0; i--) {
-            recentNet += slopes[i]/3.0
+            recentSlope += slopes[i]/3.0
             recentNet += nets[i]/3.0
          }
          
@@ -178,21 +208,29 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          
          //OVERALL CALC
          
-         var overallBenefit = 0.85*nets[nets.count - 1] + 0.15*slopes[slopes.count - 1] //gives more weight to net than slope
+         var overallNet = nets[nets.count - 1]
+         var overallSlope = slopes[slopes.count - 1]
+         //var overallIntensity = (currentMetric.good + currentMetric.bad)/daysOfData
          
-         if (nets[nets.count - 1] > 0.9 && slopes[slopes.count - 1] > -0.2) {
+         var overallBenefit = 0.85*overallNet + 0.15*overallSlope //gives more weight to net than slope
+         
+         if (overallNet > 0.9 && overallSlope > -0.2) {
             overallBenefit = nets[nets.count - 1]
          }
          
+         //GOOD or BAD
+         
          var dir = 0 //how good or bad it is - based on slope and magnitude
          if (
-            (overallBenefit < -0.1 && recentBenefit < 0.2) ||
+               (overallBenefit < -0.1 && recentBenefit < 0.2) ||
                (overallBenefit < 0.05 && recentBenefit < -0.1) ||
                overallBenefit < -0.2 ||
                (recentBenefit < -0.9 && overallBenefit < 0.4)
             ){
                dir = 1
          }
+         
+         //ACCURACY
          
          var inaccuracy = 0 //how sure we are - based on number of entries and days of data and magnitude
          var recentAbs = fabs(recentBenefit)
@@ -213,19 +251,33 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          
          inaccuracy = max(3, inaccuracy)
          
+         if (fabs(overallBenefit) > 0.5 && daysOfData >= 7) { //impact
+            //analysis += "It seems like you feel pretty strongly about this. "
+         }
+         
+         if (recentSlope > 0.25 && overallBenefit < -0.1 && daysOfData > 14) {
+            analysis += "Even though this has generally seemed bad it seems to be picking up recently. "
+         } else if (recentSlope < -0.25 && overallBenefit > 0.1 && daysOfData > 14) {
+            analysis += "Even though this has been generally good it seems to be losing it's benefit  recently which you should look out for. "
+         } else if (overallSlope < -0.2 && daysOfData > 14) { //maybe 0.2?
+            analysis += "It seems like this has been less and less beneficial over time. "
+         } else if (overallSlope > 0.2 && daysOfData > 14) {
+            analysis += "It seems like this has been more and more beneficial over time. "
+         }
+         
          var dirStrings = [
             "keep " + met.title + " in",
             "eliminate " + met.title + " from"
          ]
          
          var accuracyStrings = [
-            "almost certainly, that",
-            "with a lot of confidence, that",
-            "with a some of confidence, that",
-            "but not with much certainty, that"
+            "very confidently that",
+            ", with a lot of confidence, that",
+            ", with a some of confidence, that",
+            ", but not with much certainty, that"
          ]
          
-         analysis += "We think, " + accuracyStrings[inaccuracy] + " you should " + dirStrings[dir] + " your life for now.\n\n"
+         analysis += "We think" + accuracyStrings[inaccuracy] + " you should " + dirStrings[dir] + " your life for now.\n\n"
          
          if (daysOfData < 14) {
             analysis += "You haven't been tracking how this makes you feel for very long. In another " + String(14 - daysOfData) + " days we'll have a better idea of the situation.\n\n"
@@ -236,10 +288,10 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          analysis += "Overall Benefit: " + String(Int(overallBenefit*100)) + "%"
          
       } else {
-         analysis += "We need at least 3 days worth of data in order to get a somewhat accurate recommendation about " + met.title + ". You have " + String(3 - daysOfData) + " to go"
+         analysis += "We need at least 3 days worth of data in order to do a somewhat accurate analysis about " + met.title + ". You have " + String(3 - daysOfData) + " to go"
       }
       
-      return analysis;
+      return analysis
    }
 
    
@@ -286,7 +338,6 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
             net += Helper.netFeelings(dailyFeelings[i])
             totalDays++
          }
-         println( Helper.netFeelings(dailyFeelings[i]))
       }
       
       var average = CGFloat(net) / CGFloat(totalDays)
@@ -305,10 +356,16 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    func feelingsByDay(met : Metric) -> [[Feeling]] {
       var feelingsByDay : [[Feeling]] = []
+      
+      var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+      var components = calendar?.components(.YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit, fromDate: NSDate())
+      var today = calendar?.dateFromComponents(components!)!
+      today = today!.dateByAddingTimeInterval(Double(60*60*16))
+      
       for(var i = 0; i < met.feelings.count; i++){
          var feeling = met.feelings[i]
          
-         var days = abs(daysBetween(NSDate(), date2: feeling.date))
+         var days = abs(daysBetween(today!, date2: feeling.date.dateByAddingTimeInterval(Double(60*60*(-12)))))
          
          while(feelingsByDay.count - 1 < days){
             feelingsByDay.append([])
@@ -441,7 +498,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
                for (var x = 0; x < valueSet.count; x++){
                   CGPathAddLineToPoint(path, nil, drawX, origin.y - CGFloat(valueSet[x])*yUnit*scale - CGFloat(sign)*scale)
                   
-                  if(i == 0 && x == 0){
+                  if(i == signs.count - 1 && x == valueSet.count - 1){
                      dateX = drawX
                   }
                   
@@ -465,8 +522,8 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       
       let barColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1).CGColor
       
-      CGContextSetFillColorWithColor(context, barColor);
-      CGContextFillRect(context, CGRect(x: origin.x, y: origin.y - scale, width: graphSize.width - origin.x*1.5, height: 2*scale));
+      CGContextSetFillColorWithColor(context, barColor)
+      CGContextFillRect(context, CGRect(x: origin.x, y: origin.y - scale, width: graphSize.width - origin.x*1.5, height: 2*scale))
       
       
       //draw numbers
@@ -489,14 +546,29 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          position: CGPoint(x: origin.x - 20*scale, y: graphSize.height/scale - origin.y - 5*scale),
          context: context, scale: scale)
       
+      var formatter = NSDateFormatter()
+      formatter.setLocalizedDateFormatFromTemplate("M/d")
       
       if (dateX != 0) {
-         var formatter = NSDateFormatter()
-         formatter.setLocalizedDateFormatFromTemplate("M/d")
          
          drawText(
             formatter.stringFromDate(NSDate()),
-            position: CGPoint(x: dateX, y: graphSize.height/scale - origin.y - 50*scale),
+            position: CGPoint(x: dateX, y: graphSize.height/scale - origin.y - 60*scale),
+            context: context, scale: scale)
+      }
+      
+      if (backwardYValues.count > 5) {
+         var xUnit = (graphSize.width - origin.x*1.5 - 10*scale*2) / CGFloat(max(10, backwardYValues.count))
+         var halfDays = floor(CGFloat(backwardYValues.count) / 2.0)
+         
+         drawText(
+            formatter.stringFromDate(NSDate().dateByAddingTimeInterval(Double(-60*60*24*halfDays))),
+            position: CGPoint(x: origin.x + 10*scale + halfDays*xUnit + xUnit/2.0, y: graphSize.height/scale - origin.y - 60*scale),
+            context: context, scale: scale)
+         
+         drawText(
+            formatter.stringFromDate(NSDate().dateByAddingTimeInterval(Double(-60*60*24*CGFloat(backwardYValues.count)))),
+            position: CGPoint(x: origin.x + 10*scale + xUnit/2.0, y: graphSize.height/scale - origin.y - 60*scale),
             context: context, scale: scale)
       }
       

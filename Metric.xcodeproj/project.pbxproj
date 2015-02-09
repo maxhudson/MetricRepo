@@ -35,6 +35,9 @@
 		6D9B14771A86D720008404F9 /* SummaryAnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */; };
 		6D9B14791A86D74D008404F9 /* SummaryGraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */; };
 		6D9B147B1A86D758008404F9 /* SummaryNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */; };
+		6DCF596F1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF596E1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift */; };
+		6DCF59711A87171900EC8EE2 /* darkNote@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCF59701A87171900EC8EE2 /* darkNote@3x.png */; };
+		6DCF59741A871B8700EC8EE2 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF59731A871B8700EC8EE2 /* FeedbackTableViewCell.swift */; };
 		6DD535B01A83515000F584FA /* botShadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD535AF1A83515000F584FA /* botShadow@3x.png */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +86,9 @@
 		6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryAnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryGraphTableViewCell.swift; sourceTree = "<group>"; };
 		6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryNoteTableViewCell.swift; sourceTree = "<group>"; };
+		6DCF596E1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryAddNoteTableViewCell.swift; sourceTree = "<group>"; };
+		6DCF59701A87171900EC8EE2 /* darkNote@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkNote@3x.png"; sourceTree = "<group>"; };
+		6DCF59731A871B8700EC8EE2 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
 		6DD535AF1A83515000F584FA /* botShadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botShadow@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,11 +148,7 @@
 				1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */,
 				6D677B081A7CA13D00805A4D /* Main.storyboard */,
 				6D677B0B1A7CA13D00805A4D /* Images.xcassets */,
-				6D677B261A7CA7B500805A4D /* MainListTableViewCell.swift */,
-				6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */,
-				6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */,
-				6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */,
-				6D677B0D1A7CA13D00805A4D /* LaunchScreen.xib */,
+				6DCF59721A8719E100EC8EE2 /* Custom TableViewCells */,
 				6D677B021A7CA13D00805A4D /* Supporting Files */,
 			);
 			path = Metric;
@@ -155,6 +157,7 @@
 		6D677B021A7CA13D00805A4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6D677B0D1A7CA13D00805A4D /* LaunchScreen.xib */,
 				6DD535AF1A83515000F584FA /* botShadow@3x.png */,
 				6D896E1A1A84256E0031A3B8 /* Icons */,
 				6D782E131A816EB3009C04E2 /* icon60@2x.png */,
@@ -186,12 +189,26 @@
 		6D896E1A1A84256E0031A3B8 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6DCF59701A87171900EC8EE2 /* darkNote@3x.png */,
 				156F80911A83374C00F579A3 /* trashButtonImage@3x.png */,
 				6D896E141A8423F20031A3B8 /* edit@3x.png */,
 				6D896E151A8423F20031A3B8 /* undo@3x.png */,
 				6D896E181A8425690031A3B8 /* note@3x.png */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		6DCF59721A8719E100EC8EE2 /* Custom TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6D677B261A7CA7B500805A4D /* MainListTableViewCell.swift */,
+				6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */,
+				6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */,
+				6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */,
+				6DCF596E1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift */,
+				6DCF59731A871B8700EC8EE2 /* FeedbackTableViewCell.swift */,
+			);
+			name = "Custom TableViewCells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +310,7 @@
 				6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */,
 				6D896E191A8425690031A3B8 /* note@3x.png in Resources */,
 				6D677B0C1A7CA13D00805A4D /* Images.xcassets in Resources */,
+				6DCF59711A87171900EC8EE2 /* darkNote@3x.png in Resources */,
 				156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */,
 				6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */,
 				6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */,
@@ -317,12 +335,14 @@
 				6D677B251A7CA2B600805A4D /* MainListViewController.swift in Sources */,
 				6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */,
 				6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */,
+				6DCF596F1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift in Sources */,
 				1546C15B1A81D10C00883F8A /* MetricsManager.swift in Sources */,
 				6D9B14771A86D720008404F9 /* SummaryAnalysisTableViewCell.swift in Sources */,
 				6D677B271A7CA7B500805A4D /* MainListTableViewCell.swift in Sources */,
 				6D9B14791A86D74D008404F9 /* SummaryGraphTableViewCell.swift in Sources */,
 				6D782E0B1A7ED7E0009C04E2 /* Helper.swift in Sources */,
 				1546C15D1A81ED0E00883F8A /* MetricManagerViewController.swift in Sources */,
+				6DCF59741A871B8700EC8EE2 /* FeedbackTableViewCell.swift in Sources */,
 				6D943C2A1A7DE0F0008D130B /* Metric.swift in Sources */,
 				6D9B147B1A86D758008404F9 /* SummaryNoteTableViewCell.swift in Sources */,
 				6D677B051A7CA13D00805A4D /* AppDelegate.swift in Sources */,

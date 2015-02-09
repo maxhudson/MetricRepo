@@ -47,8 +47,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func plusButtonTouchUp(sender: UIButton) {
-      var met = metricsManager.metrics[rowForButton(sender).row]
-      metricButtonReleased(sender, buttonId: 1)
+      metricButtonReleased(sender, buttonId: 1, cancelled: false)
+   }
+   
+   @IBAction func plusButtonTouchCancelled(sender: UIButton) {
+      metricButtonReleased(sender, buttonId: 1, cancelled: true)
    }
    
    @IBAction func centerButtonEnter(sender: UIButton) {
@@ -90,7 +93,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       //take to new screen
       performSegueWithIdentifier("showSummarySegue", sender: sender)
       
-      metricButtonReleased(sender, buttonId: 0)
+      metricButtonReleased(sender, buttonId: 0, cancelled: false)
+   }
+   
+   @IBAction func metricButtonTouchCancelled(sender: UIButton) {
+      metricButtonReleased(sender, buttonId: 0, cancelled: true)
    }
    
    @IBAction func minusButtonTouchDown(sender: UIButton) {
@@ -100,7 +107,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    @IBAction func minusButtonTouchUp(sender: UIButton) {
       var met = metricsManager.metrics[rowForButton(sender).row]
       
-      metricButtonReleased(sender, buttonId: -1)
+      metricButtonReleased(sender, buttonId: -1, cancelled: false)
+   }
+   
+   @IBAction func minusButtonTouchCancelled(sender: UIButton) {
+      metricButtonReleased(sender, buttonId: -1, cancelled: true)
    }
    
    func rowForButton(sender: AnyObject) -> NSIndexPath {
@@ -118,7 +129,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       }
    }
    
-   func metricButtonReleased(button: UIButton, buttonId : Int){
+   func metricButtonReleased(button: UIButton, buttonId : Int, cancelled: Bool){
       let met = metricsManager.metrics[rowForButton(button).row]
       
       if (Helper.netMetric(met) >= 0){
@@ -131,48 +142,49 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       
       if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
          
-         if (button.titleForState(.Normal) == "-" || button.titleForState(.Normal) == "+") {
-            //indicated feeling
-            
-            if (buttonId == -1){
-               met.lastFeeling = met.feelBad("")
-            } else if (buttonId == 1){
-               met.lastFeeling = met.feelGood("")
-            }
-            
-            met.feelings.append(met.lastFeeling!)
-            println("NOTE PRINT")
-            met.delayReference = Helper.cancellableDelay(5.0) {
-               self.updateMetricViewMode(cell, mode: 1)
-            }
-            
-            updateMetricViewMode(cell, mode: 0)
-         } else if (buttonId == -1) {
-            //undo
-            
-            if(met.lastFeeling?.value == 1) {
-               met.good--
-            } else if (met.lastFeeling?.value == -1){
-               met.bad--
-            }
-            
-            met.feelings.removeAtIndex(met.feelings.count - 1)
-            
-            Helper.cancelDelay(met.delayReference)
-            updateMetricViewMode(cell, mode: 1)
-         } else if (buttonId == 1) {
-            //leave note
-            //show note view controller
-            manageNoteMode = "add"
-            currentFeeling = met.lastFeeling
-            updateMetricViewMode(cell, mode: 1)
-            performSegueWithIdentifier("showNoteSegue", sender: nil)
-
-//            currentFeeling = met.lastFeeling
-//            Helper.cancelDelay(met.delayReference)
-//            updateMetricViewMode(cell, mode: 1)
-         }
+         if (!cancelled) {
          
+            if (button.titleForState(.Normal) == "-" || button.titleForState(.Normal) == "+") {
+               //indicated feeling
+               
+               if (buttonId == -1){
+                  met.lastFeeling = met.feelBad("")
+               } else if (buttonId == 1){
+                  met.lastFeeling = met.feelGood("")
+               }
+               
+               met.delayReference = Helper.cancellableDelay(4.0) {
+                  self.updateMetricViewMode(cell, mode: 1)
+               }
+               
+               updateMetricViewMode(cell, mode: 0)
+            } else if (buttonId == -1) {
+               //undo
+               
+               if(met.lastFeeling?.value == 1) {
+                  met.good--
+               } else if (met.lastFeeling?.value == -1){
+                  met.bad--
+               }
+               
+               met.feelings.removeAtIndex(met.feelings.count - 1)
+               
+               Helper.cancelDelay(met.delayReference)
+               updateMetricViewMode(cell, mode: 1)
+            } else if (buttonId == 1) {
+               //leave note
+               //show note view controller
+               manageNoteMode = "add"
+               currentFeeling = met.lastFeeling
+               updateMetricViewMode(cell, mode: 1)
+               performSegueWithIdentifier("showNoteSegue", sender: nil)
+
+   //            currentFeeling = met.lastFeeling
+   //            Helper.cancelDelay(met.delayReference)
+   //            updateMetricViewMode(cell, mode: 1)
+            }
+            
+         }
       }
       
       Helper.delay(0.05) {
@@ -199,8 +211,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    override func viewDidLoad() {
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-      
-      
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -211,57 +221,79 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
       
       
-      //Helper.generateRandomData(50, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
+      Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
+   }
+   
+   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+      return 2
    }
    
    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return metricsManager.metrics.count
+      var rows = [
+         metricsManager.metrics.count,
+         1
+      ]
+      
+      return rows[section]
    }
    
    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-      let baseHeight : CGFloat = 70.0
-      let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
-      let multiplier : CGFloat = 0.8
-      
-      return baseHeight + netMet*multiplier
+      if (indexPath.section == 0) {
+         let baseHeight : CGFloat = 70.0
+         let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
+         let multiplier : CGFloat = 0.8
+         
+         return baseHeight + netMet*multiplier
+      } else {
+         return 70
+      }
    }
    
    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
       
-      let cell = tableView.dequeueReusableCellWithIdentifier("id1", forIndexPath: indexPath) as MainListTableViewCell
-      
-      var cellColor = Helper.badColor
-      let met = metricsManager.metrics[indexPath.row]
-      if (Helper.netMetric(met) >= 0){
-         cellColor = Helper.goodColor
+      if (indexPath.section == 0) {
+         var cell = tableView.dequeueReusableCellWithIdentifier("id1", forIndexPath: indexPath) as MainListTableViewCell
+         
+         var cellColor = Helper.badColor
+         var met = metricsManager.metrics[indexPath.row]
+         if (Helper.netMetric(met) >= 0){
+            cellColor = Helper.goodColor
+         }
+         
+         cell.plusButton.backgroundColor = cellColor
+         cell.plusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
+         cell.plusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
+         cell.plusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
+         cell.plusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
+         
+         cell.centerButton.backgroundColor = cellColor
+         cell.centerButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
+         cell.centerButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
+         cell.centerButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
+         
+         cell.centerButton.setTitle(met.title, forState: .Normal)
+         cell.centerButton.titleLabel!.font = UIFont(name: "AvenirNext-DemiBold", size: 17)
+         cell.centerButton.titleEdgeInsets = UIEdgeInsets(top: -18, left: 0, bottom: 0, right: 0)
+         
+         cell.netMet.text = Helper.formatStringNumber(Helper.netMetric(met))
+         cell.netMet.font = UIFont(name: "Quicksand-Bold", size: 13)
+         cell.netMet.textColor = Helper.coloredButtonTextColor
+         
+         cell.minusButton.backgroundColor = cellColor
+         cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
+         cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
+         cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
+         cell.minusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
+         
+         return cell
+      } else {
+         var cell = tableView.dequeueReusableCellWithIdentifier("feedback", forIndexPath: indexPath) as FeedbackTableViewCell
+         
+         Helper.styleNavButton(cell.button, fontName: "Give Feedback", fontSize: 20)
+         cell.button.titleLabel!.font = UIFont(name: Helper.navTitleFont, size: 15)
+         
+         return cell
       }
-      
-      cell.plusButton.backgroundColor = cellColor
-      cell.plusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
-      cell.plusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
-      cell.plusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
-      cell.plusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
-      
-      cell.centerButton.backgroundColor = cellColor
-      cell.centerButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
-      cell.centerButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
-      cell.centerButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
-      
-      cell.centerButton.setTitle(met.title, forState: .Normal)
-      cell.centerButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 17)
-      cell.centerButton.titleEdgeInsets = UIEdgeInsets(top: -18, left: 0, bottom: 0, right: 0)
-      
-      cell.netMet.text = Helper.formatStringNumber(Helper.netMetric(met))
-      cell.netMet.font = UIFont(name: "Quicksand-Bold", size: 13)
-      cell.netMet.textColor = Helper.coloredButtonTextColor
-      
-      cell.minusButton.backgroundColor = cellColor
-      cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Normal)
-      cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
-      cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
-      cell.minusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
-      
-      return cell
    }
    
 //   @IBAction func unwindFromSum(segue: UIStoryboardSegue){
