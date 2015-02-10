@@ -88,6 +88,10 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       }
    }
    
+   override func viewWillAppear(animated: Bool) {
+      navBar.topItem?.title = currentMetric.title
+   }
+   
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       return 5
    }
@@ -630,7 +634,16 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       currentFeeling = feelings[sender.tag]
       
       //segue to edit note
+      manageNoteMode = "edit"
+      performSegueWithIdentifier("showNoteFromSumSegue", sender: nil)
    }
+   
+   @IBAction func unwindToSummary(segue: UIStoryboardSegue){
+      if segue.identifier == "DoneNoteFromSum" {
+         tableView.reloadData()
+      }
+   }
+
 
 }
 

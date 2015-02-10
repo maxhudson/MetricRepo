@@ -9,8 +9,12 @@
 import Foundation
 
 class MetricsManager {
+   var tutorialCompleted: Bool!
+   var tutorialMetrics = [Metric]()
    
    var metrics = [Metric]()
+   
+   let defaults = NSUserDefaults.standardUserDefaults()
    
    lazy private var archivePath: String = {
       let fileManager = NSFileManager.defaultManager()
@@ -21,7 +25,8 @@ class MetricsManager {
    
    func save() {
       NSKeyedArchiver.archiveRootObject(metrics, toFile: archivePath)
-      
+      defaults.setBool(tutorialCompleted, forKey: "tutorialCompleted")
+
    }
    
    private func unarchiveSavedItems() {
@@ -29,7 +34,16 @@ class MetricsManager {
          let savedItems: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithFile(archivePath)
          metrics = savedItems as [Metric]
       }
+      if defaults.boolForKey("tutorialCompleted"){
+         tutorialCompleted = defaults.boolForKey("tutorialCompleted")
+         println("Tutorial Key Set Already")
+      }
+      else {
+         tutorialCompleted = false
+      }
+      
    }
+   
    
    init() {
       unarchiveSavedItems()

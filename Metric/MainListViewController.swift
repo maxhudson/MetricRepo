@@ -32,6 +32,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func addButtonExit(sender: AnyObject) {
       manageMetricMode = "add"
+      performSegueWithIdentifier("showMetricManagerSegue", sender: nil)
    }
    
    @IBAction func helpButtonEnter(sender: AnyObject) {
@@ -73,19 +74,30 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
       if segue.identifier == "showSummarySegue" {
          currentMetric = metricsManager.metrics[rowForButton(sender as UIButton).row]
          
          currentMetricRow = rowForButton(sender as UIButton).row
          
-         let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let vc = storyboard.instantiateViewControllerWithIdentifier("MetricSummary") as SummaryViewController
          self.presentViewController(vc, animated: false, completion: nil)
       }
       if segue.identifier == "showNoteSegue"{
-         let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let vc = storyboard.instantiateViewControllerWithIdentifier("NoteViewController") as AddNoteViewController
          self.presentViewController(vc, animated: true, completion: nil)
+      }
+      if segue.identifier == "showMetricManagerSegue" {
+         if metricsManager.tutorialCompleted == true {
+            let vc = storyboard.instantiateViewControllerWithIdentifier("MetricManagerViewController") as MetricManagerViewController
+            self.presentViewController(vc, animated: true, completion: nil)
+         }
+         else {
+            let vc = storyboard.instantiateViewControllerWithIdentifier("TutorialQuoteViewController") as TutorialQuoteViewController
+            self.presentViewController(vc, animated: true, completion: nil)
+
+         }
       }
    }
    
@@ -301,13 +313,20 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
 //   }
 //   
    @IBAction func unwindToList(segue: UIStoryboardSegue){
-      if segue.identifier == "DoneMetric" {
+      if segue.identifier == "DoneMetricFromList" {
          tableView.reloadData()
          let metricManagerController = segue.sourceViewController as MetricManagerViewController
          if let newMetric = metricManagerController.newMetric {
             metricsManager.metrics += [newMetric]
             tableView.reloadData()
          }
+      }
+      if segue.identifier == "DoneTutorialSegue" {
+         println("Done Tutorial")
+         for tutMetric in metricsManager.tutorialMetrics {
+            metricsManager.metrics += [tutMetric]
+         }
+         metricsManager.tutorialCompleted = true
       }
    }
    

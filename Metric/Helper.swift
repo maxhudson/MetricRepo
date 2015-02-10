@@ -16,7 +16,7 @@ struct Helper {
    static var darkGoodColor = UIColor(red: 58/255.0, green: 174/255.0, blue: 199/255.0, alpha: 1)
    static var badColor = UIColor(red: 234/255.0, green: 136/255.0, blue: 137/255.0, alpha: 1)
    static var darkBadColor = UIColor(red: 209/255.0, green: 117/255.0, blue: 118/255.0, alpha: 1)
-   static var darkNayColor = UIColor(red: 53/255.0, green: 73/255.0, blue: 93/255.0, alpha: 1)
+   static var darkNavyColor = UIColor(red: 53/255.0, green: 73/255.0, blue: 93/255.0, alpha: 1)
    static var goldColor = UIColor(red: 241/255.0, green: 199/255.0, blue: 83/255.0, alpha: 1)
    static var purpleColor = UIColor(red: 188/255.0, green: 141/255.0, blue: 190/255.0, alpha: 1)
    

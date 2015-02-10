@@ -17,9 +17,17 @@ class MetricManagerViewController: UIViewController {
 
    }
 
+//   override func viewDidDisappear(animated: Bool) {
+//      if manageMetricMode == "edit" {
+//         if let parentVC = self.parentViewController as? SummaryViewController {
+//            parentVC.navBar.topItem?.title = currentMetric.title
+//         }
+//      }
+//   }
    var newMetric: Metric!
    
    @IBOutlet weak var trashButton: UIButton!
+   @IBOutlet weak var cancleButton: UIButton!
    @IBOutlet weak var doneButton: UIButton!
    @IBOutlet var metricManagerView: UIView!
    @IBOutlet weak var metricTextField: UITextField!
@@ -27,9 +35,22 @@ class MetricManagerViewController: UIViewController {
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
    @IBAction func trashMetric(sender: AnyObject) {
-      dismissViewControllerAnimated(true, completion: nil)
+      metricsManager.metrics.removeAtIndex(currentMetricRow)
+      performSegueWithIdentifier("DoneMetricFromList", sender: nil)
    }
    
+   @IBAction func doneMetric(sender: AnyObject) {
+      if manageMetricMode == "edit" {
+         performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
+      }
+      if manageMetricMode == "add" {
+         performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+      }
+   }
+   
+   @IBAction func cancelMetric(sender: AnyObject) {
+      dismissViewControllerAnimated(true, completion: nil)
+   }
    override func viewWillAppear(animated: Bool) {
       super.viewWillAppear(animated)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
@@ -68,11 +89,14 @@ class MetricManagerViewController: UIViewController {
    }
    
    func setupView(){
-      doneButton.backgroundColor = Helper.darkNayColor
-      
+      doneButton.backgroundColor = Helper.darkNavyColor
+      cancleButton.titleLabel?.textColor = Helper.darkNavyColor
+      cancleButton.backgroundColor = Helper.darkNavyColor
       if manageMetricMode == "add" {
          metricManagerView.backgroundColor = Helper.goldColor
          promptLabel.text = "Enter the name of the metric you'd like to track"
+         trashButton.removeFromSuperview()
+
       }
       
       if manageMetricMode == "edit" {
@@ -91,8 +115,8 @@ class MetricManagerViewController: UIViewController {
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-   
-      if segue.identifier == "DoneMetric" {
+      
+      if segue.identifier == "DoneMetricFromList" {
          if manageMetricMode == "add" {
             if let title = metricTextField.text {
                if !title.isEmpty{
@@ -100,7 +124,10 @@ class MetricManagerViewController: UIViewController {
                }
             }
          }
-         
+      }
+      
+      
+      else if segue.identifier == "DoneMetricFromSum" {
          if manageMetricMode == "edit" {
             if let title = metricTextField.text {
                if !title.isEmpty{
@@ -109,6 +136,7 @@ class MetricManagerViewController: UIViewController {
             }
          }
       }
+
    }
    
 

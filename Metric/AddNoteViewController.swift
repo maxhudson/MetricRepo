@@ -8,12 +8,13 @@
 
 import UIKit
 
-class AddNoteViewController: UIViewController {
+class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
    
    @IBOutlet var addNoteView: UIView!
    @IBOutlet weak var noteTextView: UITextView!
    @IBOutlet weak var promptLabel: UILabel!
    @IBOutlet weak var doneButton: UIButton!
+   @IBOutlet weak var cancleButton: UIButton!
    @IBOutlet weak var trashButton: UIButton!
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
@@ -34,6 +35,9 @@ class AddNoteViewController: UIViewController {
       super.viewWillDisappear(animated)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+//      if let parentVC = self.parentViewController as? SummaryViewController {
+//         parentVC.tableView.reloadData()
+//      }
    }
 
    func keyboardWillShowNotification(notification: NSNotification) {
@@ -63,15 +67,31 @@ class AddNoteViewController: UIViewController {
 
    
    @IBAction func trashNote(sender: AnyObject) {
+      dismissViewControllerAnimated(true, completion: { () -> Void in
+         currentFeeling.note = ""
+      })
+   }
+   @IBAction func cancleNote(sender: AnyObject) {
       dismissViewControllerAnimated(true, completion: nil)
    }
    
+   @IBAction func doneNote(sender: AnyObject) {
+      if manageNoteMode == "add" {
+         performSegueWithIdentifier("DoneNoteFromList", sender: nil)
+      }
+      if manageNoteMode == "edit" {
+         performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
+      }
+   }
    func setupView(){
+      doneButton.backgroundColor = Helper.darkNavyColor
       addNoteView.backgroundColor = Helper.goldColor
+      cancleButton.backgroundColor = Helper.darkNavyColor
       
       if manageNoteMode == "add" {
          addNoteView.backgroundColor = Helper.goldColor
          promptLabel.text = "Keep it short if you can?"
+         trashButton.removeFromSuperview()
       }
       
       if manageNoteMode == "edit" {
@@ -90,10 +110,17 @@ class AddNoteViewController: UIViewController {
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-      
-      if segue.identifier == "DoneNote" {
+      if segue.identifier == "DoneNoteFromSum" {
          if let note = noteTextView.text {
-            if !note.isEmpty{
+            if !note.isEmpty {
+               currentFeeling.note = note
+            }
+         }
+      }
+      
+      if segue.identifier == "DoneNoteFromList" {
+         if let note = noteTextView.text {
+            if !note.isEmpty {
                currentFeeling.note = note
             
             }
