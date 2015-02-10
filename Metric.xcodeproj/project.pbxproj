@@ -13,8 +13,6 @@
 		1550D3841A84A9C600670DD7 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */; };
 		156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 156F80911A83374C00F579A3 /* trashButtonImage@3x.png */; };
 		15BD6E2D1A87F4A7005B7929 /* TutorialQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */; };
-		15BD6E2F1A881BFC005B7929 /* TutorialAddPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */; };
-		15F895241A8879BE0015B6BF /* CustomSlideSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F895231A8879BE0015B6BF /* CustomSlideSegue.swift */; };
 		6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */; };
 		6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */; };
 		6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */; };
@@ -39,6 +37,8 @@
 		6D9B14771A86D720008404F9 /* SummaryAnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */; };
 		6D9B14791A86D74D008404F9 /* SummaryGraphTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */; };
 		6D9B147B1A86D758008404F9 /* SummaryNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */; };
+		6DA8469F1A89F7F6001E232E /* TutorialAddPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */; };
+		6DA846A11A89F826001E232E /* CustomSlideSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA846A01A89F826001E232E /* CustomSlideSegue.swift */; };
 		6DCF596F1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF596E1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift */; };
 		6DCF59711A87171900EC8EE2 /* darkNote@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCF59701A87171900EC8EE2 /* darkNote@3x.png */; };
 		6DCF59741A871B8700EC8EE2 /* FeedbackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF59731A871B8700EC8EE2 /* FeedbackTableViewCell.swift */; };
@@ -64,7 +64,6 @@
 		156F80911A83374C00F579A3 /* trashButtonImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trashButtonImage@3x.png"; sourceTree = "<group>"; };
 		15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialQuoteViewController.swift; sourceTree = "<group>"; };
 		15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialAddPersonViewController.swift; sourceTree = "<group>"; };
-		15F895231A8879BE0015B6BF /* CustomSlideSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlideSegue.swift; sourceTree = "<group>"; };
 		6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
 		6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navShadow@3x.png"; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		6D9B14761A86D720008404F9 /* SummaryAnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryAnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		6D9B14781A86D74D008404F9 /* SummaryGraphTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryGraphTableViewCell.swift; sourceTree = "<group>"; };
 		6D9B147A1A86D758008404F9 /* SummaryNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryNoteTableViewCell.swift; sourceTree = "<group>"; };
+		6DA846A01A89F826001E232E /* CustomSlideSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlideSegue.swift; sourceTree = "<group>"; };
 		6DCF596E1A8715BB00EC8EE2 /* SummaryAddNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryAddNoteTableViewCell.swift; sourceTree = "<group>"; };
 		6DCF59701A87171900EC8EE2 /* darkNote@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkNote@3x.png"; sourceTree = "<group>"; };
 		6DCF59731A871B8700EC8EE2 /* FeedbackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 				6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */,
 				1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */,
 				6DD699741A889F8100D557A7 /* FeedbackViewController.swift */,
+				6DA846A01A89F826001E232E /* CustomSlideSegue.swift */,
 				6D677B081A7CA13D00805A4D /* Main.storyboard */,
 				154AA83D1A8951AB00A5B026 /* TutorialAddActivityViewController.swift */,
 				15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */,
@@ -345,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DA8469F1A89F7F6001E232E /* TutorialAddPersonViewController.swift in Sources */,
 				1550D3841A84A9C600670DD7 /* AddNoteViewController.swift in Sources */,
 				6D677B251A7CA2B600805A4D /* MainListViewController.swift in Sources */,
 				6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */,
@@ -364,6 +366,7 @@
 				6D677B051A7CA13D00805A4D /* AppDelegate.swift in Sources */,
 				6D782E071A7EC51C009C04E2 /* MetricSummaryViewController.swift in Sources */,
 				6D9B14751A86D5DC008404F9 /* SummaryViewController.swift in Sources */,
+				6DA846A11A89F826001E232E /* CustomSlideSegue.swift in Sources */,
 				154AA83E1A8951AB00A5B026 /* TutorialAddActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
