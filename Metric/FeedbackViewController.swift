@@ -132,7 +132,7 @@ class FeedbackViewController: UIViewController {
       
       for (var i=0; i < options.count; i++) {
          if (buttonTitles[i] != "") {
-            Helper.styleColoredButton(options[i], color: Helper.darkNayColor, title: buttonTitles[i], fontSize: 15)
+            Helper.styleColoredButton(options[i], color: Helper.darkNavyColor, title: buttonTitles[i], fontSize: 15)
          }else {
             Helper.styleColoredButton(options[i], color: UIColor.clearColor(), title: "", fontSize: 15)
          }
