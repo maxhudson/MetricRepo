@@ -479,6 +479,8 @@ class MetricSummaryViewController: UIViewController{
          if (currentMetric.feelings[i].note != "") {
             feelings.append(currentMetric.feelings[i])
          }
+         
+         
       }
       
       for (var i = feelings.count - 1; i >= 0; i--) {

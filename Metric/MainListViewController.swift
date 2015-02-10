@@ -14,6 +14,7 @@ var metricsManager = MetricsManager()
 var metrics: Metric! //???
 var manageMetricMode: String! //indicate the mode in which metric note managing is happening
 var manageNoteMode: String!
+var noteFrom: String!
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
@@ -187,6 +188,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                //leave note
                //show note view controller
                manageNoteMode = "add"
+               noteFrom = "list"
                currentFeeling = met.lastFeeling
                updateMetricViewMode(cell, mode: 1)
                performSegueWithIdentifier("showNoteSegue", sender: nil)
