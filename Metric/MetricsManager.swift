@@ -35,6 +35,7 @@ class MetricsManager {
          metrics = savedItems as [Metric]
       }
       if defaults.boolForKey("tutorialCompleted"){
+         tutorialCompleted = defaults.boolForKey("tutorialCompleted")
          println("Tutorial Key Set Already")
       }
       else {
