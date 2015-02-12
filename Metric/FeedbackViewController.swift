@@ -8,6 +8,15 @@
 
 import UIKit
 
+struct Feedback {
+   var cat1: String!
+   var cat2: String!
+   var feeling: Int!
+   var notes: String!
+}
+
+var feedback : Feedback?
+
 class FeedbackViewController: UIViewController {
    
    @IBOutlet weak var backButton: UIButton!
@@ -24,8 +33,64 @@ class FeedbackViewController: UIViewController {
    @IBOutlet weak var feelingBad: UIButton!
    @IBOutlet weak var feelingGood: UIButton!
    
+   @IBAction func backExit(sender: AnyObject) {
+      if (viewMode == 1) {
+         showView(0, item: 0)
+      } else {
+         //segue back
+      }
+   }
    
-   var mode = 0
+   @IBAction func feelingExit(sender: AnyObject) {
+      if (viewMode == 1) {
+         feeling = sender.tag
+         
+         topMessage.text = ""
+         
+         feelingBad.backgroundColor = UIColor.clearColor()
+         feelingGood.backgroundColor = UIColor.clearColor()
+         
+         feelingBad.setTitle("", forState: .Normal)
+         feelingGood.setTitle("", forState: .Normal)
+         
+         mightMoveToNotes()
+      }
+   }
+   
+   @IBAction func optionExit(sender: AnyObject) {
+      var tag = sender.tag
+      
+      if (viewMode == 0) {
+         firstOption = buttonTitleSets[0][tag]
+         if (firstOption != "") {
+            showView(1, item: tag)
+         }
+      } else {
+         secondOption = buttonTitleSets[viewItem][tag]
+         
+         for option in options {
+            Helper.styleColoredButton(option, color: UIColor.clearColor(), title: "", fontSize: 15)
+         }
+         
+         bottomMessage.text = ""
+         
+         mightMoveToNotes()
+      }
+   }
+   
+   func mightMoveToNotes() {
+      if (feeling != 0 && secondOption != "") {
+         feedback = Feedback(cat1: firstOption, cat2: secondOption, feeling: feeling, notes: "")
+         manageNoteMode = "feedback"
+         //segue to feedback notes vc
+      }
+   }
+   
+   var viewMode = 0
+   var viewItem = 0
+   var feeling = 0
+   var firstOption = ""
+   var secondOption = ""
    var buttonTitleSets : [[String]]!
    var options : [UIButton]!
    
@@ -39,13 +104,13 @@ class FeedbackViewController: UIViewController {
             "Analysis",
             "Notes",
             "Interface",
-            "Other",
-            ""
+            "Settings",
+            "Other"
          ],
          [
-            "",
-            "",
-            "",
+            "Appear-\nance",
+            "Scale",
+            "Accur-\nacy",
             "",
             "",
             ""
@@ -59,15 +124,7 @@ class FeedbackViewController: UIViewController {
             ""
          ],
          [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-         ],
-         [
-            "",
+            "Other",
             "",
             "",
             "",
@@ -75,7 +132,7 @@ class FeedbackViewController: UIViewController {
             ""
          ],
          [
-            "",
+            "Other",
             "",
             "",
             "",
@@ -83,9 +140,17 @@ class FeedbackViewController: UIViewController {
             ""
          ],
          [
+            "Password",
+            "Reminder",
+            "Unlock",
+            "Other",
             "",
-            "",
-            "",
+            ""
+         ],
+         [
+            "Colors",
+            "Design",
+            "Other",
             "",
             "",
             ""
@@ -107,17 +172,31 @@ class FeedbackViewController: UIViewController {
       bottomMessage.font = UIFont(name: Helper.navTitleFont, size: 17)
       bottomMessage.textColor = UIColor(white: 0.2, alpha: 1)
       
-      showView(1, item: 2)
+      showView(0, item: 0)
    }
    
    func showView(mode: Int, item: Int) {
       var buttonTitles : [String]!
+      viewMode = mode
+      
       if (mode == 0) {
-          buttonTitles = buttonTitleSets[0]
+         
+         feeling = 0
+         firstOption = ""
+         secondOption = ""
+         
+         buttonTitles = buttonTitleSets[0]
          
          bottomMessage.text = ""
          
-         topMessage.text = "Thank you for providing feedback.\n\nIt's beneficial for everyone.\n\nWhat did you want to give feedback on?"
+         feelingBad.backgroundColor = UIColor.clearColor()
+         feelingGood.backgroundColor = UIColor.clearColor()
+         
+         feelingBad.setTitle("", forState: .Normal)
+         feelingGood.setTitle("", forState: .Normal)
+         
+         
+         topMessage.text = "\n\n\n\n\n\nThank you for providing feedback.\n\nIt's beneficial for everyone.\n\nWhat did you want to give feedback on?"
 
       } else if (mode == 1) {
          buttonTitles = buttonTitleSets[item]
@@ -142,5 +221,6 @@ class FeedbackViewController: UIViewController {
          option.titleLabel!.numberOfLines = 0
          option.titleLabel!.font = UIFont(name: Helper.navTitleFont, size: 15)
       }
+      
    }
 }
