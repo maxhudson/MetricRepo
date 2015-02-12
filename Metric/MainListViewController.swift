@@ -99,6 +99,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             self.presentViewController(vc, animated: true, completion: nil)
 
          }
+      }else if segue.identifier == "showFeedbackFromMain" {
+         let vc = storyboard.instantiateViewControllerWithIdentifier("FeedbackViewController") as FeedbackViewController
+         self.presentViewController(vc, animated: true, completion: nil)
       }
    }
    
@@ -125,6 +128,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func minusButtonTouchCancelled(sender: UIButton) {
       metricButtonReleased(sender, buttonId: -1, cancelled: true)
+   }
+   
+   @IBAction func giveFeedbackExit(sender: AnyObject) {
+      noteFrom = "main"
+      performSegueWithIdentifier("showFeedbackFromMain", sender: sender)
    }
    
    func rowForButton(sender: AnyObject) -> NSIndexPath {
@@ -225,6 +233,14 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    override func viewDidLoad() {
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+      
+      var feedbackData = PFObject(className: "Feedback")
+      feedbackData.setObject("mklasfd", forKey: "cat1")
+      feedbackData.setObject("mklasfd2", forKey: "cat2")
+      feedbackData.setObject(1, forKey: "feeling")
+      feedbackData.setObject("note", forKey: "notes")
+      feedbackData.save()
+      
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -259,7 +275,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          
          return baseHeight + netMet*multiplier
       } else {
-         return 70
+         return 100
       }
    }
    

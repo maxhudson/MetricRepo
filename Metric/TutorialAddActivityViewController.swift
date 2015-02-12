@@ -22,6 +22,7 @@ class TutorialAddActivityViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      textField.becomeFirstResponder()
       setupView()
    }
    

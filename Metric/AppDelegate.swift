@@ -33,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       UINavigationBar.appearance().shadowImage = UIImage(named: "navShadow")
       UINavigationBar.appearance().translucent = false
       
+      Parse.enableLocalDatastore()
+      Parse.setApplicationId("BzxLd4FwCCy7WSx9BjcxcnvtF3JSIOGJmRIysquj", clientKey: "hbsFQRnoZ2Jb0xIxogBsJdltM4Ym4NfI94eLk5lo")
+      PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+      
       return true
    }
 

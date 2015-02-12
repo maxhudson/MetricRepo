@@ -31,6 +31,11 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       manageMetricMode = "edit"
    }
    
+   @IBAction func giveFeedbackExit(sender: AnyObject) {
+      noteFrom = "summary"
+      performSegueWithIdentifier("showFeedbackFromSummary", sender: sender)
+   }
+   
    @IBAction func addNoteButtonExit(sender: AnyObject) {
       var feeling = Feeling(value: 0, note: "", date: NSDate())
       
@@ -41,7 +46,6 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       manageNoteMode = "add"
       noteFrom = "summary"
       performSegueWithIdentifier("showNoteFromSumSegue", sender: nil)
-      //segue to add note here
    }
    
    override func viewDidLoad() {

@@ -40,11 +40,18 @@ class MetricManagerViewController: UIViewController {
    }
    
    @IBAction func doneMetric(sender: AnyObject) {
-      if manageMetricMode == "edit" {
-         performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
-      }
-      if manageMetricMode == "add" {
-         performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+      let noteText = metricTextField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+      if (noteText != "") {
+         metricsManager.metrics[currentMetricRow].title = noteText
+         
+         if manageMetricMode == "edit" {
+            performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
+         }
+         if manageMetricMode == "add" {
+            performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+         }
+      } else {
+         //popup
       }
    }
    
@@ -90,8 +97,10 @@ class MetricManagerViewController: UIViewController {
    
    func setupView(){
       doneButton.backgroundColor = Helper.darkNavyColor
-      cancleButton.titleLabel?.textColor = Helper.darkNavyColor
-      cancleButton.backgroundColor = Helper.darkNavyColor
+      
+      Helper.styleNavButton(cancleButton, fontName: Helper.buttonFont, fontSize: 25)
+      Helper.styleNavButton(trashButton, fontName: Helper.buttonFont, fontSize: 25)
+      
       if manageMetricMode == "add" {
          metricManagerView.backgroundColor = Helper.goldColor
          promptLabel.text = "Enter the name of the metric you'd like to track"
@@ -116,25 +125,7 @@ class MetricManagerViewController: UIViewController {
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
       
-      if segue.identifier == "DoneMetricFromList" {
-         if manageMetricMode == "add" {
-            if let title = metricTextField.text {
-               if !title.isEmpty{
-                  newMetric = Metric(title: title)
-               }
-            }
-         }
-      }
-      
-      
-      else if segue.identifier == "DoneMetricFromSum" {
-         if manageMetricMode == "edit" {
-            if let title = metricTextField.text {
-               if !title.isEmpty{
-                  metricsManager.metrics[currentMetricRow].title = title
-               }
-            }
-         }
+      if (segue.identifier == "DoneMetricFromList" || segue.identifier == "DoneMetricFromSum") {
       }
 
    }

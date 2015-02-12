@@ -22,7 +22,6 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       super.viewDidLoad()
       noteTextView.becomeFirstResponder()
       setupView()
-      
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -65,48 +64,59 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       
    }
 
-   
    @IBAction func trashNote(sender: AnyObject) {
-      dismissViewControllerAnimated(true, completion: { () -> Void in
+      if (manageNoteMode == "edit") {
          currentFeeling.note = ""
-      })
+      }
+      
+      dismissViewControllerAnimated(true, completion: nil)
    }
    @IBAction func cancleNote(sender: AnyObject) {
       dismissViewControllerAnimated(true, completion: nil)
    }
    
    @IBAction func doneNote(sender: AnyObject) {
-      if manageNoteMode == "add" {
+      if (manageNoteMode == "add" || manageNoteMode == "feedback") {
          if noteFrom == "summary"{
             performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
-         }
-         else {
+         } else {
             performSegueWithIdentifier("DoneNoteFromList", sender: nil)
          }
       }
+      
       if manageNoteMode == "edit" {
          performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
       }
    }
 
-
    func setupView(){
-      doneButton.backgroundColor = Helper.darkNavyColor
+      Helper.styleNavButton(cancleButton, fontName: Helper.buttonFont, fontSize: 25)
+      Helper.styleNavButton(trashButton, fontName: Helper.buttonFont, fontSize: 25)
+      
       addNoteView.backgroundColor = Helper.goldColor
-      cancleButton.backgroundColor = Helper.darkNavyColor
+      doneButton.backgroundColor = Helper.darkNavyColor
+      
+      noteTextView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10)
       
       if manageNoteMode == "add" {
          addNoteView.backgroundColor = Helper.goldColor
-         promptLabel.text = "Keep it short if you can?"
          trashButton.removeFromSuperview()
+         promptLabel.text = "Keep it short if you can"
       }
       
       if manageNoteMode == "edit" {
          addNoteView.backgroundColor = Helper.purpleColor
          noteTextView.text = currentFeeling.note
-         promptLabel.text = "Made a mistake?"
+         promptLabel.text = "Edit note"
       }
 
+      if manageNoteMode == "feedback" {
+         addNoteView.backgroundColor = UIColor(white: 0.8, alpha: 1)
+         trashButton.removeFromSuperview()
+         promptLabel.text = "Any other thoughts?"
+         promptLabel.textColor = Helper.navBarColor
+         doneButton.setTitle("SUBMIT", forState: .Normal)
+      }
       
    }
    
@@ -114,25 +124,26 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       self.view.endEditing(true)
    }
    
-   
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-      if segue.identifier == "DoneNoteFromSum" {
-         if let note = noteTextView.text {
-            if !note.isEmpty {
-               currentFeeling.note = note
+      
+      if (segue.identifier == "DoneNoteFromSum" || segue.identifier == "DoneNoteFromList") {
+         var noteText = noteTextView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
+         if (manageNoteMode == "add") {
+            if (noteText == "") {
+               noteText = " ";
             }
+            currentFeeling.note = title;
+         } else if (manageNoteMode == "feedback") {
+            var feedbackData = PFObject(className: "Feedback")
+            feedbackData.setObject(feedback?.cat1, forKey: "cat1")
+            feedbackData.setObject(feedback?.cat2, forKey: "cat2")
+            feedbackData.setObject(feedback?.feeling, forKey: "feeling")
+            feedbackData.setObject(noteText, forKey: "notes")
+            feedbackData.save()
          }
       }
       
-      if segue.identifier == "DoneNoteFromList" {
-         if let note = noteTextView.text {
-            if !note.isEmpty {
-               currentFeeling.note = note
-            
-            }
-         }
-      }
    }
 
    

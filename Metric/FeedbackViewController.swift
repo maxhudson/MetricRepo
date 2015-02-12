@@ -37,7 +37,7 @@ class FeedbackViewController: UIViewController {
       if (viewMode == 1) {
          showView(0, item: 0)
       } else {
-         //segue back
+         dismissViewControllerAnimated(true, completion: nil)
       }
    }
    
@@ -82,7 +82,14 @@ class FeedbackViewController: UIViewController {
       if (feeling != 0 && secondOption != "") {
          feedback = Feedback(cat1: firstOption, cat2: secondOption, feeling: feeling, notes: "")
          manageNoteMode = "feedback"
-         //segue to feedback notes vc
+         
+         performSegueWithIdentifier("showFeedbackNote", sender: nil)
+         
+         Helper.delay(0.5, closure: { () -> () in
+            self.feeling = 0
+            self.secondOption = ""
+            self.showView(1, item: self.viewItem);
+         })
       }
    }
    
@@ -178,6 +185,7 @@ class FeedbackViewController: UIViewController {
    func showView(mode: Int, item: Int) {
       var buttonTitles : [String]!
       viewMode = mode
+      viewItem = item
       
       if (mode == 0) {
          
