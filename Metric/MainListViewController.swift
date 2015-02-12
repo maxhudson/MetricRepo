@@ -233,14 +233,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    override func viewDidLoad() {
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-      
-      var feedbackData = PFObject(className: "Feedback")
-      feedbackData.setObject("mklasfd", forKey: "cat1")
-      feedbackData.setObject("mklasfd2", forKey: "cat2")
-      feedbackData.setObject(1, forKey: "feeling")
-      feedbackData.setObject("note", forKey: "notes")
-      feedbackData.save()
-      
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -340,7 +332,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          }
       }
       if segue.identifier == "DoneTutorialSegue" {
-         println("Done Tutorial")
          for tutMetric in metricsManager.tutorialMetrics {
             metricsManager.metrics += [tutMetric]
          }

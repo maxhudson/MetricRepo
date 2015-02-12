@@ -1435,8 +1435,8 @@
         <image name="edit@3x.png" width="48" height="55"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="F2n-px-FaQ"/>
         <segue reference="UGW-a8-5lX"/>
-        <segue reference="diw-6f-vFl"/>
+        <segue reference="F2n-px-FaQ"/>
+        <segue reference="g9k-QH-wco"/>
     </inferredMetricsTieBreakers>
 </document>

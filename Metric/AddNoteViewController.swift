@@ -129,11 +129,11 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       
       if (segue.identifier == "DoneNoteFromSum" || segue.identifier == "DoneNoteFromList") {
          var noteText = noteTextView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
-         if (manageNoteMode == "add") {
+         if (manageNoteMode == "add" || manageNoteMode == "edit") {
             if (noteText == "") {
                noteText = " ";
             }
-            currentFeeling.note = title;
+            currentFeeling.note = noteText;
          } else if (manageNoteMode == "feedback") {
             var feedbackData = PFObject(className: "Feedback")
             feedbackData.setObject(feedback?.cat1, forKey: "cat1")

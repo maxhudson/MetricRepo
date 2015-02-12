@@ -638,19 +638,12 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       
       currentFeeling = feelings[sender.tag]
       
-      //segue to edit note
       manageNoteMode = "edit"
       performSegueWithIdentifier("showNoteFromSumSegue", sender: nil)
    }
    
-   
-
-   
    @IBAction func unwindToSummary(segue: UIStoryboardSegue){
       tableView.reloadData()
-      if segue.identifier == "DoneNoteFromSum" {
-         tableView.reloadData()
-      }
    }
 
 

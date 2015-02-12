@@ -103,7 +103,6 @@ class MetricManagerViewController: UIViewController {
          metricManagerView.backgroundColor = Helper.goldColor
          promptLabel.text = "Enter the name of the metric you'd like to track"
          trashButton.removeFromSuperview()
-
       }
       
       if manageMetricMode == "edit" {
@@ -111,8 +110,6 @@ class MetricManagerViewController: UIViewController {
          promptLabel.text = "Modify the name of the metric you're tracking"
          metricTextField.text = metricsManager.metrics[currentMetricRow].title
       }
-      
-      
    }
 
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
