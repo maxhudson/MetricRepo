@@ -36,6 +36,11 @@ class MetricManagerViewController: UIViewController {
    
    @IBAction func trashMetric(sender: AnyObject) {
       metricsManager.metrics.removeAtIndex(currentMetricRow)
+      
+      if (trackAnalytics) {
+         PFAnalytics.trackEventInBackground("Deleted Metric", block: nil)
+      }
+      
       performSegueWithIdentifier("DoneMetricFromList", sender: nil)
    }
    
@@ -58,6 +63,7 @@ class MetricManagerViewController: UIViewController {
    @IBAction func cancelMetric(sender: AnyObject) {
       dismissViewControllerAnimated(true, completion: nil)
    }
+   
    override func viewWillAppear(animated: Bool) {
       super.viewWillAppear(animated)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
@@ -91,8 +97,6 @@ class MetricManagerViewController: UIViewController {
       UIView.animateWithDuration(animationDuraiton, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
          self.view.layoutIfNeeded()
       }, completion: nil)
-      
-      
    }
    
    func setupView(){
@@ -101,26 +105,30 @@ class MetricManagerViewController: UIViewController {
       
       if manageMetricMode == "add" {
          metricManagerView.backgroundColor = Helper.goldColor
-         promptLabel.text = "Enter the name of the metric you'd like to track"
+         promptLabel.text = "Enter the name of the metrik you'd like to track"
          trashButton.removeFromSuperview()
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Created Metric", block: nil)
+         }
       }
       
       if manageMetricMode == "edit" {
          metricManagerView.backgroundColor = Helper.purpleColor
-         promptLabel.text = "Modify the name of the metric you're tracking"
+         promptLabel.text = "Edit name"
          metricTextField.text = metricsManager.metrics[currentMetricRow].title
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Edited Metric", block: nil)
+         }
       }
+      
+      doneButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
    }
 
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
       self.view.endEditing(true)
    }
-
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
    }
-   
-
-
 }

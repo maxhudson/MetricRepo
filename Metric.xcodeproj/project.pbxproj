@@ -13,9 +13,12 @@
 		1550D3841A84A9C600670DD7 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */; };
 		156F80921A83374C00F579A3 /* trashButtonImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 156F80911A83374C00F579A3 /* trashButtonImage@3x.png */; };
 		15BD6E2D1A87F4A7005B7929 /* TutorialQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */; };
+		6D04832A1A8D33E700E4D296 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0483291A8D33E700E4D296 /* TestHelper.swift */; };
 		6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */; };
 		6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */; };
 		6D067D4C1A7D94E8001B1EFF /* navShadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */; };
+		6D0F83791A8D40430035A2CD /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0F83781A8D40430035A2CD /* ParseCrashReporting.framework */; };
+		6D0F837D1A8D45390035A2CD /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0F837C1A8D45390035A2CD /* libstdc++.6.dylib */; };
 		6D26EEC81A8C8EC60017EAD6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EEC71A8C8EC60017EAD6 /* Parse.framework */; };
 		6D26EECA1A8C90430017EAD6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EEC91A8C90430017EAD6 /* AudioToolbox.framework */; };
 		6D26EECC1A8C904B0017EAD6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EECB1A8C904B0017EAD6 /* CFNetwork.framework */; };
@@ -27,7 +30,6 @@
 		6D26EED81A8C907D0017EAD6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EED71A8C907D0017EAD6 /* SystemConfiguration.framework */; };
 		6D26EEDA1A8C90870017EAD6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EED91A8C90870017EAD6 /* libz.dylib */; };
 		6D26EEDC1A8C90910017EAD6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EEDB1A8C90910017EAD6 /* libsqlite3.dylib */; };
-		6D26EEDE1A8C91250017EAD6 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EEDD1A8C91250017EAD6 /* ParseCrashReporting.framework */; };
 		6D26EEE21A8C91DA0017EAD6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EEE01A8C91DA0017EAD6 /* Bolts.framework */; };
 		6D26EEE31A8C91DA0017EAD6 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D26EEE11A8C91DA0017EAD6 /* ParseUI.framework */; };
 		6D677B051A7CA13D00805A4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D677B041A7CA13D00805A4D /* AppDelegate.swift */; };
@@ -78,9 +80,12 @@
 		156F80911A83374C00F579A3 /* trashButtonImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trashButtonImage@3x.png"; sourceTree = "<group>"; };
 		15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialQuoteViewController.swift; sourceTree = "<group>"; };
 		15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialAddPersonViewController.swift; sourceTree = "<group>"; };
+		6D0483291A8D33E700E4D296 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
 		6D067D4B1A7D94E8001B1EFF /* navShadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navShadow@3x.png"; sourceTree = "<group>"; };
+		6D0F83781A8D40430035A2CD /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		6D0F837C1A8D45390035A2CD /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		6D26EEC71A8C8EC60017EAD6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		6D26EEC91A8C90430017EAD6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6D26EECB1A8C904B0017EAD6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -92,7 +97,6 @@
 		6D26EED71A8C907D0017EAD6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6D26EED91A8C90870017EAD6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6D26EEDB1A8C90910017EAD6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		6D26EEDD1A8C91250017EAD6 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		6D26EEE01A8C91DA0017EAD6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		6D26EEE11A8C91DA0017EAD6 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		6D677AFF1A7CA13D00805A4D /* Metric.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metric.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,7 +139,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D0F837D1A8D45390035A2CD /* libstdc++.6.dylib in Frameworks */,
 				6D26EEDC1A8C90910017EAD6 /* libsqlite3.dylib in Frameworks */,
+				6D0F83791A8D40430035A2CD /* ParseCrashReporting.framework in Frameworks */,
 				6D26EEDA1A8C90870017EAD6 /* libz.dylib in Frameworks */,
 				6D26EED81A8C907D0017EAD6 /* SystemConfiguration.framework in Frameworks */,
 				6D26EED61A8C90720017EAD6 /* Security.framework in Frameworks */,
@@ -148,7 +154,6 @@
 				6D26EEC81A8C8EC60017EAD6 /* Parse.framework in Frameworks */,
 				6D782E121A815883009C04E2 /* StoreKit.framework in Frameworks */,
 				6D26EEE31A8C91DA0017EAD6 /* ParseUI.framework in Frameworks */,
-				6D26EEDE1A8C91250017EAD6 /* ParseCrashReporting.framework in Frameworks */,
 				6D26EEE21A8C91DA0017EAD6 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,6 +171,8 @@
 		6D26EEDF1A8C91290017EAD6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D0F837C1A8D45390035A2CD /* libstdc++.6.dylib */,
+				6D0F83781A8D40430035A2CD /* ParseCrashReporting.framework */,
 				6D26EEE01A8C91DA0017EAD6 /* Bolts.framework */,
 				6D26EEE11A8C91DA0017EAD6 /* ParseUI.framework */,
 				6D26EEDB1A8C90910017EAD6 /* libsqlite3.dylib */,
@@ -179,7 +186,6 @@
 				6D26EECB1A8C904B0017EAD6 /* CFNetwork.framework */,
 				6D26EEC91A8C90430017EAD6 /* AudioToolbox.framework */,
 				6D782E111A815883009C04E2 /* StoreKit.framework */,
-				6D26EEDD1A8C91250017EAD6 /* ParseCrashReporting.framework */,
 				6D26EEC71A8C8EC60017EAD6 /* Parse.framework */,
 			);
 			name = Frameworks;
@@ -188,9 +194,9 @@
 		6D26EEE41A8C938C0017EAD6 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				154AA83D1A8951AB00A5B026 /* TutorialAddActivityViewController.swift */,
-				15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */,
 				15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */,
+				15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */,
+				154AA83D1A8951AB00A5B026 /* TutorialAddActivityViewController.swift */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -229,11 +235,12 @@
 				6D677B241A7CA2B600805A4D /* MainListViewController.swift */,
 				6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */,
 				1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */,
+				1546C15C1A81ED0E00883F8A /* MetricManagerViewController.swift */,
 				6DD699741A889F8100D557A7 /* FeedbackViewController.swift */,
 				6D943C291A7DE0F0008D130B /* Metric.swift */,
 				1546C15A1A81D10C00883F8A /* MetricsManager.swift */,
-				1546C15C1A81ED0E00883F8A /* MetricManagerViewController.swift */,
 				6D782E0A1A7ED7E0009C04E2 /* Helper.swift */,
+				6D0483291A8D33E700E4D296 /* TestHelper.swift */,
 				6D677B081A7CA13D00805A4D /* Main.storyboard */,
 				6D26EEE51A8C93CC0017EAD6 /* Segues */,
 				6D26EEE41A8C938C0017EAD6 /* Tutorial */,
@@ -428,6 +435,7 @@
 			files = (
 				6DA8469F1A89F7F6001E232E /* TutorialAddPersonViewController.swift in Sources */,
 				1550D3841A84A9C600670DD7 /* AddNoteViewController.swift in Sources */,
+				6D04832A1A8D33E700E4D296 /* TestHelper.swift in Sources */,
 				6D677B251A7CA2B600805A4D /* MainListViewController.swift in Sources */,
 				6D943C281A7DDB0E008D130B /* Metrics.swift in Sources */,
 				6D943C1F1A7DD892008D130B /* Model.xcdatamodeld in Sources */,

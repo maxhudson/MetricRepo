@@ -9,6 +9,7 @@
 import Foundation
 
 class MetricsManager {
+   var sampleDataAdded: Bool!
    var tutorialCompleted: Bool!
    var tutorialMetrics = [Metric]()
    
@@ -26,6 +27,7 @@ class MetricsManager {
    func save() {
       NSKeyedArchiver.archiveRootObject(metrics, toFile: archivePath)
       defaults.setBool(tutorialCompleted, forKey: "tutorialCompleted")
+      defaults.setBool(sampleDataAdded, forKey: "sampleDataAdded")
 
    }
    
@@ -34,14 +36,18 @@ class MetricsManager {
          let savedItems: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithFile(archivePath)
          metrics = savedItems as [Metric]
       }
+      
       if defaults.boolForKey("tutorialCompleted"){
          tutorialCompleted = defaults.boolForKey("tutorialCompleted")
-         println("Tutorial Key Set Already")
-      }
-      else {
+      } else {
          tutorialCompleted = false
       }
       
+      if defaults.boolForKey("sampleDataAdded"){
+         sampleDataAdded = defaults.boolForKey("sampleDataAdded")
+      } else {
+         sampleDataAdded = false
+      }
    }
    
    

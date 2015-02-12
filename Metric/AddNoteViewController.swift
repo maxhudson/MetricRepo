@@ -34,9 +34,6 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       super.viewWillDisappear(animated)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-//      if let parentVC = self.parentViewController as? SummaryViewController {
-//         parentVC.tableView.reloadData()
-//      }
    }
 
    func keyboardWillShowNotification(notification: NSNotification) {
@@ -67,6 +64,9 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
    @IBAction func trashNote(sender: AnyObject) {
       if (manageNoteMode == "edit") {
          currentFeeling.note = ""
+      }
+      if (trackAnalytics) {
+         PFAnalytics.trackEventInBackground("Deleted Note", block: nil)
       }
       
       dismissViewControllerAnimated(true, completion: nil)
@@ -102,22 +102,32 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
          addNoteView.backgroundColor = Helper.goldColor
          trashButton.removeFromSuperview()
          promptLabel.text = "Keep it short if you can"
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Added Note", block: nil)
+         }
       }
       
       if manageNoteMode == "edit" {
          addNoteView.backgroundColor = Helper.purpleColor
          noteTextView.text = currentFeeling.note
          promptLabel.text = "Edit note"
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Edited Note", block: nil)
+         }
       }
 
       if manageNoteMode == "feedback" {
          addNoteView.backgroundColor = UIColor(white: 0.8, alpha: 1)
          trashButton.removeFromSuperview()
-         promptLabel.text = "Any other thoughts?"
+         promptLabel.text = "Any helpful details?"
          promptLabel.textColor = Helper.navBarColor
          doneButton.setTitle("SUBMIT", forState: .Normal)
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Submitted Feedback", block: nil)
+         }
       }
       
+      doneButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
    }
    
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {

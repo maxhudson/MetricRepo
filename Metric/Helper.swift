@@ -124,21 +124,25 @@ struct Helper {
       return badColor
    }
    
-   static func generateRandomData(days: Int, values: Int, lowRange: Int, hiRange: Int, met: Metric) {
+   static func generateTutorialData(met: Metric) {
       met.feelings = []
       met.good = 0
       met.bad = 0
+      
+      var days = 30
+      
       var date = NSDate()
       date = date.dateByAddingTimeInterval(Double(-1*60*60*24*days))
-      var val :CGFloat = 0
+      var val :CGFloat = 2
       var dec :CGFloat = 0
+      
       for (var i = 0; i < days; i++) {
          
-         if(CGFloat(i) < 0.75*CGFloat(days) ){
-            val = CGFloat(random() % 6)
+         if(CGFloat(i) < 0.65*CGFloat(days) ){
+            val += 0.1
          }else {
-            dec -= 0.4
-            val = dec + CGFloat(random() % 2)
+            dec -= 0.2
+            val = dec
          }
          
          if (Int(val) < 0){
@@ -147,10 +151,32 @@ struct Helper {
             met.good += abs(Int(val))
          }
          
-         met.feelings.append(Feeling(value: Int(val), note: "This is a comment for note " + String(i), date: date))
+         var note = ""
+         if (i == 0) {
+            note = "Quickly give us feedback below at any time if we're doing something wrong or right!"
+         } else if (i == 1) {
+            note = "You can delete this metrik using the edit (pencil shaped) button at the top right of the screen."
+         } else if (i == 2) {
+            note = "You can edit or delete notes by tapping on them."
+         } else if (i == 3) {
+            note = "Metrik becomes more powerful the longer you use it."
+         }
          
-            date = date.dateByAddingTimeInterval(Double(60*60*24))
+         met.feelings.append(Feeling(value: Int(val), note: note, date: date))
          
+         date = date.dateByAddingTimeInterval(Double(60*60*24))
       }
+   }
+   
+   static func heightForMetricCell(var indexPath: NSIndexPath) -> CGFloat {
+      let baseHeight : CGFloat = 70.0
+      let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
+      let multiplier : CGFloat = 0.8
+      
+      return baseHeight + netMet*multiplier
+   }
+   
+   static func track() {
+      
    }
 }

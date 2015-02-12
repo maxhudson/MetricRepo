@@ -91,6 +91,10 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
             showGraph = 1
          }
       }
+      
+      if (trackAnalytics) {
+         PFAnalytics.trackEventInBackground("Viewed Summary", block: nil)
+      }
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -206,30 +210,13 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
       }
       
       if (daysOfData >= 3) {
-         var slopes = [
-            slope(met, days: 3),
-            slope(met, days: 7),
-            slope(met, days: 14),
-            slope(met, days: 1000000)
-         ]
-         
-         var nets = [
-            net(met, days: 3),
-            net(met, days: 7),
-            net(met, days: 14),
-            net(met, days: 1000000)
-         ]
          
          //RECENT CALC
          
+         var recentDays = min(14, daysOfData)
          var recentBenefit : CGFloat = 0 //gives more weight to 14 day than 3
-         var recentNet : CGFloat = 0
-         var recentSlope : CGFloat = 0
-         
-         for (var i = 2; i >= 0; i--) {
-            recentSlope += slopes[i]/3.0
-            recentNet += nets[i]/3.0
-         }
+         var recentNet : CGFloat = net(met, days: recentDays)
+         var recentSlope : CGFloat = slope(met, days: recentDays)
          
          recentBenefit = 0.35*recentSlope + 0.65*recentNet
          
@@ -241,14 +228,14 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          
          //OVERALL CALC
          
-         var overallNet = nets[nets.count - 1]
-         var overallSlope = slopes[slopes.count - 1]
+         var overallNet = net(met, days: 1000000)
+         var overallSlope = slope(met, days: 1000000)
          //var overallIntensity = (currentMetric.good + currentMetric.bad)/daysOfData
          
          var overallBenefit = 0.85*overallNet + 0.15*overallSlope //gives more weight to net than slope
          
          if (overallNet > 0.9 && overallSlope > -0.2) {
-            overallBenefit = nets[nets.count - 1]
+            overallBenefit = overallNet
          }
          
          //GOOD or BAD
@@ -282,7 +269,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
             inaccuracy++
          }
          
-         inaccuracy = max(3, inaccuracy)
+         inaccuracy = min(3, inaccuracy)
          
          if (fabs(overallBenefit) > 0.5 && daysOfData >= 7) { //impact
             //analysis += "It seems like you feel pretty strongly about this. "
@@ -290,9 +277,11 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          
          if (recentSlope > 0.25 && overallBenefit < -0.1 && daysOfData > 14) {
             analysis += "Even though this has generally seemed bad it seems to be picking up recently. "
-         } else if (recentSlope < -0.25 && overallBenefit > 0.1 && daysOfData > 14) {
-            analysis += "Even though this has been generally good it seems to be losing it's benefit  recently which you should look out for. "
-         } else if (overallSlope < -0.2 && daysOfData > 14) { //maybe 0.2?
+         } else if (recentSlope < -0.25 && recentBenefit > 0 && overallBenefit > 0.1 && daysOfData > 14) {
+            analysis += "Even though this has been generally good it seems to be losing it's benefit recently which you should look out for. "
+         } else if (recentSlope < -0.10 && recentBenefit < 0 && overallBenefit > 0.2 && daysOfData > 14) {
+            analysis += "Even though this hasn't been beneficial recently, it's been beneficial over time. "
+         } else if (overallSlope < -0.2 && daysOfData > 14) {
             analysis += "It seems like this has been less and less beneficial over time. "
          } else if (overallSlope > 0.2 && daysOfData > 14) {
             analysis += "It seems like this has been more and more beneficial over time. "
@@ -304,13 +293,13 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          ]
          
          var accuracyStrings = [
-            "very confidently that",
-            ", with a lot of confidence, that",
-            ", with a some of confidence, that",
-            ", but not with much certainty, that"
+            "We think, with a lot of confidence, ",
+            "We are pretty confident",
+            "We think, with a some of confidence, ",
+            "We think, but not with much certainty, "
          ]
          
-         analysis += "We think" + accuracyStrings[inaccuracy] + " you should " + dirStrings[dir] + " your life for now.\n\n"
+         analysis += accuracyStrings[inaccuracy] + " you should " + dirStrings[dir] + " your life for now.\n\n"
          
          if (daysOfData < 14) {
             analysis += "You haven't been tracking how this makes you feel for very long. In another " + String(14 - daysOfData) + " days we'll have a better idea of the situation.\n\n"

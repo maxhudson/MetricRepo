@@ -22,7 +22,6 @@ class TutorialAddActivityViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      textField.becomeFirstResponder()
       setupView()
    }
    
@@ -34,8 +33,6 @@ class TutorialAddActivityViewController: UIViewController {
    
    @IBAction func backButtonPressed(sender: AnyObject) {
       self.view.clipsToBounds = true;
-
-      
    }
    
    
@@ -45,6 +42,7 @@ class TutorialAddActivityViewController: UIViewController {
             newMetric = Metric(title: title)
             metricsManager.tutorialMetrics.append(newMetric)
             performSegueWithIdentifier("DoneTutorialSegue", sender: nil)
+            PFAnalytics.trackEventInBackground("Tutorial Completed", block: nil)
          }
       }
    }
@@ -97,17 +95,13 @@ class TutorialAddActivityViewController: UIViewController {
    }
    
    func setupView() {
-      promptLabelTwo.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
-      
       promptLabelOne.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
-      promptLabelOne.text = "\"Enter the name of \n a significant activity \n in your life \""
+      promptLabelOne.text = "Enter the name of \n a significant activity \n in your life"
       backButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.textColor = Helper.goldColor
       
-      
-      
-      
+      //textField.becomeFirstResponder()
    }
    
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {

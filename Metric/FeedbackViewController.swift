@@ -61,12 +61,13 @@ class FeedbackViewController: UIViewController {
       var tag = sender.tag
       
       if (viewMode == 0) {
-         firstOption = buttonTitleSets[0][tag]
+         firstOption = buttonTitleSets[0][tag - 1].stringByReplacingOccurrencesOfString("-", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+         
          if (firstOption != "") {
             showView(1, item: tag)
          }
       } else {
-         secondOption = buttonTitleSets[viewItem][tag]
+         secondOption = buttonTitleSets[viewItem][tag - 1].stringByReplacingOccurrencesOfString("-", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
          
          for option in options {
             Helper.styleColoredButton(option, color: UIColor.clearColor(), title: "", fontSize: 15)
@@ -102,62 +103,61 @@ class FeedbackViewController: UIViewController {
    var options : [UIButton]!
    
    override func viewDidLoad() {
-      
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
       
       buttonTitleSets = [
          [
-            "Graph",
-            "Analysis",
-            "Notes",
-            "Interface",
+            "General",
+            "Summary",
+            "Report\nBug",
             "Settings",
-            "Other"
-         ],
-         [
-            "Appear-\nance",
-            "Scale",
-            "Accur-\nacy",
-            "",
-            "",
+            "Other",
             ""
          ],
-         [
+         [ //general
+            "Tutorial",
+            "Usabil-\nity",
+            "Purpose",
+            "Feature\nRequest",
+            "Complaint",
+            "Other"
+         ],
+         [ //analysis
             "Overall\nBenefit",
             "Recent\nBenefit",
             "Confi-\ndence",
             "Message",
-            "Other",
-            ""
+            "Graph",
+            "Other"
          ],
-         [
+         [ //bugs
+            "Crash",
+            "Data\nLoss",
+            "Security",
             "Other",
-            "",
-            "",
-            "",
-            "",
-            ""
-         ],
-         [
-            "Other",
-            "",
-            "",
-            "",
             "",
             ""
          ],
-         [
+         [ //settings
             "Password",
             "Reminder",
-            "Unlock",
+            "Purchase\nUnlock",
+            "Restore\nUnlock",
             "Other",
-            "",
             ""
          ],
-         [
+         [ //other
             "Colors",
             "Design",
             "Other",
+            "",
+            "",
+            ""
+         ],
+         [
+            "Other",
+            "",
+            "",
             "",
             "",
             ""

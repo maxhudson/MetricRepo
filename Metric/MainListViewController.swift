@@ -18,6 +18,7 @@ var noteFrom: String!
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
+var trackAnalytics = true
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
@@ -93,11 +94,18 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          if metricsManager.tutorialCompleted == true {
             let vc = storyboard.instantiateViewControllerWithIdentifier("MetricManagerViewController") as MetricManagerViewController
             self.presentViewController(vc, animated: true, completion: nil)
-         }
-         else {
+         } else {
+            
+            if (!metricsManager.sampleDataAdded) {
+               Helper.delay(0.5, closure: { () -> () in
+                  metricsManager.metrics.append(Metric(title: "Sample"))
+                  Helper.generateTutorialData(metricsManager.metrics[0])
+               })
+               metricsManager.sampleDataAdded = true
+            }
+            
             let vc = storyboard.instantiateViewControllerWithIdentifier("TutorialQuoteViewController") as TutorialQuoteViewController
             self.presentViewController(vc, animated: true, completion: nil)
-
          }
       }else if segue.identifier == "showFeedbackFromMain" {
          let vc = storyboard.instantiateViewControllerWithIdentifier("FeedbackViewController") as FeedbackViewController
@@ -241,9 +249,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       
       Helper.styleNavButton(helpButton, fontName: Helper.buttonFont, fontSize: 22)
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
-      
-      
-      //Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
    }
    
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -251,9 +256,14 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      var showGiveFeedback = 0
+      if (metricsManager.tutorialCompleted == true) {
+         showGiveFeedback = 1
+      }
+      
       var rows = [
          metricsManager.metrics.count,
-         1
+         showGiveFeedback
       ]
       
       return rows[section]
@@ -261,11 +271,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
       if (indexPath.section == 0) {
-         let baseHeight : CGFloat = 70.0
-         let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
-         let multiplier : CGFloat = 0.8
-         
-         return baseHeight + netMet*multiplier
+         return Helper.heightForMetricCell(indexPath)
       } else {
          return 100
       }
@@ -318,10 +324,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       }
    }
    
-//   @IBAction func unwindFromSum(segue: UIStoryboardSegue){
-//      tableView.reloadData()
-//   }
-//   
+   
    @IBAction func unwindToList(segue: UIStoryboardSegue){
       if segue.identifier == "DoneMetricFromList" {
          tableView.reloadData()
