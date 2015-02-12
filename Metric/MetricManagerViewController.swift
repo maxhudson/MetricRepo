@@ -42,12 +42,12 @@ class MetricManagerViewController: UIViewController {
    @IBAction func doneMetric(sender: AnyObject) {
       let noteText = metricTextField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
       if (noteText != "") {
-         metricsManager.metrics[currentMetricRow].title = noteText
-         
          if manageMetricMode == "edit" {
+            metricsManager.metrics[currentMetricRow].title = noteText
             performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
          }
          if manageMetricMode == "add" {
+            newMetric = Metric(title: noteText)
             performSegueWithIdentifier("DoneMetricFromList", sender: nil)
          }
       } else {
@@ -96,8 +96,6 @@ class MetricManagerViewController: UIViewController {
    }
    
    func setupView(){
-      doneButton.backgroundColor = Helper.darkNavyColor
-      
       Helper.styleNavButton(cancleButton, fontName: Helper.buttonFont, fontSize: 25)
       Helper.styleNavButton(trashButton, fontName: Helper.buttonFont, fontSize: 25)
       
@@ -124,10 +122,6 @@ class MetricManagerViewController: UIViewController {
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-      
-      if (segue.identifier == "DoneMetricFromList" || segue.identifier == "DoneMetricFromSum") {
-      }
-
    }
    
 
