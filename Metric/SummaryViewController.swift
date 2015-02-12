@@ -200,7 +200,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
          
       }
       
-      if (daysOfData > 3) {
+      if (daysOfData >= 3) {
          var slopes = [
             slope(met, days: 3),
             slope(met, days: 7),
