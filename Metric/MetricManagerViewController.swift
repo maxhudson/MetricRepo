@@ -35,13 +35,20 @@ class MetricManagerViewController: UIViewController {
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
    @IBAction func trashMetric(sender: AnyObject) {
-      metricsManager.metrics.removeAtIndex(currentMetricRow)
+      var deleteConfirmation = UIAlertController(title: "Are you sure?", message: "This cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
       
-      if (trackAnalytics) {
-         PFAnalytics.trackEventInBackground("Deleted Metric", block: nil)
-      }
+      deleteConfirmation.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+      deleteConfirmation.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
+         metricsManager.metrics.removeAtIndex(currentMetricRow)
+         
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Deleted Metric", block: nil)
+         }
+         
+         self.performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+      }))
       
-      performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+      presentViewController(deleteConfirmation, animated: true, completion: nil)
    }
    
    @IBAction func doneMetric(sender: AnyObject) {
@@ -56,7 +63,11 @@ class MetricManagerViewController: UIViewController {
             performSegueWithIdentifier("DoneMetricFromList", sender: nil)
          }
       } else {
-         //popup
+         var emptyTitle = UIAlertController(title: "Empty Title", message: "A metrik can't have an empty title.", preferredStyle: UIAlertControllerStyle.Alert)
+         
+         emptyTitle.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+         
+         presentViewController(emptyTitle, animated: true, completion: nil)
       }
    }
    

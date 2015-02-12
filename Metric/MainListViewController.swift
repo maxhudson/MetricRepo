@@ -18,7 +18,7 @@ var noteFrom: String!
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
-var trackAnalytics = true
+var trackAnalytics = false
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    

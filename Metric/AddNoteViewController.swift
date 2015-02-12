@@ -60,17 +60,27 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       
       
    }
-
+   
    @IBAction func trashNote(sender: AnyObject) {
-      if (manageNoteMode == "edit") {
-         currentFeeling.note = ""
-      }
-      if (trackAnalytics) {
-         PFAnalytics.trackEventInBackground("Deleted Note", block: nil)
-      }
       
-      dismissViewControllerAnimated(true, completion: nil)
+      var deleteConfirmation = UIAlertController(title: "Are you sure?", message: "This cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
+      
+      deleteConfirmation.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+      deleteConfirmation.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
+         if (manageNoteMode == "edit") {
+            currentFeeling.note = ""
+         }
+         
+         if (trackAnalytics) {
+            PFAnalytics.trackEventInBackground("Deleted Note", block: nil)
+         }
+         
+         self.dismissViewControllerAnimated(true, completion: nil)
+      }))
+      
+      presentViewController(deleteConfirmation, animated: true, completion: nil)
    }
+   
    @IBAction func cancleNote(sender: AnyObject) {
       dismissViewControllerAnimated(true, completion: nil)
    }

@@ -60,6 +60,8 @@ class TutorialAddPersonViewController: UIViewController {
 
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+      
+      textField.becomeFirstResponder()
    }
    
    override func viewWillDisappear(animated: Bool) {

@@ -49,18 +49,16 @@ class TutorialAddActivityViewController: UIViewController {
    
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
       self.view.endEditing(true)
-      if segue.identifier == "DoneTutorialSegue" {
-//         dismissViewControllerAnimated(true, completion: nil)
-      }
    }
-
-   
-   
    
    override func viewWillAppear(animated: Bool) {
       super.viewWillAppear(animated)
+      self.view.endEditing(true)
+      
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+      
+      textField.becomeFirstResponder()
    }
    
    override func viewWillDisappear(animated: Bool) {
@@ -90,18 +88,14 @@ class TutorialAddActivityViewController: UIViewController {
       UIView.animateWithDuration(animationDuraiton, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
          self.view.layoutIfNeeded()
          }, completion: nil)
-      
-      
    }
    
    func setupView() {
       promptLabelOne.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
-      promptLabelOne.text = "Enter the name of \n a significant activity \n in your life"
+      promptLabelOne.text = "Enter the name of\na significant activity\nin your life"
       backButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.textColor = Helper.goldColor
-      
-      //textField.becomeFirstResponder()
    }
    
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {

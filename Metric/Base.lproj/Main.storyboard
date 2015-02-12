@@ -813,7 +813,7 @@
                                     <segue destination="xyT-rf-7eL" kind="unwind" unwindAction="unwindToQuote:" id="mRY-8d-OFM"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DNf-i0-RQM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DNf-i0-RQM">
                                 <rect key="frame" x="30" y="320" width="540" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="BgM-RX-8mR"/>
@@ -869,7 +869,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uKh-dh-05d">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uKh-dh-05d">
                                 <rect key="frame" x="30" y="320" width="540" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="TcM-Kc-FdH"/>
