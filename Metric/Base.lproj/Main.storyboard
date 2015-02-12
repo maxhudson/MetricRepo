@@ -641,9 +641,7 @@
                                                 <rect key="frame" x="10" y="10" width="100" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-32" maxY="0.0"/>
-                                                <state key="normal" title="+">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
+                                                <state key="normal" title="+"/>
                                                 <connections>
                                                     <action selector="addButtonEnter:" destination="9OP-jg-jdd" eventType="touchDown" id="h8C-ue-vMy"/>
                                                     <action selector="addButtonExit:" destination="9OP-jg-jdd" eventType="touchUpInside" id="GYL-JJ-MuQ"/>
@@ -1365,7 +1363,7 @@
         <image name="trashButtonImage@3x.png" width="114" height="144"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zca-OV-H2M"/>
-        <segue reference="g9k-QH-wco"/>
+        <segue reference="f3F-Ix-JQa"/>
+        <segue reference="UGW-a8-5lX"/>
     </inferredMetricsTieBreakers>
 </document>

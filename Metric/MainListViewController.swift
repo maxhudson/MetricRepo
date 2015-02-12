@@ -18,9 +18,11 @@ var noteFrom: String!
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
+var tutorialPartCompleted: Bool!
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
+   var tutorialCase = 0
+
    @IBOutlet weak var addButton: UIButton!
    @IBOutlet weak var helpButton: UIButton!
    
@@ -50,6 +52,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func plusButtonTouchUp(sender: UIButton) {
       metricButtonReleased(sender, buttonId: 1, cancelled: false)
+      progressTutorial()
    }
    
    @IBAction func plusButtonTouchCancelled(sender: UIButton) {
@@ -121,6 +124,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       var met = metricsManager.metrics[rowForButton(sender).row]
       
       metricButtonReleased(sender, buttonId: -1, cancelled: false)
+      progressTutorial()
    }
    
    @IBAction func minusButtonTouchCancelled(sender: UIButton) {
@@ -236,7 +240,87 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       
       
       //Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
+      
+      //Tutorial
+      progressTutorial()
    }
+   
+   func progressTutorial(){
+      //Tutorial
+      if metricsManager.tutorialCompleted == false {
+         
+         switch tutorialCase {
+         case 0:
+            let tutLabel = UILabel(frame: self.view.frame)
+            tutLabel.text = "press the \'+\' \n to get started."
+            tutLabel.numberOfLines = 2
+            
+            var circles = [Shape]()
+            var circle1 = Shape(circleDiameter: 100, center: CGPointMake(view.frame.width-50, navigationBar.center.y))
+            circles.append(circle1)
+            
+            var rectangles = [Shape]()
+            
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: addButton)
+            tutorialViewManager.createTutorialView()
+            
+            tutorialCase = 1
+            break
+         case 1:
+            for subv in view.subviews {
+               var subView: UIView = subv as UIView
+               if subv.tag == 1{
+                  subv.removeFromSuperview()
+               }
+            }
+            
+            let tutLabel = UILabel(frame: self.view.frame)
+            tutLabel.text = "these are metrics. \n \n tap on \'+\' or \'-\' \n when you feel \n good or bad \n about something"
+            tutLabel.numberOfLines = 6
+            
+            var circles = [Shape]()
+            
+            var rectangles = [Shape]()
+            var rectangle1 = Shape(width: view.frame.width, height: 70, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 70/2))
+            rectangles.append(rectangle1)
+            
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: addButton)
+            tutorialViewManager.createTutorialView()
+        
+            tutorialCase = 2
+            break
+         case 2:
+            for subv in view.subviews {
+               var subView: UIView = subv as UIView
+               if subv.tag == 1{
+                  subv.removeFromSuperview()
+               }
+            }
+            
+            let tutLabel = UILabel(frame: self.view.frame)
+            tutLabel.text = "you can undo \n or add anote"
+            tutLabel.numberOfLines = 3
+            
+            var circles = [Shape]()
+            
+            var rectangles = [Shape]()
+            var rectangle1 = Shape(width: view.frame.width, height: 70, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 70/2))
+            rectangles.append(rectangle1)
+            
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: addButton)
+            tutorialViewManager.createTutorialView()
+            
+            tutorialCase = 3
+            break
+         default:
+            break
+         }
+
+      }
+      
+      
+   }
+   
    
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       return 2
@@ -328,7 +412,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          for tutMetric in metricsManager.tutorialMetrics {
             metricsManager.metrics += [tutMetric]
          }
-         metricsManager.tutorialCompleted = true
+         tableView.reloadData()
+//         metricsManager.tutorialCompleted = true
+         
       }
    }
    
