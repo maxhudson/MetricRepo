@@ -77,12 +77,19 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
    
    @IBAction func doneNote(sender: AnyObject) {
       if manageNoteMode == "add" {
-         performSegueWithIdentifier("DoneNoteFromList", sender: nil)
+         if noteFrom == "summary"{
+            performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
+         }
+         else {
+            performSegueWithIdentifier("DoneNoteFromList", sender: nil)
+         }
       }
       if manageNoteMode == "edit" {
          performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
       }
    }
+
+
    func setupView(){
       doneButton.backgroundColor = Helper.darkNavyColor
       addNoteView.backgroundColor = Helper.goldColor
