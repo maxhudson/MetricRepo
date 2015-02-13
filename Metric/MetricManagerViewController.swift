@@ -17,13 +17,6 @@ class MetricManagerViewController: UIViewController {
 
    }
 
-//   override func viewDidDisappear(animated: Bool) {
-//      if manageMetricMode == "edit" {
-//         if let parentVC = self.parentViewController as? SummaryViewController {
-//            parentVC.navBar.topItem?.title = currentMetric.title
-//         }
-//      }
-//   }
    var newMetric: Metric!
    
    @IBOutlet weak var trashButton: UIButton!

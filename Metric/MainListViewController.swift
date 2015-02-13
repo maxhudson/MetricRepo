@@ -11,7 +11,6 @@ import CoreData
 
 var metricsManager = MetricsManager()
 
-var metrics: Metric! //???
 var manageMetricMode: String! //indicate the mode in which metric note managing is happening
 var manageNoteMode: String!
 var noteFrom: String!
@@ -21,9 +20,9 @@ var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //
 var trackAnalytics = false
 var tutorialPartCompleted: Bool!
 var senderAllowed = 0
-var tablePlusButton: UIButton!
-var tableMinusButton: UIButton!
-var tableCenterButton: UIButton!
+var tablePlusButton: UIButton?
+var tableMinusButton: UIButton?
+var tableCenterButton: UIButton?
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    var tutorialCase = 0
@@ -44,7 +43,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          performSegueWithIdentifier("showMetricManagerSegue", sender: nil)
       }
       removeButtonTag([sender as UIButton])
-
    }
    
    @IBAction func helpButtonEnter(sender: AnyObject) {
@@ -62,10 +60,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    @IBAction func plusButtonTouchUp(sender: UIButton) {
       if sender.tag == senderAllowed{
          metricButtonReleased(sender, buttonId: 1, cancelled: false)
-         removeButtonTag([sender, tableMinusButton])
+         if (tableMinusButton != nil) {
+            removeButtonTag([sender, tableMinusButton!])
+         }
          progressTutorial(self.view)
       }
-
    }
    
    @IBAction func plusButtonTouchCancelled(sender: UIButton) {
@@ -151,7 +150,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          var met = metricsManager.metrics[rowForButton(sender).row]
          
          metricButtonReleased(sender, buttonId: -1, cancelled: false)
-         removeButtonTag([sender, tablePlusButton])
+         if (tablePlusButton != nil) {
+            removeButtonTag([sender, tablePlusButton!])
+         }
          progressTutorial(self.view)
       }
    }
@@ -238,18 +239,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                   PFAnalytics.trackEventInBackground("ML New Note", block: nil)
                }
                //leave note
-               //show note view controller
                manageNoteMode = "add"
                noteFrom = "list"
                currentFeeling = met.lastFeeling
                updateMetricViewMode(cell, mode: 1)
                performSegueWithIdentifier("showNoteSegue", sender: nil)
 
-   //            currentFeeling = met.lastFeeling
-   //            Helper.cancelDelay(met.delayReference)
-   //            updateMetricViewMode(cell, mode: 1)
             }
-            
          }
       }
       
@@ -275,7 +271,10 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewDidLoad() {
-      setupButtonTag([addButton])
+      if (!metricsManager.tutorialCompleted) {
+         setupButtonTag([addButton])
+      }
+      
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
    }
@@ -406,7 +405,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             
             break
          case 3:
-            tableCenterButton.tag = 3
+            if (tableCenterButton != nil) {
+               tableCenterButton!.tag = 3
+            }
             let tutLabel = UILabel(frame: self.view.frame)
             tutLabel.text = "tap here to \n see a summary \n of your metric"
             tutLabel.numberOfLines = 6
