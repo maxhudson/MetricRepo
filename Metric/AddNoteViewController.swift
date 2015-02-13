@@ -18,6 +18,8 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
    @IBOutlet weak var trashButton: UIButton!
    @IBOutlet weak var doneButtonConstraint: NSLayoutConstraint!
    
+   var seguingFromDelete = false
+   
    override func viewDidLoad() {
       super.viewDidLoad()
       noteTextView.becomeFirstResponder()
@@ -57,8 +59,6 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       UIView.animateWithDuration(animationDuraiton, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
          self.view.layoutIfNeeded()
          }, completion: nil)
-      
-      
    }
    
    @IBAction func trashNote(sender: AnyObject) {
@@ -67,15 +67,16 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       
       deleteConfirmation.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
       deleteConfirmation.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
-         if (manageNoteMode == "edit") {
-            currentFeeling.note = ""
-         }
+         
+         currentFeeling.note = ""
+         self.seguingFromDelete = true
          
          if (trackAnalytics) {
             PFAnalytics.trackEventInBackground("Deleted Note", block: nil)
          }
          
-         self.dismissViewControllerAnimated(true, completion: nil)
+         self.performSegueWithIdentifier("DoneNoteFromSum", sender: nil)
+         
       }))
       
       presentViewController(deleteConfirmation, animated: true, completion: nil)
@@ -149,7 +150,7 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
       
       if (segue.identifier == "DoneNoteFromSum" || segue.identifier == "DoneNoteFromList") {
          var noteText = noteTextView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
-         if (manageNoteMode == "add" || manageNoteMode == "edit") {
+         if ((manageNoteMode == "add" || manageNoteMode == "edit") && !seguingFromDelete) {
             if (noteText == "") {
                noteText = " ";
             }
@@ -163,10 +164,5 @@ class AddNoteViewController: UIViewController, UINavigationControllerDelegate {
             feedbackData.save()
          }
       }
-      
    }
-
-   
-   
-   
 }

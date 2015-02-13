@@ -105,6 +105,10 @@ class FeedbackViewController: UIViewController {
    override func viewDidLoad() {
       Helper.styleNavButton(backButton, fontName: Helper.buttonFont, fontSize: 25)
       
+      if (trackAnalytics) {
+         PFAnalytics.trackEventInBackground("Viewed Feedback", block: nil)
+      }
+      
       buttonTitleSets = [
          [
             "General",

@@ -178,8 +178,14 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                
                if (buttonId == -1){
                   met.lastFeeling = met.feelBad("")
+                  if (trackAnalytics) {
+                     PFAnalytics.trackEventInBackground("ML Feeling Bad", block: nil)
+                  }
                } else if (buttonId == 1){
                   met.lastFeeling = met.feelGood("")
+                  if (trackAnalytics) {
+                     PFAnalytics.trackEventInBackground("ML Feeling Good", block: nil)
+                  }
                }
                
                met.delayReference = Helper.cancellableDelay(4.0) {
@@ -189,6 +195,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                updateMetricViewMode(cell, mode: 0)
             } else if (buttonId == -1) {
                //undo
+               if (trackAnalytics) {
+                  PFAnalytics.trackEventInBackground("ML Undo", block: nil)
+               }
                
                if(met.lastFeeling?.value == 1) {
                   met.good--
@@ -201,6 +210,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                Helper.cancelDelay(met.delayReference)
                updateMetricViewMode(cell, mode: 1)
             } else if (buttonId == 1) {
+               if (trackAnalytics) {
+                  PFAnalytics.trackEventInBackground("ML New Note", block: nil)
+               }
                //leave note
                //show note view controller
                manageNoteMode = "add"
@@ -331,7 +343,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          let metricManagerController = segue.sourceViewController as MetricManagerViewController
          if let newMetric = metricManagerController.newMetric {
             metricsManager.metrics += [newMetric]
-            tableView.reloadData()
          }
       }
       if segue.identifier == "DoneTutorialSegue" {
@@ -340,6 +351,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          }
          metricsManager.tutorialCompleted = true
       }
+      tableView.reloadData()
    }
    
 }

@@ -59,8 +59,15 @@ class MetricManagerViewController: UIViewController {
             performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
          }
          if manageMetricMode == "add" {
+            
             newMetric = Metric(title: noteText)
             performSegueWithIdentifier("DoneMetricFromList", sender: nil)
+         }
+         if (trackAnalytics) {
+            var metricData = PFObject(className: "Metric")
+            metricData.setObject(noteText, forKey: "title")
+            metricData.setObject(manageMetricMode, forKey: "mode")
+            metricData.save()
          }
       } else {
          var emptyTitle = UIAlertController(title: "Empty Title", message: "A metrik can't have an empty title.", preferredStyle: UIAlertControllerStyle.Alert)
