@@ -13,6 +13,7 @@ class MainListTableViewCell: UITableViewCell {
    @IBOutlet weak var plusButton: UIButton!
    @IBOutlet weak var minusButton: UIButton!
    @IBOutlet weak var centerButton: UIButton!
-   
+
    @IBOutlet weak var netMet: UILabel!
+   
 }

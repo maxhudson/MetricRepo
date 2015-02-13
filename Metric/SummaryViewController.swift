@@ -49,6 +49,7 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    }
    
    override func viewDidLoad() {
+
       
       tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -99,7 +100,14 @@ class SummaryViewController: UIViewController, UITableViewDelegate, UITableViewD
    
    override func viewWillAppear(animated: Bool) {
       navBar.topItem?.title = currentMetric.title
+      if let pVC = self.presentingViewController as? MainListViewController {
+         if pVC.tutorialCase == 4 {
+            pVC.progressTutorial(self.view)
+         }
+      }
    }
+   
+
    
    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
       return 5
