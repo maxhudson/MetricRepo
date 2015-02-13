@@ -15,6 +15,7 @@
 		159C776C1A8C0CF4005EEC84 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C776B1A8C0CF4005EEC84 /* TutorialView.swift */; };
 		159C776E1A8C817A005EEC84 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C776D1A8C817A005EEC84 /* Shape.swift */; };
 		15BD6E2D1A87F4A7005B7929 /* TutorialQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */; };
+		15DB8D401A8BDF3D007D718A /* BlackOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DB8D3F1A8BDF3D007D718A /* BlackOutView.swift */; };
 		6D04832A1A8D33E700E4D296 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0483291A8D33E700E4D296 /* TestHelper.swift */; };
 		6D067D431A7D7B50001B1EFF /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */; };
 		6D067D441A7D7B50001B1EFF /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */; };
@@ -84,6 +85,7 @@
 		159C776D1A8C817A005EEC84 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		15BD6E2C1A87F4A7005B7929 /* TutorialQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialQuoteViewController.swift; sourceTree = "<group>"; };
 		15BD6E2E1A881BFC005B7929 /* TutorialAddPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialAddPersonViewController.swift; sourceTree = "<group>"; };
+		15DB8D3F1A8BDF3D007D718A /* BlackOutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackOutView.swift; sourceTree = "<group>"; };
 		6D0483291A8D33E700E4D296 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		6D067D411A7D7B50001B1EFF /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
 		6D067D421A7D7B50001B1EFF /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
@@ -237,6 +239,10 @@
 			children = (
 				6D677B041A7CA13D00805A4D /* AppDelegate.swift */,
 				6D677B241A7CA2B600805A4D /* MainListViewController.swift */,
+				159C776B1A8C0CF4005EEC84 /* TutorialView.swift */,
+				159C776D1A8C817A005EEC84 /* Shape.swift */,
+				15DB8D3F1A8BDF3D007D718A /* BlackOutView.swift */,
+				6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */,
 				6D9B14741A86D5DC008404F9 /* SummaryViewController.swift */,
 				1550D3831A84A9C600670DD7 /* AddNoteViewController.swift */,
 				1546C15C1A81ED0E00883F8A /* MetricManagerViewController.swift */,
@@ -257,7 +263,6 @@
 		6D677B021A7CA13D00805A4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6D782E061A7EC51C009C04E2 /* MetricSummaryViewController.swift */,
 				6D943C271A7DDB0E008D130B /* Metrics.swift */,
 				6D782E101A815881009C04E2 /* Metric.entitlements */,
 				6D943C1D1A7DD892008D130B /* Model.xcdatamodeld */,
@@ -462,7 +467,6 @@
 				6D782E071A7EC51C009C04E2 /* MetricSummaryViewController.swift in Sources */,
 				6D9B14751A86D5DC008404F9 /* SummaryViewController.swift in Sources */,
 				6DA846A11A89F826001E232E /* CustomSlideSegue.swift in Sources */,
-				15DB8D421A8BEBD5007D718A /* BlurFilterMask.swift in Sources */,
 				154AA83E1A8951AB00A5B026 /* TutorialAddActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

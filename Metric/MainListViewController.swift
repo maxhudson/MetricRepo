@@ -19,6 +19,11 @@ var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
 var trackAnalytics = false
+var tutorialPartCompleted: Bool!
+var senderAllowed = 0
+var tablePlusButton: UIButton!
+var tableMinusButton: UIButton!
+var tableCenterButton: UIButton!
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    var tutorialCase = 0
@@ -292,33 +297,20 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       
       Helper.styleNavButton(helpButton, fontName: Helper.buttonFont, fontSize: 22)
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
+      
+      
+      //Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
+      
+      //Tutorial
+      progressTutorial(self.view)
+      if metricsManager.tutorialCompleted == false{
+         senderAllowed = 3
+      }
+      else {
+         senderAllowed = 0
+      }
    }
-   
-//   override func viewDidAppear(animated: Bool) {
-//      super.viewDidAppear(animated)
-//      if metricsManager.tutorialCompleted == false{
-//         for subv in view.subviews {
-//            var subView: UIView = subv as UIView
-//            if subv.tag != 3{
-//               subView.userInteractionEnabled = false
-//            }
-//            if subv.tag == 3 {
-//               subView.userInteractionEnabled = true
-//            }
-//            for subv2 in subView.subviews {
-//               var subView2: UIView = subv2 as UIView
-//               if subv2.tag != 3{
-//                  subView2.userInteractionEnabled = false
-//               }
-//               if subv2.tag == 3 {
-//                  subView2.userInteractionEnabled = true
-//               }
-//
-//            }
-//         }
-//      }
-//
-//   }
+
    
    func progressTutorial(onView: UIView){
       var onView = onView as UIView
@@ -327,12 +319,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          
          switch tutorialCase {
          case 0:
-//            for subv in view.subviews {
-//               var subView: UIView = subv as UIView
-//               if subv.tag != 3{
-//                  subView.userInteractionEnabled = false
-//               }
-//            }
+            self.tableView.scrollEnabled = false
 
             let tutLabel = UILabel(frame: self.view.frame)
             tutLabel.text = "press the \'+\' \n to get started."
@@ -364,7 +351,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             var circles = [Shape]()
             
             var rectangles = [Shape]()
-            var rectangle1 = Shape(width: view.frame.width, height: 68, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 68/2))
+            var rectangle1 = Shape(width: view.frame.width, height: 113.6, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 113.6/2))
             rectangles.append(rectangle1)
             
             var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
@@ -385,8 +372,8 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             tutLabel.numberOfLines = 3
             
             var circles = [Shape]()
-            let circle1 = Shape(circleDiameter: 50, center: CGPointMake(50, 80))
-            let circle2 = Shape(circleDiameter: 50, center: CGPointMake(self.view.frame.width - 50, 80))
+            let circle1 = Shape(circleDiameter: 50, center: CGPointMake(50, 100))
+            let circle2 = Shape(circleDiameter: 50, center: CGPointMake(self.view.frame.width - 50, 100))
             circles.append(circle1)
             circles.append(circle2)
             
@@ -422,13 +409,12 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             tableCenterButton.tag = 3
             let tutLabel = UILabel(frame: self.view.frame)
             tutLabel.text = "tap here to \n see a summary \n of your metric"
-//            tutLabel.text = "you can see \n a summary of \n your metric by \n tapping here"
             tutLabel.numberOfLines = 6
             
             var circles = [Shape]()
             
             var rectangles = [Shape]()
-            var rectangle1 = Shape(width: (3/5)*view.frame.width, height: 68, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 68/2))
+            var rectangle1 = Shape(width: (3/5)*view.frame.width, height: 113.6, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 113.6/2))
             rectangles.append(rectangle1)
             
             
@@ -454,15 +440,9 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             var rectangles = [Shape]()
             var rectangle1 = Shape(width: view.frame.width, height: 4*view.frame.height/10, center: CGPointMake(view.frame.width/2, 4*view.frame.height/20))
             var rectangle2 = Shape(width: view.frame.width, height: 4*view.frame.height/10, center: CGPointMake(view.frame.width/2, view.frame.height - 4*view.frame.height/20))
-//            rectangles.append(rectangle1)
-//            rectangles.append(rectangle2)
-            
             
             tutorialCase = 5
-            
-            
-//            let delay = 2 * Double(NSEC_PER_SEC)
-//            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+
             var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: onView, label: tutLabel, button: nil)
             tutorialViewManager.createTutorialView()
             
@@ -487,31 +467,6 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                      
                })
             })
-
-         
-//            dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
-//               UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
-//                  for subv in onView.subviews {
-//                     var subView: UIView = subv as UIView
-//                     if subv.tag == 1{
-//                        subView.alpha = 0
-//                     }
-//                  }
-//
-//                  }, completion: { (finished) -> Void in
-//                     if finished == true {
-//                        for subv in onView.subviews {
-//                           var subView: UIView = subv as UIView
-//                           if subv.tag == 1{
-//                              subv.removeFromSuperview()
-//                           }
-//                        }
-//                     }
-//               })
-//
-//            })
-//            
-//
             break
          case 5:
             for subv in view.subviews {
@@ -549,36 +504,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
                            }
                         }
                         metricsManager.tutorialCompleted = true
+                        senderAllowed = 0
+                        self.tableView.scrollEnabled = true
                      }
                })
 
             })
             
-//            let delay = 4 * Double(NSEC_PER_SEC)
-//            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-//            
-//            dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
-//               UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
-//                  for subv in self.view.subviews {
-//                     var subView: UIView = subv as UIView
-//                     if subv.tag == 1{
-//                        subView.alpha = 0
-//                     }
-//                  }
-//                  
-//                  }, completion: { (finished) -> Void in
-//                     if finished == true {
-//                        for subv in self.view.subviews {
-//                           var subView: UIView = subv as UIView
-//                           if subv.tag == 1{
-//                              subv.removeFromSuperview()
-//                           }
-//                        }
-//                        metricsManager.tutorialCompleted = true
-//                     }
-//               })
-//               
-//            })
             break
          default:
             break
