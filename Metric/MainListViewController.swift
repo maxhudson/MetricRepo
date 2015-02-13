@@ -19,6 +19,10 @@ var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
 var tutorialPartCompleted: Bool!
+var senderAllowed = 0
+var tablePlusButton: UIButton!
+var tableMinusButton: UIButton!
+var tableCenterButton: UIButton!
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    var tutorialCase = 0
@@ -35,7 +39,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func addButtonExit(sender: AnyObject) {
       manageMetricMode = "add"
-      performSegueWithIdentifier("showMetricManagerSegue", sender: nil)
+      if sender.tag == senderAllowed{
+         performSegueWithIdentifier("showMetricManagerSegue", sender: nil)
+      }
+      removeButtonTag([sender as UIButton])
+
    }
    
    @IBAction func helpButtonEnter(sender: AnyObject) {
@@ -51,8 +59,12 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func plusButtonTouchUp(sender: UIButton) {
-      metricButtonReleased(sender, buttonId: 1, cancelled: false)
-      progressTutorial()
+      if sender.tag == senderAllowed{
+         metricButtonReleased(sender, buttonId: 1, cancelled: false)
+         removeButtonTag([sender, tableMinusButton])
+         progressTutorial(self.view)
+      }
+
    }
    
    @IBAction func plusButtonTouchCancelled(sender: UIButton) {
@@ -60,19 +72,20 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func centerButtonEnter(sender: UIButton) {
-      var path = rowForButton(sender)
-      
-      if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
-         var met = metricsManager.metrics[rowForButton(sender).row]
+      if sender.tag == senderAllowed{
+         var path = rowForButton(sender)
+         if let cell = tableView.cellForRowAtIndexPath(path) as? MainListTableViewCell {
+            var met = metricsManager.metrics[rowForButton(sender).row]
 
-         if (Helper.netMetric(met) >= 0){
-            cell.centerButton.backgroundColor = Helper.darkGoodColor
-            cell.plusButton.backgroundColor = Helper.darkGoodColor
-            cell.minusButton.backgroundColor = Helper.darkGoodColor
-         } else {
-            cell.centerButton.backgroundColor = Helper.darkBadColor
-            cell.plusButton.backgroundColor = Helper.darkBadColor
-            cell.minusButton.backgroundColor = Helper.darkBadColor
+            if (Helper.netMetric(met) >= 0){
+               cell.centerButton.backgroundColor = Helper.darkGoodColor
+               cell.plusButton.backgroundColor = Helper.darkGoodColor
+               cell.minusButton.backgroundColor = Helper.darkGoodColor
+            } else {
+               cell.centerButton.backgroundColor = Helper.darkBadColor
+               cell.plusButton.backgroundColor = Helper.darkBadColor
+               cell.minusButton.backgroundColor = Helper.darkBadColor
+            }
          }
       }
    }
@@ -107,9 +120,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    
    @IBAction func metricButtonTouchUp(sender: UIButton) {
       //take to new screen
-      performSegueWithIdentifier("showSummarySegue", sender: sender)
-      
-      metricButtonReleased(sender, buttonId: 0, cancelled: false)
+      if sender.tag == senderAllowed{
+         performSegueWithIdentifier("showSummarySegue", sender: sender)
+         metricButtonReleased(sender, buttonId: 0, cancelled: false)
+         removeButtonTag([sender])
+      }
    }
    
    @IBAction func metricButtonTouchCancelled(sender: UIButton) {
@@ -121,10 +136,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    @IBAction func minusButtonTouchUp(sender: UIButton) {
-      var met = metricsManager.metrics[rowForButton(sender).row]
-      
-      metricButtonReleased(sender, buttonId: -1, cancelled: false)
-      progressTutorial()
+      if sender.tag == senderAllowed{
+         var met = metricsManager.metrics[rowForButton(sender).row]
+         
+         metricButtonReleased(sender, buttonId: -1, cancelled: false)
+         removeButtonTag([sender, tablePlusButton])
+         progressTutorial(self.view)
+      }
    }
    
    @IBAction func minusButtonTouchCancelled(sender: UIButton) {
@@ -137,12 +155,14 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func metricButtonPressed(button: UIButton){
-      let met = metricsManager.metrics[rowForButton(button).row]
-      
-      if (Helper.netMetric(met) >= 0){
-         button.backgroundColor = Helper.darkGoodColor
-      } else {
-         button.backgroundColor = Helper.darkBadColor
+      if button.tag == senderAllowed{
+         let met = metricsManager.metrics[rowForButton(button).row]
+         
+         if (Helper.netMetric(met) >= 0){
+            button.backgroundColor = Helper.darkGoodColor
+         } else {
+            button.backgroundColor = Helper.darkBadColor
+         }
       }
    }
    
@@ -227,8 +247,20 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewDidLoad() {
+      setupButtonTag([addButton])
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+   }
+   
+   func setupButtonTag(buttons: [UIButton]) {
+      for button in buttons {
+         button.tag = 3
+      }
+   }
+   func removeButtonTag(buttons: [UIButton]) {
+      for button in buttons {
+         button.tag = 0
+      }
    }
    
    override func viewWillAppear(animated: Bool) {
@@ -242,15 +274,55 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       //Helper.generateRandomData(10, values: 3, lowRange: -1, hiRange: 1, met: metricsManager.metrics[0])
       
       //Tutorial
-      progressTutorial()
+      progressTutorial(self.view)
+      if metricsManager.tutorialCompleted == false{
+         senderAllowed = 3
+      }
+      else {
+         senderAllowed = 0
+      }
    }
    
-   func progressTutorial(){
+//   override func viewDidAppear(animated: Bool) {
+//      super.viewDidAppear(animated)
+//      if metricsManager.tutorialCompleted == false{
+//         for subv in view.subviews {
+//            var subView: UIView = subv as UIView
+//            if subv.tag != 3{
+//               subView.userInteractionEnabled = false
+//            }
+//            if subv.tag == 3 {
+//               subView.userInteractionEnabled = true
+//            }
+//            for subv2 in subView.subviews {
+//               var subView2: UIView = subv2 as UIView
+//               if subv2.tag != 3{
+//                  subView2.userInteractionEnabled = false
+//               }
+//               if subv2.tag == 3 {
+//                  subView2.userInteractionEnabled = true
+//               }
+//
+//            }
+//         }
+//      }
+//
+//   }
+   
+   func progressTutorial(onView: UIView){
+      var onView = onView as UIView
       //Tutorial
       if metricsManager.tutorialCompleted == false {
          
          switch tutorialCase {
          case 0:
+//            for subv in view.subviews {
+//               var subView: UIView = subv as UIView
+//               if subv.tag != 3{
+//                  subView.userInteractionEnabled = false
+//               }
+//            }
+
             let tutLabel = UILabel(frame: self.view.frame)
             tutLabel.text = "press the \'+\' \n to get started."
             tutLabel.numberOfLines = 2
@@ -275,16 +347,16 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             let tutLabel = UILabel(frame: self.view.frame)
-            tutLabel.text = "these are metrics. \n \n tap on \'+\' or \'-\' \n when you feel \n good or bad \n about something"
+            tutLabel.text = "tap on \'+\' or \'-\' \n when you feel \n good or bad \n about something"
             tutLabel.numberOfLines = 6
             
             var circles = [Shape]()
             
             var rectangles = [Shape]()
-            var rectangle1 = Shape(width: view.frame.width, height: 70, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 70/2))
+            var rectangle1 = Shape(width: view.frame.width, height: 68, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 68/2))
             rectangles.append(rectangle1)
             
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: addButton)
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
             tutorialViewManager.createTutorialView()
         
             tutorialCase = 2
@@ -298,27 +370,209 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             let tutLabel = UILabel(frame: self.view.frame)
-            tutLabel.text = "you can undo \n or add anote"
+            tutLabel.text = "with these you can \n undo a feeling \n or add a note"
             tutLabel.numberOfLines = 3
+            
+            var circles = [Shape]()
+            let circle1 = Shape(circleDiameter: 50, center: CGPointMake(50, 80))
+            let circle2 = Shape(circleDiameter: 50, center: CGPointMake(self.view.frame.width - 50, 80))
+            circles.append(circle1)
+            circles.append(circle2)
+            
+            var rectangles = [Shape]()
+         
+            
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+            tutorialViewManager.createTutorialView()
+            tutorialCase = 3
+            
+            UIView.animateWithDuration(1, delay: 4.5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+               for subv in self.view.subviews {
+                  var subView: UIView = subv as UIView
+                  if subView.tag == 1{
+                     subView.alpha = 0
+                  }
+               }
+
+            }, completion: { (finished) -> Void in
+               if finished == true {
+                  for subv in self.view.subviews {
+                     var subView: UIView = subv as UIView
+                     if subv.tag == 1{
+                        subv.removeFromSuperview()
+                     }
+                  }
+                  self.progressTutorial(self.view)
+               }
+            })
+            
+            break
+         case 3:
+            tableCenterButton.tag = 3
+            let tutLabel = UILabel(frame: self.view.frame)
+            tutLabel.text = "tap here to \n see a summary \n of your metric"
+//            tutLabel.text = "you can see \n a summary of \n your metric by \n tapping here"
+            tutLabel.numberOfLines = 6
             
             var circles = [Shape]()
             
             var rectangles = [Shape]()
-            var rectangle1 = Shape(width: view.frame.width, height: 70, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 70/2))
+            var rectangle1 = Shape(width: (3/5)*view.frame.width, height: 68, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 68/2))
             rectangles.append(rectangle1)
             
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: addButton)
+            
+            tutorialCase = 4
+
+         
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+               var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+               tutorialViewManager.createTutorialView()
+               }, completion: { (finished) -> Void in
+                  if finished == true {
+                     self.progressTutorial(self.view)
+                  }
+            })
+            break
+         case 4:
+            let tutLabel = UILabel(frame: self.view.frame)
+            tutLabel.text = "go ahead \n play around"
+            tutLabel.numberOfLines = 2
+            
+            var circles = [Shape]()
+            
+            var rectangles = [Shape]()
+            var rectangle1 = Shape(width: view.frame.width, height: 4*view.frame.height/10, center: CGPointMake(view.frame.width/2, 4*view.frame.height/20))
+            var rectangle2 = Shape(width: view.frame.width, height: 4*view.frame.height/10, center: CGPointMake(view.frame.width/2, view.frame.height - 4*view.frame.height/20))
+//            rectangles.append(rectangle1)
+//            rectangles.append(rectangle2)
+            
+            
+            tutorialCase = 5
+            
+            
+//            let delay = 2 * Double(NSEC_PER_SEC)
+//            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: onView, label: tutLabel, button: nil)
             tutorialViewManager.createTutorialView()
             
-            tutorialCase = 3
+            Helper.delay(2, closure: { () -> () in
+               UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                  for subv in onView.subviews {
+                     var subView: UIView = subv as UIView
+                     if subv.tag == 1{
+                        subView.alpha = 0
+                     }
+                  }
+                  
+                  }, completion: { (finished) -> Void in
+                     if finished == true {
+                        for subv in onView.subviews {
+                           var subView: UIView = subv as UIView
+                           if subv.tag == 1{
+                              subv.removeFromSuperview()
+                           }
+                        }
+                     }
+                     
+               })
+            })
+
+         
+//            dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
+//               UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+//                  for subv in onView.subviews {
+//                     var subView: UIView = subv as UIView
+//                     if subv.tag == 1{
+//                        subView.alpha = 0
+//                     }
+//                  }
+//
+//                  }, completion: { (finished) -> Void in
+//                     if finished == true {
+//                        for subv in onView.subviews {
+//                           var subView: UIView = subv as UIView
+//                           if subv.tag == 1{
+//                              subv.removeFromSuperview()
+//                           }
+//                        }
+//                     }
+//               })
+//
+//            })
+//            
+//
+            break
+         case 5:
+            for subv in view.subviews {
+               var subView: UIView = subv as UIView
+               if subv.tag == 1{
+                  subv.removeFromSuperview()
+               }
+            }
+            
+            let tutLabel = UILabel(frame: self.view.frame)
+            tutLabel.text = "finished! \n go ahead and \n add a few more \n \n enjoy"
+            tutLabel.numberOfLines = 6
+            
+            var circles = [Shape]()
+            var rectangles = [Shape]()
+
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+            tutorialViewManager.createTutorialView()
+            
+            Helper.delay(4, closure: { () -> () in
+               UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+                  for subv in self.view.subviews {
+                     var subView: UIView = subv as UIView
+                     if subv.tag == 1{
+                        subView.alpha = 0
+                     }
+                  }
+                  
+                  }, completion: { (finished) -> Void in
+                     if finished == true {
+                        for subv in self.view.subviews {
+                           var subView: UIView = subv as UIView
+                           if subv.tag == 1{
+                              subv.removeFromSuperview()
+                           }
+                        }
+                        metricsManager.tutorialCompleted = true
+                     }
+               })
+
+            })
+            
+//            let delay = 4 * Double(NSEC_PER_SEC)
+//            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//            
+//            dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
+//               UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+//                  for subv in self.view.subviews {
+//                     var subView: UIView = subv as UIView
+//                     if subv.tag == 1{
+//                        subView.alpha = 0
+//                     }
+//                  }
+//                  
+//                  }, completion: { (finished) -> Void in
+//                     if finished == true {
+//                        for subv in self.view.subviews {
+//                           var subView: UIView = subv as UIView
+//                           if subv.tag == 1{
+//                              subv.removeFromSuperview()
+//                           }
+//                        }
+//                        metricsManager.tutorialCompleted = true
+//                     }
+//               })
+//               
+//            })
             break
          default:
             break
          }
-
       }
-      
-      
    }
    
    
@@ -382,6 +636,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Selected)
          cell.minusButton.setTitleColor(Helper.coloredButtonTextColor, forState: .Highlighted)
          cell.minusButton.titleLabel!.font = UIFont(name: "Quicksand-Bold", size: 30)
+
+         if tutorialCase == 2 && indexPath.row == 0{
+            tableCenterButton = cell.centerButton
+            tableMinusButton = cell.minusButton
+            tablePlusButton = cell.plusButton
+            setupButtonTag([cell.plusButton, cell.minusButton])
+         }
          
          return cell
       } else {

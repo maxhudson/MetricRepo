@@ -645,7 +645,6 @@
                                                 <connections>
                                                     <action selector="addButtonEnter:" destination="9OP-jg-jdd" eventType="touchDown" id="h8C-ue-vMy"/>
                                                     <action selector="addButtonExit:" destination="9OP-jg-jdd" eventType="touchUpInside" id="GYL-JJ-MuQ"/>
-                                                    <segue destination="LjB-lQ-QcT" kind="presentation" id="6tY-VM-hXw"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>

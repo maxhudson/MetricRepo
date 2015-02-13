@@ -11,18 +11,20 @@ import UIKit
 class TutorialView {
    var viewToAddTo = UIView()
    var label = UILabel()
-   var button = UIButton()
+   var button: UIButton!
    var circles: [Shape]!
    var rectangles: [Shape]!
    
 
    
-   init(circles:[Shape], rectangles:[Shape], viewToAddTo: UIView, label: UILabel, button: UIButton) {
+   init(circles:[Shape], rectangles:[Shape], viewToAddTo: UIView, label: UILabel, button: UIButton?) {
       self.viewToAddTo = viewToAddTo
       self.circles = circles
       self.rectangles = rectangles
       self.label = label
-      self.button = button
+      if let theButton = button as UIButton? {
+         self.button = button
+      }
       
    }
 
@@ -86,7 +88,9 @@ class TutorialView {
       viewToAddTo.addSubview(overlay)
       
       viewToAddTo.addSubview(label)
-      viewToAddTo.addSubview(button)
+      if button != nil {
+         viewToAddTo.addSubview(button)
+      }
 
    }
 
