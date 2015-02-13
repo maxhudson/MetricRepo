@@ -59,10 +59,10 @@ class MetricManagerViewController: UIViewController {
             performSegueWithIdentifier("DoneMetricFromSum", sender: nil)
          }
          if manageMetricMode == "add" {
-            
             newMetric = Metric(title: noteText)
             performSegueWithIdentifier("DoneMetricFromList", sender: nil)
          }
+         
          if (trackAnalytics) {
             var metricData = PFObject(className: "Metric")
             metricData.setObject(noteText, forKey: "title")
