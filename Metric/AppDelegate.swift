@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
       UINavigationBar.appearance().shadowImage = UIImage(named: "navShadow")
-      UINavigationBar.appearance().translucent = false
+      //UINavigationBar.appearance().translucent = false
       
       ParseCrashReporting.enable()
       Parse.enableLocalDatastore()
