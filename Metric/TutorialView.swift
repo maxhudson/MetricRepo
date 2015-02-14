@@ -17,14 +17,11 @@ class TutorialView {
    
 
    
-   init(circles:[Shape], rectangles:[Shape], viewToAddTo: UIView, label: UILabel, button: UIButton?) {
+   init(circles:[Shape], rectangles:[Shape], viewToAddTo: UIView, label: UILabel) {
       self.viewToAddTo = viewToAddTo
       self.circles = circles
       self.rectangles = rectangles
       self.label = label
-      if let theButton = button as UIButton? {
-         self.button = button
-      }
       
    }
 
@@ -86,11 +83,8 @@ class TutorialView {
       overlay.userInteractionEnabled = false
       label.userInteractionEnabled = false
       viewToAddTo.addSubview(overlay)
-      
       viewToAddTo.addSubview(label)
-      if button != nil {
-         viewToAddTo.addSubview(button)
-      }
+     
 
    }
 

@@ -330,7 +330,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             
             var rectangles = [Shape]()
             
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: addButton)
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel)
             tutorialViewManager.createTutorialView()
             
             tutorialCase = 1
@@ -353,7 +353,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             var rectangle1 = Shape(width: view.frame.width, height: 113.6, center: CGPointMake(view.frame.width/2,navigationBar.frame.height + 113.6/2))
             rectangles.append(rectangle1)
             
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel)
             tutorialViewManager.createTutorialView()
         
             tutorialCase = 2
@@ -379,7 +379,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             var rectangles = [Shape]()
          
             
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel)
             tutorialViewManager.createTutorialView()
             tutorialCase = 3
             
@@ -423,7 +423,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
 
          
             UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-               var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+               var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel)
                tutorialViewManager.createTutorialView()
                }, completion: { (finished) -> Void in
                   if finished == true {
@@ -444,7 +444,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             
             tutorialCase = 5
 
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: onView, label: tutLabel, button: nil)
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: onView, label: tutLabel)
             tutorialViewManager.createTutorialView()
             
             Helper.delay(2, closure: { () -> () in
@@ -484,7 +484,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             var circles = [Shape]()
             var rectangles = [Shape]()
 
-            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel, button: nil)
+            var tutorialViewManager = TutorialView(circles: circles, rectangles: rectangles, viewToAddTo: self.view, label: tutLabel)
             tutorialViewManager.createTutorialView()
             
             Helper.delay(4, closure: { () -> () in
