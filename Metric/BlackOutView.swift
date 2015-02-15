@@ -11,27 +11,17 @@ import UIKit
 class BlackOutView: UIView {
    
    var fillColor = UIColor()
-   var framesToCutOut = NSArray()
+   var framesToCutOut = [CGRect]()
    var shapes = [String]()
    var shape: String!
-   
-//   init(frame: CGRect, shape: String) {
-//      super.init(frame: frame)
-////      self.shape = shape
-//   }
-   
-//   required init(coder aDecoder: NSCoder) {
-//      fatalError("This class does not support NSCoding")
-//   }
    
    override func drawRect(rect: CGRect) {
       let context = UIGraphicsGetCurrentContext()
       CGContextSetBlendMode(context, kCGBlendModeDestinationOut)
       println(shapes)
       var i = 0
-      for value in self.framesToCutOut {
+      for pathRect in self.framesToCutOut {
          shape = shapes[i++]
-         let pathRect = value.CGRectValue()
          var path = UIBezierPath()
          if shape == "rectangle" {
              path = UIBezierPath(rect: pathRect)
