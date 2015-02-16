@@ -718,6 +718,20 @@
                                     <constraint firstAttribute="width" constant="32" id="GFk-5E-bA3"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86R-y0-8ch">
+                                <rect key="frame" x="20" y="505" width="85" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="86R-y0-8ch" secondAttribute="height" multiplier="17:13" id="Uey-ja-aPX"/>
+                                    <constraint firstAttribute="width" constant="85" id="xB4-8c-rTC"/>
+                                </constraints>
+                                <state key="normal" image="Touch ID Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Touch ID Button High"/>
+                                <connections>
+                                    <action selector="touchUpTouchID:" destination="5Ko-ZZ-JQw" eventType="touchUpInside" id="J9I-QT-w51"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.30285834210000001" blue="0.28199062899999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -728,6 +742,8 @@
                             <constraint firstItem="JEk-DT-19e" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CgJ-Ew-Jel" secondAttribute="bottom" priority="999" constant="30" id="8Yr-nP-hxz"/>
                             <constraint firstItem="Mca-yz-pOj" firstAttribute="top" secondItem="K3v-OT-6bd" secondAttribute="bottom" constant="30" id="9Bb-cO-4Ur"/>
                             <constraint firstItem="uKv-lg-Ent" firstAttribute="leading" secondItem="0n2-7a-guQ" secondAttribute="leading" constant="20" id="AMY-Lp-hcX"/>
+                            <constraint firstItem="86R-y0-8ch" firstAttribute="leading" secondItem="0n2-7a-guQ" secondAttribute="leading" constant="20" id="Af8-Re-xFz"/>
+                            <constraint firstItem="86R-y0-8ch" firstAttribute="width" secondItem="86R-y0-8ch" secondAttribute="height" multiplier="17:13" id="CF3-GF-aGJ"/>
                             <constraint firstItem="ADr-EG-ajx" firstAttribute="top" secondItem="suS-mZ-Ngm" secondAttribute="bottom" constant="50" id="Cwx-QD-TSJ"/>
                             <constraint firstItem="SgO-ep-csH" firstAttribute="centerX" secondItem="0n2-7a-guQ" secondAttribute="trailing" multiplier="0.8" id="Ew0-D4-GIC"/>
                             <constraint firstItem="ADr-EG-ajx" firstAttribute="leading" secondItem="CgJ-Ew-Jel" secondAttribute="trailing" constant="-115" id="JTu-UJ-STZ"/>
@@ -735,6 +751,7 @@
                             <constraint firstItem="w1l-1O-BZ8" firstAttribute="width" secondItem="SgO-ep-csH" secondAttribute="height" multiplier="1:1" id="KH2-l5-azm"/>
                             <constraint firstItem="w1l-1O-BZ8" firstAttribute="width" secondItem="CgJ-Ew-Jel" secondAttribute="height" multiplier="1:1" id="Kah-rr-N6m"/>
                             <constraint firstItem="zgC-0k-hbC" firstAttribute="leading" secondItem="0n2-7a-guQ" secondAttribute="leading" constant="20" id="Kfb-cA-Wp1"/>
+                            <constraint firstItem="86R-y0-8ch" firstAttribute="centerY" secondItem="K3v-OT-6bd" secondAttribute="centerY" id="M8g-rg-B2O"/>
                             <constraint firstItem="SgO-ep-csH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ADr-EG-ajx" secondAttribute="bottom" constant="20" id="PSX-pa-DhM"/>
                             <constraint firstItem="CgJ-Ew-Jel" firstAttribute="top" relation="lessThanOrEqual" secondItem="ADr-EG-ajx" secondAttribute="bottom" priority="998" constant="50" id="RYT-aL-K6b"/>
                             <constraint firstItem="w1l-1O-BZ8" firstAttribute="width" secondItem="sh4-tH-DdQ" secondAttribute="height" multiplier="1:1" id="Sko-rb-dFq"/>
@@ -759,6 +776,7 @@
                             <constraint firstAttribute="trailing" secondItem="UlB-XI-Pj5" secondAttribute="trailing" constant="20" id="s5k-52-OSd"/>
                             <constraint firstAttribute="centerX" secondItem="JEk-DT-19e" secondAttribute="centerX" id="sTh-fA-xdp"/>
                             <constraint firstItem="ADr-EG-ajx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="suS-mZ-Ngm" secondAttribute="bottom" priority="999" constant="100" id="sco-LP-hQa"/>
+                            <constraint firstItem="86R-y0-8ch" firstAttribute="top" secondItem="uKv-lg-Ent" secondAttribute="bottom" constant="10" id="vnn-af-O4p"/>
                             <constraint firstAttribute="trailing" secondItem="Szt-20-ScL" secondAttribute="trailing" constant="20" id="vpw-jc-p2X"/>
                             <constraint firstItem="K3v-OT-6bd" firstAttribute="top" secondItem="15h-MM-X2r" secondAttribute="bottom" constant="10" id="x2l-9k-wYq"/>
                             <constraint firstItem="HfF-4y-OHU" firstAttribute="leading" secondItem="0n2-7a-guQ" secondAttribute="leading" constant="20" id="xju-XZ-aym"/>
@@ -770,6 +788,7 @@
                                 <exclude reference="JTu-UJ-STZ"/>
                                 <exclude reference="sco-LP-hQa"/>
                                 <exclude reference="q3i-Yh-qI5"/>
+                                <exclude reference="CF3-GF-aGJ"/>
                                 <exclude reference="PSX-pa-DhM"/>
                                 <exclude reference="an8-19-BTN"/>
                                 <exclude reference="yDd-bL-1ya"/>
@@ -791,6 +810,7 @@
                         <outlet property="sixButton" destination="uKv-lg-Ent" id="wG8-qw-bPA"/>
                         <outlet property="thirdDot" destination="w1l-1O-BZ8" id="PbJ-Xw-KJb"/>
                         <outlet property="threeButton" destination="RKg-8k-SC8" id="OcM-lW-y1J"/>
+                        <outlet property="touchIDButton" destination="86R-y0-8ch" id="lxw-J7-dRt"/>
                         <outlet property="twoButton" destination="JEk-DT-19e" id="HvU-fp-dUy"/>
                         <outlet property="zeroButton" destination="K3v-OT-6bd" id="luy-Ac-Ocm"/>
                     </connections>
@@ -1549,6 +1569,8 @@
         <image name="Button 9 High" width="170" height="130"/>
         <image name="Dot Empty" width="32" height="32"/>
         <image name="Dot Filled" width="32" height="32"/>
+        <image name="Touch ID Button" width="170" height="130"/>
+        <image name="Touch ID Button High" width="170" height="130"/>
         <image name="botShadow@3x.png" width="1242" height="26"/>
         <image name="darkNote@3x.png" width="68" height="48"/>
         <image name="edit@3x.png" width="48" height="55"/>

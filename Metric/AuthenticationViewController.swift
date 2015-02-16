@@ -8,6 +8,10 @@
 
 import UIKit
 
+var shouldAllowTouchID: Bool!
+var authManager = Authentication()
+
+
 class AuthenticationViewController: UIViewController {
    
    private var password = [Int?](count: 4, repeatedValue: nil)
@@ -37,6 +41,7 @@ class AuthenticationViewController: UIViewController {
    @IBOutlet weak var eightButton: UIButton!
    @IBOutlet weak var nineButton: UIButton!
    @IBOutlet weak var zeroButton: UIButton!
+   @IBOutlet weak var touchIDButton: UIButton!
    
    override func viewWillAppear(animated: Bool) {
       passwordMode = "verify"
@@ -48,6 +53,9 @@ class AuthenticationViewController: UIViewController {
    }
 
    override func viewDidAppear(animated: Bool) {
+      if shouldAllowTouchID == true {
+         authManager.authenticateUser()
+      }
      
    }
    override func viewDidLoad(){
@@ -132,6 +140,11 @@ class AuthenticationViewController: UIViewController {
       enterPassword(0)
       fillDot()
    }
+   
+   @IBAction func touchUpTouchID(sender: AnyObject) {
+      authManager.authenticateUser()
+   }
+   
    
    func retrievePassword () -> Bool {
       let storedPassword = metricsManager.password
@@ -311,80 +324,6 @@ class AuthenticationViewController: UIViewController {
       shakeAnimation.fromValue = NSValue(CGPoint: CGPointMake(dot.center.x - 20, dot.center.y))
       shakeAnimation.toValue = NSValue(CGPoint: CGPointMake(dot.center.x + 20, dot.center.y))
       dot.layer.addAnimation(shakeAnimation, forKey: "position")
-   }
-   
-   
-//
-//      if setPasswordMode == true {
-//         if(passIndex < 4){
-//            password[passIndex++] = input
-//         }
-//         if passIndex == 4 {
-//            //Have user re-enter password to confirm
-//            label.text = "Please Confirm Passcode"
-//            label.setNeedsDisplay()
-//         }
-//         
-//            var confirmPassIndex = 0
-//            if(confirmPassIndex < 4){
-//               passwordValidation[confirmPassIndex++] = input
-//            }
-//            if(confirmPassIndex == 4) {
-//               //Verify passwords match
-//               var passwordsMatch = true
-//               var index = 0
-//               for key in password {
-//                  if key != passwordValidation[index++] {
-//                     passwordsMatch = false
-//                     break
-//                  }
-//               }
-//               
-//               if passwordsMatch == true {
-//                  setPasswordMode = false
-//                  metricsManager.password = password as [Int]
-//                  dismissViewControllerAnimated(true, completion: nil)
-//               }
-//            }
-//         }
-//      }
-//      else {
-//         
-//         if(passIndex < 4){
-//            password[passIndex++] = input
-//         }
-//         else {
-//            //Verify password correct
-//            var passwordsMatch = true
-//            var index = 0
-//            for key in metricsManager.password {
-//               passwordValidation[index++] = key
-//            }
-//            index = 0
-//            for key in password {
-//               if key != passwordValidation[index++] {
-//                  passwordsMatch = false
-//                  break
-//               }
-//            }
-//            
-//            if passwordsMatch == true {
-//               dismissViewControllerAnimated(true, completion: nil)
-//            }
-//
-//         }
-//      }
-//   }
-//   
-//   func setPassword() {
-//      label.text = "Set Passcode to \n Protect Metrik"
-//      var passwordSet = false
-//      
-//
-//   }
-   
-   func verifyPassword() {
-      
    }
    
    

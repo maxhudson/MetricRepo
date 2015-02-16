@@ -22,6 +22,7 @@ var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
 var trackAnalytics = false
 var tutorialPartCompleted: Bool!
+var shouldShowKeypad: Bool!
 var senderAllowed = 0
 var tablePlusButton: UIButton?
 var tableMinusButton: UIButton?
@@ -274,8 +275,8 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewDidLoad() {
-      var authManager = Authentication()
-      authManager.authenticateUser(self)
+//      var authManager = Authentication()
+//      authManager.authenticateUser(self)
       //Create Blur
 //      let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
 //      let blurView = UIVisualEffectView(effect: blurEffect)
@@ -312,7 +313,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "showPasswordKeypad", name: passwordNotificationKey, object: nil)
       
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeLockBlur", name: lockBlurNotificationKey, object: nil)
-
+      
 
       
       Helper.styleNavButton(helpButton, fontName: Helper.buttonFont, fontSize: 22)
@@ -334,33 +335,19 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    override func viewDidAppear(animated: Bool) {
       super.viewDidAppear(animated)
       
-      
-
-//      performSegueWithIdentifier("AuthViewControllerSegue", sender: nil)
+      if shouldShowKeypad == nil || shouldShowKeypad == true {
+         showPasswordKeypad()
+         shouldShowKeypad = false
+      }
    }
    
    func showPasswordKeypad() {
       performSegueWithIdentifier("AuthViewControllerSegue", sender: nil)
-//      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//      let avc = storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as AuthenticationViewController
-//      self.presentViewController(avc, animated: true, completion: nil)
    }
    
+   
    func removeLockBlur() {
-//      self.view.viewWithTag(4)!.hidden = true
-//      self.view.setNeedsLayout()
-//      self.view.setNeedsDisplay()
-//      self.view.viewWithTag(4)!.removeFromSuperview()
-
-//      UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-//         let blurView =  self.view.viewWithTag(4) as UIVisualEffectView
-//         blurView.backgroundColor = UIColor.clearColor()
-//         
-//         }, completion: { (finished) -> Void in
-//            if finished == true {
-//               self.view.viewWithTag(4)!.removeFromSuperview()
-//            }
-//      })
+      dismissViewControllerAnimated(true, completion: nil)
    }
    
    func progressTutorial(onView: UIView){

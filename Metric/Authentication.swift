@@ -10,14 +10,14 @@ import UIKit
 import LocalAuthentication
 
 class Authentication {
-   var passedVC: UIViewController!
+//   var passedVC: UIViewController!
    
    init(){
       
    }
 
-   func authenticateUser(passedVC: UIViewController) {
-      self.passedVC = passedVC
+   func authenticateUser() {
+//      self.passedVC = passedVC
       //Get the local authentication context.
       let context = LAContext()
       
@@ -26,13 +26,14 @@ class Authentication {
       
       //Set the reason string that will appear on the authentication alert.
       var reasonString = "Authentication is needed to access your Metriks"
+      context.localizedFallbackTitle = ""
       
       //Check if the device an evalutate the policy.
       if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error){
          [context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success: Bool, evalPolicyError: NSError?) -> Void in
             
             if success {
-//               NSNotificationCenter.defaultCenter().postNotificationName(lockBlurNotificationKey, object: nil)
+               NSNotificationCenter.defaultCenter().postNotificationName(lockBlurNotificationKey, object: nil)
 //               passedVC.view.viewWithTag(4)?.removeFromSuperview()
             }
             else {
@@ -87,11 +88,6 @@ class Authentication {
    }
    
    func showPasswordAlert() {
-      NSNotificationCenter.defaultCenter().postNotificationName(passwordNotificationKey, object: nil)
-      Helper.delay(1, closure: { () -> () in
-         NSNotificationCenter.defaultCenter().postNotificationName(lockBlurNotificationKey, object: nil)
-
-      })
 
 
    }
