@@ -779,15 +779,17 @@
                     <connections>
                         <outlet property="backgroundView" destination="0n2-7a-guQ" id="q5M-Hm-cdg"/>
                         <outlet property="eightButton" destination="15h-MM-X2r" id="qWH-Qc-o96"/>
-                        <outlet property="firstDot" destination="SgO-ep-csH" id="Emd-67-559"/>
+                        <outlet property="firstDot" destination="sh4-tH-DdQ" id="Mw8-Kq-Ey2"/>
                         <outlet property="fiveButton" destination="rK4-UW-F0f" id="w2R-Wk-bJS"/>
                         <outlet property="fourButton" destination="zgC-0k-hbC" id="Qiy-pU-cst"/>
+                        <outlet property="fourthDot" destination="SgO-ep-csH" id="rNA-th-AVp"/>
                         <outlet property="label" destination="ADr-EG-ajx" id="ORN-HD-ux7"/>
                         <outlet property="nineButton" destination="UlB-XI-Pj5" id="WNm-0m-vx0"/>
                         <outlet property="oneButton" destination="HfF-4y-OHU" id="2m2-lX-gmr"/>
-                        <outlet property="secondDot" destination="w1l-1O-BZ8" id="trk-bK-gTZ"/>
+                        <outlet property="secondDot" destination="CgJ-Ew-Jel" id="saY-RC-z9l"/>
                         <outlet property="sevenButton" destination="uKv-lg-Ent" id="eVI-cV-hDb"/>
                         <outlet property="sixButton" destination="uKv-lg-Ent" id="wG8-qw-bPA"/>
+                        <outlet property="thirdDot" destination="w1l-1O-BZ8" id="PbJ-Xw-KJb"/>
                         <outlet property="threeButton" destination="RKg-8k-SC8" id="OcM-lW-y1J"/>
                         <outlet property="twoButton" destination="JEk-DT-19e" id="HvU-fp-dUy"/>
                         <outlet property="zeroButton" destination="K3v-OT-6bd" id="luy-Ac-Ocm"/>

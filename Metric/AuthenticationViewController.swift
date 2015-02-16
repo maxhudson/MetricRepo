@@ -13,6 +13,7 @@ class AuthenticationViewController: UIViewController {
    private var password = [Int?](count: 4, repeatedValue: nil)
    private var passwordValidation = [Int?](count: 4, repeatedValue: nil)
    private var passIndex = 0
+   var dotNumber = 0
    var validPassword = false
    var passwordMode: String!
    var passwordStep = 0
@@ -56,6 +57,7 @@ class AuthenticationViewController: UIViewController {
    func setupView() {
       view.backgroundColor = UIColor.clearColor()
       
+      
       //Create Blur
       let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
       let blurView = UIVisualEffectView(effect: blurEffect)
@@ -65,6 +67,8 @@ class AuthenticationViewController: UIViewController {
       
       //Setup Dots
       println(self.view.frame.width)
+      let dotsLayer = CALayer()
+      dotsLayer.frame = view.frame
       
       
       //Setup Label
@@ -81,42 +85,52 @@ class AuthenticationViewController: UIViewController {
    
    @IBAction func touchUpOne(sender: AnyObject) {
       enterPassword(1)
+      fillDot()
    }
    
    @IBAction func touchUpTwo(sender: AnyObject) {
       enterPassword(2)
+      fillDot()
    }
    
    @IBAction func touchUpThree(sender: AnyObject) {
       enterPassword(3)
+      fillDot()
    }
 
    @IBAction func touchUpFour(sender: AnyObject) {
       enterPassword(4)
+      fillDot()
    }
    
    @IBAction func touchUpFive(sender: AnyObject) {
       enterPassword(5)
+      fillDot()
    }
    
    @IBAction func touchUpSix(sender: AnyObject) {
       enterPassword(6)
+      fillDot()
    }
   
    @IBAction func touchUpSeven(sender: AnyObject) {
       enterPassword(7)
+      fillDot()
    }
    
    @IBAction func touchUpEight(sender: AnyObject) {
       enterPassword(8)
+      fillDot()
    }
    
    @IBAction func touchUpEleven(sender: AnyObject) {
       enterPassword(9)
+      fillDot()
    }
    
    @IBAction func touchUpZero(sender: AnyObject) {
       enterPassword(0)
+      fillDot()
    }
    
    func retrievePassword () -> Bool {
@@ -128,7 +142,6 @@ class AuthenticationViewController: UIViewController {
    }
    
    func enterPassword(input: Int?) {
-      animateDot()
         switch passwordMode {
         case "set":
             
@@ -163,6 +176,13 @@ class AuthenticationViewController: UIViewController {
                   if key != passwordValidation[passIndex++] {
                      label.text = "Passwords Did Not Match \n Please Try Again"
                      label.setNeedsDisplay()
+                     
+                     
+                     let dots = [firstDot, secondDot, thirdDot, fourthDot]
+                     for dot in dots {
+                        animateDot(dot)
+                     }
+                     
                      passwordStep = 0
                      passIndex = 0
                      passwordsMatch = false
@@ -218,10 +238,17 @@ class AuthenticationViewController: UIViewController {
                      label.setNeedsDisplay()
                      passwordStep = 0
                      passIndex = 0
+                     
+                     let dots = [firstDot, secondDot, thirdDot, fourthDot]
+                     for dot in dots {
+                        animateDot(dot)
+                     }
+                     
                      passwordsMatch = false
                      Helper.delay(1.5, closure: { () -> () in
                         self.label.text = "Enter Passcode to \n Unlock Metrik"
                         self.label.setNeedsDisplay()
+                        self.fillDot()
                      })
                      break
                   }
@@ -241,13 +268,49 @@ class AuthenticationViewController: UIViewController {
          }
    }
    
-   func animateDot() {
-      
+   func fillDot() {
+      switch dotNumber {
+      case 0:
+         firstDot.highlighted = true
+         dotNumber = 1
+         break
+      case 1:
+         secondDot.highlighted = true
+         dotNumber = 2
+         break
+      case 2:
+         thirdDot.highlighted = true
+         dotNumber = 3
+         break
+      case 3:
+         fourthDot.highlighted = true
+         dotNumber = 4
+         break
+      case 4:
+         firstDot.highlighted = false
+         secondDot.highlighted  = false
+         thirdDot.highlighted = false
+         fourthDot.highlighted = false
+         dotNumber = 0
+         break
+      default:
+         break
+         
+      }
    }
 
+   func animateDot(dot: UIImageView){
+      let shakeAnimation = CABasicAnimation(keyPath: "position")
+      shakeAnimation.duration = 0.04
+      shakeAnimation.repeatCount = 2
+      shakeAnimation.autoreverses = true
+      shakeAnimation.fromValue = NSValue(CGPoint: CGPointMake(dot.center.x - 20, dot.center.y))
+      shakeAnimation.toValue = NSValue(CGPoint: CGPointMake(dot.center.x + 20, dot.center.y))
+      dot.layer.addAnimation(shakeAnimation, forKey: "position")
+   }
    
-      
-//      
+   
+//
 //      if setPasswordMode == true {
 //         if(passIndex < 4){
 //            password[passIndex++] = input
