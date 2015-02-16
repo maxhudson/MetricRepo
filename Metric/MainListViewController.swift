@@ -347,10 +347,10 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    func removeLockBlur() {
-      self.view.viewWithTag(4)!.hidden = true
-      self.view.setNeedsLayout()
-      self.view.setNeedsDisplay()
-      self.view.viewWithTag(4)!.removeFromSuperview()
+//      self.view.viewWithTag(4)!.hidden = true
+//      self.view.setNeedsLayout()
+//      self.view.setNeedsDisplay()
+//      self.view.viewWithTag(4)!.removeFromSuperview()
 
 //      UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
 //         let blurView =  self.view.viewWithTag(4) as UIVisualEffectView
