@@ -153,8 +153,11 @@ class AuthenticationViewController: UIViewController {
                if passIndex == 4 {
                   passwordStep = 1
                   passIndex = 0
-                  label.text = "Please Confirm Passcode"
+                  label.text = "Please Confirm Passcode \n "
                   label.setNeedsDisplay()
+                  Helper.delay(0.5, closure: { () -> () in
+                     self.fillDot()
+                  })
                   
                }
             case 1:
@@ -189,6 +192,7 @@ class AuthenticationViewController: UIViewController {
                      Helper.delay(1.5, closure: { () -> () in
                         self.label.text = "Set Passcode to \n Protect Metrik"
                         self.label.setNeedsDisplay()
+                        self.fillDot()
                      })
                      break
                   }
@@ -200,7 +204,7 @@ class AuthenticationViewController: UIViewController {
             case 3:
                println("passwords match")
                self.view.userInteractionEnabled = false
-               label.text = "Password Set"
+               label.text = "Password Set \n "
                label.setNeedsDisplay()
                
                Helper.delay(1, closure: { () -> () in
