@@ -13,7 +13,7 @@ class BlackOutView: UIView {
    var fillColor = UIColor()
    var framesToCutOut = NSArray()
    var shapes = [String]()
-   var shape: String!
+   var shape: String?
    
 //   init(frame: CGRect, shape: String) {
 //      super.init(frame: frame)

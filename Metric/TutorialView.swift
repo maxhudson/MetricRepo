@@ -47,20 +47,20 @@ class TutorialView {
 //      viewToAddTo.addSubview(blurView)
    
       var frames = NSMutableArray()
-      var shapes = NSMutableArray()
+      var shapes = [String]()
       for circle:Shape in circles {
          let blurView = UIVisualEffectView(effect: blurEffect)
          blurView.frame.size = circle.size()
          blurView.center = circle.center
          frames.addObject(blurView as UIView)
-         shapes.addObject(circle.shape)
+         shapes.append(circle.shape)
       }
       for rectangle:Shape in rectangles {
          let blurView = UIVisualEffectView(effect: blurEffect)
          blurView.frame.size = rectangle.size()
          blurView.center = rectangle.center
          frames.addObject(blurView as UIView)
-         shapes.addObject(rectangle.shape)
+         shapes.append(rectangle.shape)
       }
       
       self.addMaskInViews(frames, shapeNames:shapes)
@@ -68,7 +68,7 @@ class TutorialView {
 
 
 
-   func addMaskInViews(viewsToCutOut: NSMutableArray, shapeNames: NSMutableArray){
+   func addMaskInViews(viewsToCutOut: NSMutableArray, shapeNames: [String]){
       let frames = NSMutableArray()
       for view in viewsToCutOut {
          (view as UIView).hidden = true
@@ -77,7 +77,9 @@ class TutorialView {
       
       let overlay = BlackOutView(frame: self.viewToAddTo.frame)
       overlay.backgroundColor = UIColor(white: 0.0, alpha: 0.8)
-      overlay.shapes = shapeNames as NSArray as [String]
+      if shapeNames != []{
+         overlay.shapes = shapeNames
+      }
       overlay.framesToCutOut = frames
       overlay.tag = 1
       overlay.userInteractionEnabled = false

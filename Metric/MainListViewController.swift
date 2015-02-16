@@ -14,6 +14,9 @@ var metricsManager = MetricsManager()
 var manageMetricMode: String! //indicate the mode in which metric note managing is happening
 var manageNoteMode: String!
 var noteFrom: String!
+let passwordNotificationKey = "com.metric.passwordNotificationKey"
+let lockBlurNotificationKey = "com.metric.lockBlurNotificationKey"
+
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
@@ -271,6 +274,18 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewDidLoad() {
+      var authManager = Authentication()
+      authManager.authenticateUser(self)
+      //Create Blur
+//      let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+//      let blurView = UIVisualEffectView(effect: blurEffect)
+      let blurView = UIView()
+      blurView.backgroundColor = UIColor.grayColor()
+      blurView.alpha = 0.9
+      blurView.frame.size = self.view.frame.size
+      blurView.tag = 4
+//      self.view.addSubview(blurView)
+
       if (!metricsManager.tutorialCompleted) {
          setupButtonTag([addButton])
       }
@@ -278,6 +293,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
    }
+   
    
    func setupButtonTag(buttons: [UIButton]) {
       for button in buttons {
@@ -291,8 +307,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewWillAppear(animated: Bool) {
-      
       super.viewWillAppear(animated)
+
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "showPasswordKeypad", name: passwordNotificationKey, object: nil)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeLockBlur", name: lockBlurNotificationKey, object: nil)
+
+
       
       Helper.styleNavButton(helpButton, fontName: Helper.buttonFont, fontSize: 22)
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
@@ -309,7 +330,38 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          senderAllowed = 0
       }
    }
+   
+   override func viewDidAppear(animated: Bool) {
+      super.viewDidAppear(animated)
+      
+      
 
+//      performSegueWithIdentifier("AuthViewControllerSegue", sender: nil)
+   }
+   
+   func showPasswordKeypad() {
+      performSegueWithIdentifier("AuthViewControllerSegue", sender: nil)
+//      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//      let avc = storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as AuthenticationViewController
+//      self.presentViewController(avc, animated: true, completion: nil)
+   }
+   
+   func removeLockBlur() {
+      self.view.viewWithTag(4)!.hidden = true
+      self.view.setNeedsLayout()
+      self.view.setNeedsDisplay()
+      self.view.viewWithTag(4)!.removeFromSuperview()
+
+//      UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+//         let blurView =  self.view.viewWithTag(4) as UIVisualEffectView
+//         blurView.backgroundColor = UIColor.clearColor()
+//         
+//         }, completion: { (finished) -> Void in
+//            if finished == true {
+//               self.view.viewWithTag(4)!.removeFromSuperview()
+//            }
+//      })
+   }
    
    func progressTutorial(onView: UIView){
       var onView = onView as UIView

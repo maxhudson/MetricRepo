@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
 class Feeling: NSObject, NSCoding {
    let valueKey = "valueKey"
