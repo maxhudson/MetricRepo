@@ -173,7 +173,7 @@ struct Helper {
       let netMet = CGFloat(metricsManager.metrics[indexPath.row].good + metricsManager.metrics[indexPath.row].bad)
       let multiplier : CGFloat = 0.8
       
-      return baseHeight + netMet*multiplier
+      return floor(baseHeight + netMet*multiplier)
    }
    
    static func track() {

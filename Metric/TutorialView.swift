@@ -22,7 +22,7 @@ class TutorialView {
       self.label = label
    }
 
-   func createTutorialView(){/*
+   func createTutorialView(){
       let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
 
       label.textColor = UIColor.whiteColor()
@@ -30,10 +30,10 @@ class TutorialView {
       label.center = viewToAddTo.center
       label.textAlignment = .Center
       label.tag = 1
-   
+      
       var frames : [UIView] = []
       var shapes : [String] = []
-
+      
       for circle:Shape in circles {
          let blurView = UIVisualEffectView(effect: blurEffect)
          blurView.frame.size = circle.size()
@@ -50,7 +50,7 @@ class TutorialView {
          shapes.append(rectangle.shape)
       }
       
-      self.addMaskInViews(frames, shapeNames:shapes)*/
+      self.addMaskInViews(frames, shapeNames:shapes)
    }
 
    func addMaskInViews(viewsToCutOut: [UIView], shapeNames: [String]){

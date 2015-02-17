@@ -12,8 +12,6 @@ class TutorialQuoteViewController: UIViewController {
    
    @IBOutlet weak var quoteLabel: UILabel!
    
-   @IBOutlet var quoteByLabel: UILabel!
-   
    @IBOutlet weak var gotItButton: UIButton!
    
    @IBAction func gotItPressed(sender: AnyObject) {
@@ -32,9 +30,8 @@ class TutorialQuoteViewController: UIViewController {
    
    func setupView(){
       quoteLabel.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
-      quoteByLabel.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
       
-      quoteLabel.text = "\"Do what makes you happy, \n be with who makes you smile, \n laugh as much as breathe, \n and love as long as you live.\""
+      quoteLabel.text = "Metrik helps you \nvisualize your feelings."
       
       gotItButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       view.backgroundColor = Helper.darkNavyColor

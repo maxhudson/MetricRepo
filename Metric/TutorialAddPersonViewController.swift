@@ -89,7 +89,7 @@ class TutorialAddPersonViewController: UIViewController {
    
    func setupView() {
       promptLabelOne.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
-      promptLabelOne.text = "Enter the name of \n a significant person \n in your life"
+      promptLabelOne.text = "Name a person you're \nnot sure how \nyou feel about"
       backButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.textColor = Helper.purpleColor

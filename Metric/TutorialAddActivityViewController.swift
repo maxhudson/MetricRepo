@@ -90,7 +90,7 @@ class TutorialAddActivityViewController: UIViewController {
    
    func setupView() {
       promptLabelOne.font = UIFont(name: Helper.bodyTextFont, size: 18.0)
-      promptLabelOne.text = "Enter the name of\na significant activity\nin your life"
+      promptLabelOne.text = "Name something else \nyou're not sure \nhow you feel about"
       backButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.font = UIFont(name: Helper.buttonFont, size: 18.0)
       nextButton.titleLabel?.textColor = Helper.goldColor
@@ -99,13 +99,4 @@ class TutorialAddActivityViewController: UIViewController {
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
       self.view.endEditing(true)
    }
-
-
-
-   
-   
-   
-   
-   
-   
 }
