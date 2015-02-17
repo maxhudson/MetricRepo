@@ -70,6 +70,15 @@ class AuthenticationViewController: UIViewController {
       
       
       //Create Blur
+      //      var systemVersion = UIDevice.currentDevice().systemVersion
+      //      var blurEffect: AnyObject
+      //      if systemVersion.toInt() > 8 {
+      //          blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark) as UIBlurEffect
+      //      }
+      //      else {
+      //          blurEffect =
+      //      }
+
       let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
       let blurView = UIVisualEffectView(effect: blurEffect)
       blurView.frame.size = self.view.frame.size

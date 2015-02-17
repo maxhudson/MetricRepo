@@ -33,7 +33,7 @@ class TutorialView {
       
       
       //BLUR STUFF
-      let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+//      let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
 //      let blurView = UIVisualEffectView(effect: blurEffect)
       
       //Label Stuff
@@ -49,14 +49,16 @@ class TutorialView {
       var frames = NSMutableArray()
       var shapes = [String]()
       for circle:Shape in circles {
-         let blurView = UIVisualEffectView(effect: blurEffect)
+//         let blurView = UIVisualEffectView(effect: blurEffect)
+         let blurView = UIView()
          blurView.frame.size = circle.size()
          blurView.center = circle.center
          frames.addObject(blurView as UIView)
          shapes.append(circle.shape)
       }
       for rectangle:Shape in rectangles {
-         let blurView = UIVisualEffectView(effect: blurEffect)
+//         let blurView = UIVisualEffectView(effect: blurEffect)
+         let blurView = UIView()
          blurView.frame.size = rectangle.size()
          blurView.center = rectangle.center
          frames.addObject(blurView as UIView)
