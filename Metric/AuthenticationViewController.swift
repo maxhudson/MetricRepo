@@ -53,6 +53,9 @@ class AuthenticationViewController: UIViewController {
    }
 
    override func viewDidAppear(animated: Bool) {
+      super.viewDidAppear(animated)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "touchIDFillDots", name: fillDotsNotificationKey, object: nil)
+      
       if shouldAllowTouchID == true {
          authManager.authenticateUser()
       }
@@ -324,6 +327,14 @@ class AuthenticationViewController: UIViewController {
       shakeAnimation.fromValue = NSValue(CGPoint: CGPointMake(dot.center.x - 20, dot.center.y))
       shakeAnimation.toValue = NSValue(CGPoint: CGPointMake(dot.center.x + 20, dot.center.y))
       dot.layer.addAnimation(shakeAnimation, forKey: "position")
+   }
+   
+   func touchIDFillDots() {
+      firstDot.highlighted = true
+      secondDot.highlighted  = true
+      thirdDot.highlighted = true
+      fourthDot.highlighted = true
+      
    }
    
    

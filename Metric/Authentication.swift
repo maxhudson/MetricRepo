@@ -9,15 +9,15 @@
 import UIKit
 import LocalAuthentication
 
+let fillDotsNotificationKey = "com.metric.fillDotsNotificationKey"
+
 class Authentication {
-//   var passedVC: UIViewController!
    
    init(){
       
    }
 
    func authenticateUser() {
-//      self.passedVC = passedVC
       //Get the local authentication context.
       let context = LAContext()
       
@@ -33,8 +33,9 @@ class Authentication {
          [context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success: Bool, evalPolicyError: NSError?) -> Void in
             
             if success {
-               NSNotificationCenter.defaultCenter().postNotificationName(lockBlurNotificationKey, object: nil)
-//               passedVC.view.viewWithTag(4)?.removeFromSuperview()
+                  NSNotificationCenter.defaultCenter().postNotificationName(lockBlurNotificationKey, object: nil)
+
+          
             }
             else {
                //Iff authentication failed then show a message to the console with a short discription.
@@ -91,6 +92,14 @@ class Authentication {
 
 
    }
+   
+//   func getTopViewController() -> UIViewController {
+//      var topVC = UIApplication.sharedApplication().keyWindow?.rootViewController
+//      while (topVC?.presentedViewController != nil) {
+//         topVC = topVC?.presentedViewController
+//      }
+//      return topVC!
+//   }
    
    
 }
