@@ -335,7 +335,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    override func viewDidAppear(animated: Bool) {
       super.viewDidAppear(animated)
       
-      if shouldShowKeypad == nil || shouldShowKeypad == true {
+      if metricsManager.tutorialCompleted == true && (shouldShowKeypad == nil || shouldShowKeypad == true) {
          showPasswordKeypad()
          shouldShowKeypad = false
       }
