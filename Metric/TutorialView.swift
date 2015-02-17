@@ -22,7 +22,7 @@ class TutorialView {
       self.label = label
    }
 
-   func createTutorialView(){
+   func createTutorialView(){/*
       let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
 
       label.textColor = UIColor.whiteColor()
@@ -50,7 +50,7 @@ class TutorialView {
          shapes.append(rectangle.shape)
       }
       
-      self.addMaskInViews(frames, shapeNames:shapes)
+      self.addMaskInViews(frames, shapeNames:shapes)*/
    }
 
    func addMaskInViews(viewsToCutOut: [UIView], shapeNames: [String]){

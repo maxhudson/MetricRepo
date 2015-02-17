@@ -609,14 +609,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
             metricsManager.metrics += [newMetric]
          }
       }
+      
       if segue.identifier == "DoneTutorialSegue" {
          for tutMetric in metricsManager.tutorialMetrics {
-            metricsManager.metrics += [tutMetric]
+            metricsManager.metrics.append(tutMetric)
          }
-         tableView.reloadData()
-//         metricsManager.tutorialCompleted = true
-         
       }
+      
       tableView.reloadData()
    }
    

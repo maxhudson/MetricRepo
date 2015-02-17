@@ -24,21 +24,14 @@ class TutorialAddPersonViewController: UIViewController {
    
    @IBAction func backButtonPressed(sender: AnyObject) {
       self.view.clipsToBounds = true;
-
-//      dismissViewControllerAnimated(false, completion: nil)
-
    }
-   
-//   override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
-//      return CustomSlideSegue()
-//   }
-   
    
    @IBAction func nextButtonPressed(sender: AnyObject) {
       if let title = textField.text {
-         if !title.isEmpty{
+         if !title.isEmpty {
             newMetric = Metric(title: title)
             metricsManager.tutorialMetrics.append(newMetric)
+            println("button pressed");
             
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("tutorialAddActivityViewController") as TutorialAddActivityViewController
             let customSegue = CustomSlideSegue(identifier: "anyid", source: self, destination: vc, shouldUnwind: false)
@@ -52,6 +45,7 @@ class TutorialAddPersonViewController: UIViewController {
       super.viewDidLoad()
       //textField.becomeFirstResponder()
       setupView()
+      println("add person loaded");
    }
    
    override func viewWillAppear(animated: Bool) {
