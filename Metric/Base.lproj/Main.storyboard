@@ -638,30 +638,23 @@
                                     <action selector="touchUpOne:" destination="5Ko-ZZ-JQw" eventType="touchUpInside" id="3jQ-zY-8pw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15h-MM-X2r">
-                                <rect key="frame" x="258" y="430" width="85" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="gMn-3G-fpP"/>
-                                    <constraint firstAttribute="width" secondItem="15h-MM-X2r" secondAttribute="height" multiplier="17:13" id="wpg-6M-czf"/>
-                                </constraints>
-                                <state key="normal" image="Button 8">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="Button 8 High"/>
-                                <connections>
-                                    <action selector="touchUpEight:" destination="5Ko-ZZ-JQw" eventType="touchUpInside" id="g97-sv-aTu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-OT-6bd">
                                 <rect key="frame" x="258" y="505" width="85" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="K3v-OT-6bd" secondAttribute="height" multiplier="17:13" id="0Gk-4N-IKE"/>
+                                    <constraint firstAttribute="width" constant="85" id="G3s-Sc-TtR"/>
                                     <constraint firstAttribute="width" constant="85" id="UPd-9z-vsB"/>
                                 </constraints>
                                 <state key="normal" image="Button 0">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="Button 0 High"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Gk-4N-IKE"/>
+                                        <exclude reference="UPd-9z-vsB"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="touchUpZero:" destination="5Ko-ZZ-JQw" eventType="touchUpInside" id="0IQ-uV-ojp"/>
                                 </connections>
@@ -735,6 +728,20 @@
                                 <state key="highlighted" image="Touch ID Button High"/>
                                 <connections>
                                     <action selector="touchUpTouchID:" destination="5Ko-ZZ-JQw" eventType="touchUpInside" id="J9I-QT-w51"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15h-MM-X2r">
+                                <rect key="frame" x="258" y="428" width="85" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="gMn-3G-fpP"/>
+                                    <constraint firstAttribute="width" secondItem="15h-MM-X2r" secondAttribute="height" multiplier="17:13" id="wpg-6M-czf"/>
+                                </constraints>
+                                <state key="normal" image="Button 8">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="Button 8 High"/>
+                                <connections>
+                                    <action selector="touchUpEight:" destination="5Ko-ZZ-JQw" eventType="touchUpInside" id="g97-sv-aTu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1558,30 +1565,30 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Button 0" width="170" height="130"/>
-        <image name="Button 0 High" width="170" height="130"/>
-        <image name="Button 1" width="170" height="130"/>
-        <image name="Button 1 High" width="170" height="130"/>
-        <image name="Button 2" width="170" height="130"/>
-        <image name="Button 2 High" width="170" height="130"/>
-        <image name="Button 3" width="170" height="130"/>
-        <image name="Button 3 High" width="170" height="130"/>
-        <image name="Button 4" width="170" height="130"/>
-        <image name="Button 4 High" width="170" height="130"/>
-        <image name="Button 5" width="170" height="130"/>
-        <image name="Button 5 High" width="170" height="130"/>
-        <image name="Button 6" width="170" height="130"/>
-        <image name="Button 6 High" width="170" height="130"/>
-        <image name="Button 7" width="170" height="130"/>
-        <image name="Button 7 High" width="170" height="130"/>
-        <image name="Button 8" width="170" height="130"/>
-        <image name="Button 8 High" width="170" height="130"/>
-        <image name="Button 9" width="170" height="130"/>
-        <image name="Button 9 High" width="170" height="130"/>
+        <image name="Button 0" width="255" height="195"/>
+        <image name="Button 0 High" width="255" height="195"/>
+        <image name="Button 1" width="255" height="195"/>
+        <image name="Button 1 High" width="255" height="195"/>
+        <image name="Button 2" width="255" height="195"/>
+        <image name="Button 2 High" width="255" height="195"/>
+        <image name="Button 3" width="255" height="195"/>
+        <image name="Button 3 High" width="255" height="195"/>
+        <image name="Button 4" width="255" height="195"/>
+        <image name="Button 4 High" width="255" height="195"/>
+        <image name="Button 5" width="255" height="195"/>
+        <image name="Button 5 High" width="255" height="195"/>
+        <image name="Button 6" width="255" height="195"/>
+        <image name="Button 6 High" width="255" height="195"/>
+        <image name="Button 7" width="255" height="195"/>
+        <image name="Button 7 High" width="255" height="195"/>
+        <image name="Button 8" width="85" height="65"/>
+        <image name="Button 8 High" width="85" height="65"/>
+        <image name="Button 9" width="255" height="195"/>
+        <image name="Button 9 High" width="255" height="195"/>
         <image name="Dot Empty" width="32" height="32"/>
         <image name="Dot Filled" width="32" height="32"/>
-        <image name="Touch ID Button" width="170" height="130"/>
-        <image name="Touch ID Button High" width="170" height="130"/>
+        <image name="Touch ID Button" width="85" height="65"/>
+        <image name="Touch ID Button High" width="85" height="65"/>
         <image name="botShadow@3x.png" width="1242" height="26"/>
         <image name="darkNote@3x.png" width="68" height="48"/>
         <image name="edit@3x.png" width="48" height="55"/>
