@@ -13,7 +13,7 @@ class BlackOutView: UIView {
    var fillColor = UIColor()
    var framesToCutOut = [CGRect]()
    var shapes = [String]()
-   var shape: String!
+   var shape: String?
    
    override func drawRect(rect: CGRect) {
       let context = UIGraphicsGetCurrentContext()

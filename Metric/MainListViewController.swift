@@ -14,11 +14,15 @@ var metricsManager = MetricsManager()
 var manageMetricMode: String! //indicate the mode in which metric note managing is happening
 var manageNoteMode: String!
 var noteFrom: String!
+let passwordNotificationKey = "com.metric.passwordNotificationKey"
+let lockBlurNotificationKey = "com.metric.lockBlurNotificationKey"
+
 var currentMetricRow: Int! //reference to current metric row
 var currentFeeling: Feeling! //current feeling for editing notes
 var currentMetric : Metric = Metric(title: "", good: 0, bad: 0, feelings: []) //current metric for viewing metric
 var trackAnalytics = false
 var tutorialPartCompleted: Bool!
+var shouldShowKeypad: Bool!
 var senderAllowed = 0
 var tablePlusButton: UIButton?
 var tableMinusButton: UIButton?
@@ -271,6 +275,18 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewDidLoad() {
+//      var authManager = Authentication()
+//      authManager.authenticateUser(self)
+      //Create Blur
+//      let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+//      let blurView = UIVisualEffectView(effect: blurEffect)
+      let blurView = UIView()
+      blurView.backgroundColor = UIColor.grayColor()
+      blurView.alpha = 0.9
+      blurView.frame.size = self.view.frame.size
+      blurView.tag = 4
+//      self.view.addSubview(blurView)
+
       if (!metricsManager.tutorialCompleted) {
          setupButtonTag([addButton])
       }
@@ -278,6 +294,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
       self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
    }
+   
    
    func setupButtonTag(buttons: [UIButton]) {
       for button in buttons {
@@ -291,8 +308,13 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
    }
    
    override func viewWillAppear(animated: Bool) {
-      
       super.viewWillAppear(animated)
+
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "showPasswordKeypad", name: passwordNotificationKey, object: nil)
+      
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeLockBlur", name: lockBlurNotificationKey, object: nil)
+      
+
       
       Helper.styleNavButton(helpButton, fontName: Helper.buttonFont, fontSize: 22)
       Helper.styleNavButton(addButton, fontName: Helper.lightButtonFont, fontSize: 30)
@@ -309,7 +331,24 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
          senderAllowed = 0
       }
    }
-
+   
+   override func viewDidAppear(animated: Bool) {
+      super.viewDidAppear(animated)
+      
+      if metricsManager.tutorialCompleted == true && (shouldShowKeypad == nil || shouldShowKeypad == true) {
+         showPasswordKeypad()
+         shouldShowKeypad = false
+      }
+   }
+   
+   func showPasswordKeypad() {
+      performSegueWithIdentifier("AuthViewControllerSegue", sender: nil)
+   }
+   
+   
+   func removeLockBlur() {
+      dismissViewControllerAnimated(true, completion: nil)
+   }
    
    func progressTutorial(onView: UIView){
       var onView = onView as UIView

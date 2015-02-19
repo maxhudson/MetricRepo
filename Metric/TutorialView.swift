@@ -35,7 +35,8 @@ class TutorialView {
       var shapes : [String] = []
 
       for circle:Shape in circles {
-         let blurView = UIVisualEffectView(effect: blurEffect)
+//         let blurView = UIVisualEffectView(effect: blurEffect)
+         let blurView = UIView()
          blurView.frame.size = circle.size()
          blurView.center = circle.center
          frames.append(blurView as UIView)
@@ -43,7 +44,8 @@ class TutorialView {
       }
       
       for rectangle:Shape in rectangles {
-         let blurView = UIVisualEffectView(effect: blurEffect)
+//         let blurView = UIVisualEffectView(effect: blurEffect)
+         let blurView = UIView()
          blurView.frame.size = rectangle.size()
          blurView.center = rectangle.center
          frames.append(blurView as UIView)
