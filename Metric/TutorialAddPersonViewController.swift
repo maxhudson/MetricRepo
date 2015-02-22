@@ -10,6 +10,8 @@ import UIKit
 
 class TutorialAddPersonViewController: UIViewController {
    var newMetric: Metric!
+   let transitionManager = TransitionManager()
+
 
    
    @IBOutlet weak var nextButtonConstraint: NSLayoutConstraint!
@@ -40,9 +42,11 @@ class TutorialAddPersonViewController: UIViewController {
             newMetric = Metric(title: title)
             metricsManager.tutorialMetrics.append(newMetric)
             
-            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("tutorialAddActivityViewController") as TutorialAddActivityViewController
-            let customSegue = CustomSlideSegue(identifier: "anyid", source: self, destination: vc, shouldUnwind: false)
-            customSegue.perform()
+//            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("tutorialAddActivityViewController") as TutorialAddActivityViewController
+//            let customSegue = CustomSlideSegue(identifier: "anyid", source: self, destination: vc, shouldUnwind: false)
+//            customSegue.perform()
+            
+            performSegueWithIdentifier("GoToAddActivitySegue", sender: nil)
 
          }
       }
@@ -102,13 +106,22 @@ class TutorialAddPersonViewController: UIViewController {
       //textField.becomeFirstResponder()
    }
    
+   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+      // Create reference to the view that we are about to transition to
+      let toViewController = segue.destinationViewController as UIViewController
+      
+      // Set TransitionManager to manage the transtion animation
+      transitionManager.animationName = "slideLeft"
+      toViewController.transitioningDelegate = self.transitionManager
+   }
+   
    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
       self.view.endEditing(true)
    }
    
-   override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
-      return CustomSlideSegue(identifier: identifier, source: fromViewController, destination: toViewController, shouldUnwind: true)
-   }
+//     override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
+//      return CustomSlideSegue(identifier: identifier, source: fromViewController, destination: toViewController, shouldUnwind: true)
+//   }
    
    
    @IBAction func unwindToPerson(segue: UIStoryboardSegue){

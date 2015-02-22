@@ -9,6 +9,7 @@
 import UIKit
 
 class TutorialQuoteViewController: UIViewController {
+   let transitionManager = TransitionManager()
    
    @IBOutlet weak var quoteLabel: UILabel!
    
@@ -17,9 +18,10 @@ class TutorialQuoteViewController: UIViewController {
    @IBOutlet weak var gotItButton: UIButton!
    
    @IBAction func gotItPressed(sender: AnyObject) {
-      let vc = self.storyboard?.instantiateViewControllerWithIdentifier("tutorialAddPersonViewController") as TutorialAddPersonViewController
-      let customSegue = CustomSlideSegue(identifier: "anyid", source: self, destination: vc, shouldUnwind: false)
-      customSegue.perform()
+//      let vc = self.storyboard?.instantiateViewControllerWithIdentifier("tutorialAddPersonViewController") as TutorialAddPersonViewController
+//      let customSegue = CustomSlideSegue(identifier: "anyid", source: self, destination: vc, shouldUnwind: false)
+//      customSegue.perform()
+      performSegueWithIdentifier("GoToAddPersonSegue", sender: nil)
    }
    
    override func viewDidLoad() {
@@ -42,10 +44,20 @@ class TutorialQuoteViewController: UIViewController {
    
    }
    
-   
-   override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
-      return CustomSlideSegue(identifier: identifier, source: fromViewController, destination: toViewController, shouldUnwind: true)
+   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+      // Create reference to the view that we are about to transition to
+      let toViewController = segue.destinationViewController as UIViewController
+      
+      // Set TransitionManager to manage the transtion animation
+      transitionManager.animationName = "slideLeft"
+      toViewController.transitioningDelegate = self.transitionManager
+
    }
+   
+//   
+//   override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
+////      return CustomSlideSegue(identifier: identifier, source: fromViewController, destination: toViewController, shouldUnwind: true)
+//   }
    
    
    @IBAction func unwindToQuote(segue: UIStoryboardSegue){

@@ -1048,6 +1048,7 @@
                         <outlet property="gotItButton" destination="dM9-T8-ept" id="lca-da-vMJ"/>
                         <outlet property="quoteByLabel" destination="s3Q-S8-50Q" id="dJw-ag-Lg7"/>
                         <outlet property="quoteLabel" destination="xrn-0n-Q5l" id="OEx-to-lnj"/>
+                        <segue destination="NGS-eP-Jms" kind="custom" identifier="GoToAddPersonSegue" id="Mv5-xn-Ibb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivZ-QU-MTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1151,12 +1152,13 @@
                         <outlet property="nextButtonConstraint" destination="F1p-s6-m8D" id="4Kr-kn-5j9"/>
                         <outlet property="promptLabelOne" destination="1sk-kf-ik9" id="CgM-kv-nZh"/>
                         <outlet property="textField" destination="DNf-i0-RQM" id="3cm-gJ-cvp"/>
+                        <segue destination="ygd-et-76u" kind="custom" identifier="GoToAddActivitySegue" id="4mF-cI-Kad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3H8-di-1uO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xyT-rf-7eL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3683" y="-703"/>
+            <point key="canvasLocation" x="3672" y="-703"/>
         </scene>
         <!--Tutorial Add Activity View Controller-->
         <scene sceneID="NsE-PR-OK8">
@@ -1565,26 +1567,26 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Button 0" width="255" height="195"/>
-        <image name="Button 0 High" width="255" height="195"/>
-        <image name="Button 1" width="255" height="195"/>
-        <image name="Button 1 High" width="255" height="195"/>
-        <image name="Button 2" width="255" height="195"/>
-        <image name="Button 2 High" width="255" height="195"/>
-        <image name="Button 3" width="255" height="195"/>
-        <image name="Button 3 High" width="255" height="195"/>
-        <image name="Button 4" width="255" height="195"/>
-        <image name="Button 4 High" width="255" height="195"/>
-        <image name="Button 5" width="255" height="195"/>
-        <image name="Button 5 High" width="255" height="195"/>
-        <image name="Button 6" width="255" height="195"/>
-        <image name="Button 6 High" width="255" height="195"/>
-        <image name="Button 7" width="255" height="195"/>
-        <image name="Button 7 High" width="255" height="195"/>
+        <image name="Button 0" width="85" height="65"/>
+        <image name="Button 0 High" width="170" height="130"/>
+        <image name="Button 1" width="85" height="65"/>
+        <image name="Button 1 High" width="85" height="65"/>
+        <image name="Button 2" width="85" height="65"/>
+        <image name="Button 2 High" width="85" height="65"/>
+        <image name="Button 3" width="85" height="65"/>
+        <image name="Button 3 High" width="85" height="65"/>
+        <image name="Button 4" width="85" height="65"/>
+        <image name="Button 4 High" width="85" height="65"/>
+        <image name="Button 5" width="85" height="65"/>
+        <image name="Button 5 High" width="85" height="65"/>
+        <image name="Button 6" width="85" height="65"/>
+        <image name="Button 6 High" width="85" height="65"/>
+        <image name="Button 7" width="85" height="65"/>
+        <image name="Button 7 High" width="85" height="65"/>
         <image name="Button 8" width="85" height="65"/>
         <image name="Button 8 High" width="85" height="65"/>
-        <image name="Button 9" width="255" height="195"/>
-        <image name="Button 9 High" width="255" height="195"/>
+        <image name="Button 9" width="85" height="65"/>
+        <image name="Button 9 High" width="85" height="65"/>
         <image name="Dot Empty" width="32" height="32"/>
         <image name="Dot Filled" width="32" height="32"/>
         <image name="Touch ID Button" width="85" height="65"/>
