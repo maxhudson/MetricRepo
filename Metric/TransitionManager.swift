@@ -18,14 +18,14 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
    
    // animate a change from one viewcontroller to another
    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+      // get reference to fromView, toView, and the container view that we should perform the transition in
+      let container = transitionContext.containerView()
+      let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
+      let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+
       switch animationName {
       case "slideLeft":
-      
-         // get reference to fromView, toView, and the container view that we should perform the transition in
-         let container = transitionContext.containerView()
-         let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
-         let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
-         
+   
          // Setup 2D animation transforms
          let offScreenRight = CGAffineTransformMakeTranslation(container.frame.width, 0)
          let offScreenLeft = CGAffineTransformMakeTranslation(-container.frame.width, 0)
@@ -64,6 +64,48 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
      
          
          break
+      case "slideDown":
+         
+         // Setup 2D animation transforms
+         let offScreenRight = CGAffineTransformMakeTranslation(container.frame.width, 0)
+         let offScreenLeft = CGAffineTransformMakeTranslation(-container.frame.width, 0)
+         
+         // Start the toView to the right of the screen
+         if presenting == true {
+            toView.transform = offScreenRight
+         }
+         else {
+            toView.transform = offScreenLeft
+         }
+         
+         // add both views to the current view controller
+         container.addSubview(toView)
+         container.addSubview(fromView)
+         
+         // get the duration of the animation
+         let duration = self.transitionDuration(transitionContext)
+         
+         // peform the animation
+         UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: nil, animations: { () -> Void in
+            if self.presenting == true {
+               fromView.transform = offScreenLeft
+            }
+            else {
+               fromView.transform = offScreenRight
+            }
+            toView.transform = CGAffineTransformIdentity
+            
+            
+            }, completion: { (finished) -> Void in
+               if finished {
+                  transitionContext.completeTransition(true)
+               }
+         })
+         
+         
+         
+         break
+         
       default:
          break
          
